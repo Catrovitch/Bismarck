@@ -10,5 +10,3 @@
 
 
 *Just a little tweak - exercise 16*
-
-*A Tweak from GITHUB which will mess things up*
