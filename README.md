@@ -1,4 +1,7 @@
-#Week 1 exercises
-###Learning goals: repetition of lapio-course
-*It was good content for repition*
+# Ohejlmistotekniikka, harjoitustyö
 
+## Tehtavat
+
+### Viikko1
+
+*Good repetition of how to use the terminal, git and github.*
