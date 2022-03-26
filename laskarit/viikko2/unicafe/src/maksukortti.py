@@ -15,4 +15,6 @@ class Maksukortti:
     def __str__(self):
         saldo_euroissa = round(self.saldo / 100, 2)
 
-        return (f"saldo: {saldo_euroissa}")
+        return f"saldo: {saldo_euroissa}"
+
+
