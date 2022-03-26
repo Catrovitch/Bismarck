@@ -13,3 +13,7 @@
 
 *Tweak number 2*
 
+### Viikko 2
+
+[kattavuusprosentti.png](https://github.com/Catrovitch/ot-harjoitustyo/blob/master/laskarit/viikko1/gitlog.txthttps://github.com/Catrovitch/ot-harjoitustyo/blob/master/laskarit/viikko2/kattavuusprosentti.png)
+
