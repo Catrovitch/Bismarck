@@ -19,3 +19,6 @@ Landscape 3 consists of the "main menu"-page. Here the user can press four diffe
 
 Button 3 (Saved games) takes the player to landscape 6 which holds a list of "saved games" of the user. This list will to a beginning be empty but will store a list of recorded games that the user has chosen to save. The saving process will take place at the end of a game (landscape 4) if the player would chose to save it by pressing the "save game button". The "save games" page (landscape 6) will also hold a "main menu" button to take the player back to the main menu (landscape 3).
 The 4th and final button (exit) on the main menu (landscape 3) will simply exit the game.    
+
+
+## The gameboard
