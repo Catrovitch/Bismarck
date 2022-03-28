@@ -17,3 +17,4 @@
 
 [kattavuusprosentti.png](https://github.com/Catrovitch/ot-harjoitustyo/blob/master/laskarit/viikko1/gitlog.txthttps://github.com/Catrovitch/ot-harjoitustyo/blob/master/laskarit/viikko2/kattavuusprosentti.png)
 
+[vaatimusmaarittely.md](https://github.com/Catrovitch/ot-harjoitustyo/blob/master/documentation/vaatimusmaarittely.md)
