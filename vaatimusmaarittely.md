@@ -51,12 +51,12 @@ These are the core parts of the game of Bismarck. In the next subchapter more sp
 
 Rule 1. Each player needs to do either of three things each turn. 
 
-	a.) Play one or many cards with the same numeric value. The only exception to this is *the Joker* which can be played alone or together with any card. If the played card/cards are sufficient the player will lift x amount of cards from *the Pack* so that he/she has three *hand-cards*. If the cards played are not sufficient the player *lifts* the *field pack*. 
+a.) Play one or many cards with the same numeric value. The only exception to this is *the Joker* which can be played alone or together with any card. If the played card/cards are sufficient the player will lift x amount of cards from *the Pack* so that he/she has three *hand-cards*. If the cards played are not sufficient the player *lifts* the *field pack*. 
 	
-	b.) If the player doesn't want to play any of his *hand-cards* he can choose to *chance*.
+b.) If the player doesn't want to play any of his *hand-cards* he can choose to *chance*.
 
-	c.) The last option is to *lift* the *field pack*.
+c.) The last option is to *lift* the *field pack*.
 
-	 After this the turn moves to the opposing player.
+After this the turn moves to the opposing player.
 
 Rule 2. A player can always *lift* or *chance* even though he would have sufficient *hand-cards* to play.
