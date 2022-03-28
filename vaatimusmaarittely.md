@@ -65,7 +65,7 @@ Rule 2. A player can always *lift* or *chance* even though he would have suffici
 ## Skiss of User Interface
 
 ### All the different landscapes.
-![](Data/Planning/Picture/Planning-pic.pdf)
+![](ot-harjoitustyo/Data/Planning/Picture/Planning-pic.pdf)
 
 ### User interface when playing a game of Bismarck
-![](Data/Planning/Picture/Gameboard.pdf)
+![](ot-harjoitustyo/Data/Planning/Picture/Gameboard.pdf)
