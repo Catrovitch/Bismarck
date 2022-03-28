@@ -21,4 +21,22 @@ Button 3 (Saved games) takes the player to landscape 6 which holds a list of "sa
 The 4th and final button (exit) on the main menu (landscape 3) will simply exit the game.    
 
 
-## The gameboard
+## Rules
+
+The game of Bismarck is a game of strategy where each player strives to win by being the first to have no cards left. This is done through o process described in the following chapter. First some important concepts and terminology will be introduced as to be able to smoothly describe different events. Concepts will be written in *itallic*.
+
+### Concepts and terminogoly
+
+
+*Hand-cards:* Each player has three *hand-cards* at the beginning of the game. At the end of each turn the player lifts x cards from *The Reserve* so that he/she has three *hand-cards*. If the player already has three or more *hand-cards* none will be lifted.
+*The Reserve:* After the *initial dealing* (described later) of the cards the remainder of the cards will serve as *The Reserve* which is placed with the backside of the cards up on the game board. It will be used to fill each players' hand with up to three *Hand-cards*. A player can also choose to *chance* from *The Reserve* at any point.
+*The Field:* *The field* is empty at the beginning of a game or after a player has *lifted*. When a player playes a card he/she places it on the field. If a card is sufficient is decided by the current top card on *the field*. Generally suffiency demands the played card's numeric value to be equal or higher than the current top card of *the field*. 
+*Chance:* If the player doesn't want to play any of his/her *Hand-cards* the player can choose to *chance*. *Chancing* means lifting the top card from *The Pack* and playing that as his/her card. If the card is sufficient the turn goes over to the opposing player. If the card is not sufficient the player has to *lift* the *field pack*. 
+*Lift:* The player has to lift *the field pack* if he has no cards that are sufficient. *Lifting* means that he will hold the entire *field pack* as *hand-cards* and won't be able to lift cards from *the reserve pack until he/she has less than three *hand_cards*. The player can choose to chance, but if this fails the player has to lift. The player can also chose to *lift* the pack at any time on his turn. 
+*Final-cards:* At the *initial dealing* a set of randomly selected cards are dealt to the players as "Final-cards". These will be placed besides each other with the backside up. Only after the player has played all cards in his/her hand as well as his/her *End-game cards* can the player chose to play a *Final Card*.
+*End-game cards:* At the *initial dealing* each player is deal a selection of six randomly selected cards. Out of these six cards the players choose three to place on top of the *final cars* with frontside up. These cards are called *End-game cards* and will be played when a player has no more *hand-cards* and *The reserve" is empty.
+*Fallen:* Fallen cards are discarded and won't be part of the game after discardation. Cards fall when a player fells *the field pack* which can happen either by playing four cards of the same numeric value / by placing a number of cards with the same numeric value so that there are four cards of the same numeric value in direct succesive order on *the field pack* or by playing a 10 (special card).
+*Special cards:* There are two *special cards cards which main power is not derived from their numeric value. These cards can are suffiecnt against any other card no matter it's numeric value and have a special effect to them. The *special cards* are the 2 which resets numeric value on top of *the field pack* (everything can be played on the 2). The other *special card is the 10 which fells the pack. After the pack has been felled the player can play a card on a clear field.
+
+
+
