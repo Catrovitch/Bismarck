@@ -60,3 +60,12 @@ c.) The last option is to *lift* the *field pack*.
 After this the turn moves to the opposing player.
 
 Rule 2. A player can always *lift* or *chance* even though he would have sufficient *hand-cards* to play.
+
+
+## Skiss of User Interface
+
+### All the different landscapes.
+![](master/Data/Planning/Picture/Planning-pic.pdf)
+
+### User interface when playing a game of Bismarck
+![](master/Data/Planning/Picture/Gameboard.pdf)
