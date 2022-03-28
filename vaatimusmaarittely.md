@@ -49,5 +49,14 @@ The game of Bismarck is a game of strategy where each player strives to win by b
 
 These are the core parts of the game of Bismarck. In the next subchapter more specific rules are explained. Due to much of the game rules being tied up to the concepts explained above the amount of actual rules are quite low.
 
-Rule 1. Each player needs to do either of three things each turn. a.) Play one or many cards with the same numeric value. The only exception to this is *the Joker* which can be played alone or together with any card. If the played card/cards are sufficient the player will lift x amount of cards from *the Pack* so that he/she has a three *hand-cards*. If the cards played are not sufficient the player *lifts* the *field pack*. If the player doesn't want to play any of his *hand-cards* he can chose to either *chance* or just straight up *lift* the *field pack*. (see last chapter for details). After this the turn moves to the opposing player.
+Rule 1. Each player needs to do either of three things each turn. 
+
+	a.) Play one or many cards with the same numeric value. The only exception to this is *the Joker* which can be played alone or together with any card. If the played card/cards are sufficient the player will lift x amount of cards from *the Pack* so that he/she has three *hand-cards*. If the cards played are not sufficient the player *lifts* the *field pack*. 
+	
+	b.) If the player doesn't want to play any of his *hand-cards* he can choose to *chance*.
+
+	c.) The last option is to *lift* the *field pack*.
+
+	 After this the turn moves to the opposing player.
+
 Rule 2. A player can always *lift* or *chance* even though he would have sufficient *hand-cards* to play.
