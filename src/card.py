@@ -1,6 +1,6 @@
 class Card:
 
-    def init(self, suit, number):
+    def __init__(self, suit, number):
         
         self.suit = suit
         self.number = number
@@ -13,7 +13,3 @@ class Card:
     def get_suit(self):
 
         return self.suit
-
-    def get_name(self):
-
-        return self.name

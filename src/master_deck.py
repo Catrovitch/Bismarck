@@ -3,7 +3,7 @@ from card import Card
 
 class Deck:
 
-    def init(self):
+    def __init__(self):
 
         self.deck = []
 
@@ -22,9 +22,11 @@ class Deck:
     def lay_deck(self):
         
         for card in self.deck:
-            print(card.get_name())
+            print(card.name)
         
 
 deck = Deck()
 
 deck.create_deck()
+
+deck.lay_deck()
