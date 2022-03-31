@@ -1,7 +1,7 @@
 from card import Card
 import random
 
-class MasterDeck:
+class CreateDeck:
 
     def __init__(self):
 
@@ -29,17 +29,12 @@ class MasterDeck:
         for card in self.deck:
             print(card.name)
 
-    def draw(self, number_of_cards: int, destination: list):
+    def export(self):
+        
+        return self.deck
+        
 
-        if number_of_cards >= len(self.deck):
-            number_of_cards = len(self.deck)
-
-
-        for i in range(0, number_of_cards):
-            destination.append(self.deck.pop())
-
-
-d = MasterDeck()
+d = CreateDeck()
 d.create_deck()
+d.scramble()
 d.lay_out_deck()
-print(len(d.deck))
