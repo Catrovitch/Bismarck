@@ -1,11 +1,8 @@
-from card import Card
-import random
-
 class Deck:
 
-    def __init__(self):
+    def __init__(self, deck: list):
 
-        self.deck = []
+        self.deck = deck
 
     def draw(self, destination: list):
 
@@ -13,6 +10,8 @@ class Deck:
             return False
 
         destination.append(self.deck.pop())
+        
+        return True
     
     def empty(self):
 
@@ -21,4 +20,3 @@ class Deck:
         
         else:
             return True
-d = Deck()
