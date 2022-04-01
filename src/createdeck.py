@@ -7,6 +7,8 @@ class CreateDeck:
 
         self.deck = []
 
+        self.create_deck()
+
     def create_deck(self):
         
         suits = ["hearts", "diamonds", "clubs", "spades"]
@@ -20,21 +22,11 @@ class CreateDeck:
         self.deck.append(Card("black-joker", 0))
         self.deck.append(Card("red-joker", 0))
 
-    def scramble(self):
+    def shuffle(self):
 
         random.shuffle(self.deck)
-
-    def lay_out_deck(self):
-
-        for card in self.deck:
-            print(card.name)
 
     def export(self):
         
         return self.deck
         
-
-d = CreateDeck()
-d.create_deck()
-d.scramble()
-d.lay_out_deck()

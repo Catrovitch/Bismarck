@@ -1,3 +1,5 @@
+from kassapaate import Kassapaate
+
 class Maksukortti:
     def __init__(self, saldo):
         self.saldo = saldo
@@ -17,4 +19,4 @@ class Maksukortti:
 
         return f"saldo: {saldo_euroissa}"
 
-
+kassa = Kassapaate()
