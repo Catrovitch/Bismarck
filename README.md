@@ -1,20 +1,11 @@
-# Ohejlmistotekniikka, harjoitustyö
+# Bismarck
 
-## Tehtävät
+Bismarck is a classic card game which is played between two players each striving to defeat the other through strategy and cunning. Below you will be able to find various aspects of the game like links to documentation, some instructions on how to install and launch the program as well instructions on how to test it. At the current moment there are only links to the *functional specifications*, *working hours* and *changelog*.
 
-### Viikko 1
+## Documentation
 
-[gitlog.txt](https://github.com/Catrovitch/ot-harjoitustyo/blob/master/laskarit/viikko1/gitlog.txt)
+ - [Functional specifications](./documentation/functional_specifications.md)
+ - [Working hours](./documentation/working_hours.md)
+ - [Changelog](./documentation/changelog.md)
 
-[komentorivi.txt](https://github.com/Catrovitch/ot-harjoitustyo/blob/master/laskarit/viikko1/komentorivi.txt)
 
-
-*Just a little tweak - exercise 16*
-
-*Tweak number 2*
-
-### Viikko 2
-
-[kattavuusprosentti.png](https://github.com/Catrovitch/ot-harjoitustyo/blob/master/laskarit/viikko1/gitlog.txthttps://github.com/Catrovitch/ot-harjoitustyo/blob/master/laskarit/viikko2/kattavuusprosentti.png)
-
-[vaatimusmaarittely.md](https://github.com/Catrovitch/ot-harjoitustyo/blob/master/documentation/vaatimusmaarittely.md)

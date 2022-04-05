@@ -8,6 +8,7 @@ authors = ["alexander <ale.engelhardt@outlook.com>"]
 python = "^3.8"
 cowsay = "^4.0"
 pytest = "^7.1.1"
+invoke = "^1.7.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.1.1"
