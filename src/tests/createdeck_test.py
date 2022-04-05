@@ -16,23 +16,6 @@ class TestCreateDeck(unittest.TestCase):
 
         self.assertEqual(length, 54)
 
-
-    def test_create_deck_bottom_card(self):
-
-        created_deck = CreateDeck()
-        
-        bottom_card = str(created_deck.deck[0])
-
-        self.assertEqual(bottom_card, "2 hearts")
-
-    def test_create_deck_top_card(self):
-
-        created_deck = CreateDeck()
-        
-        top_card = str(created_deck.deck[-1])
-
-        self.assertEqual(top_card, "0 red-joker")
-
     def test_create_deck_shuffle(self):
 
         created_deck = CreateDeck()
@@ -49,6 +32,6 @@ class TestCreateDeck(unittest.TestCase):
 
         exported_deck = created_deck.export()
 
-        exported_deck_top_card = str(exported_deck[-1])
+        exported_deck_len = len(exported_deck)
 
-        self.assertEqual(exported_deck_top_card, "0 red-joker")
+        self.assertEqual(exported_deck_len, 54)
