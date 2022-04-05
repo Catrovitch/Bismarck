@@ -11,7 +11,7 @@ Bismarck is a classic card game which is played between two players each strivin
 
 ## Installing
 
-##### Note
+#### Note
 As the program is at a very early stage a proper main function is not currently available. Currently it creates all the currently finnished parts of the game.
 
 1. Install the dependencies with command:
@@ -29,7 +29,8 @@ poetry run invoke start
 ## Testing
 
 A test coverage report can be generated with command:
-
+#### Note:
+Due to one of the tests relying on shuffling the deck the test might at rare cases fail although nothing is wrong. Run the test again and it should work.
 ```bash
 poetry run invoke coverage-report
 ```
