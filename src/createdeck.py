@@ -22,8 +22,6 @@ class CreateDeck:
         self.deck.append(Card("black-joker", 0))
         self.deck.append(Card("red-joker", 0))
 
-        self.shuffle()
-
     def shuffle(self):
 
         random.shuffle(self.deck)

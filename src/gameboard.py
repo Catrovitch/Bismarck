@@ -29,13 +29,12 @@ class GameBoard:
 
     def initial_deal(self):
         #This function is called at the beginning of a game.
+        for i in range(0, 3):
+            self.move(self.reserve_deck, self.player1_final, -1)
+            self.move(self.reserve_deck, self.player2_final, -1)
+        
         for i in range(0, 6):
 
             self.move(self.reserve_deck, self.player1_hand, -1)
             self.move(self.reserve_deck, self.player2_hand, -1)
 
-createddeck = CreateDeck()
-deck = createddeck.export()
-gameboard = GameBoard(deck)
-
-print(len(gameboard.reserve_deck))
