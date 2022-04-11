@@ -12,7 +12,6 @@ class TestCard(unittest.TestCase):
 
         test_card = Card("hearts", 2)
 
-
         test_card_suit = test_card.suit
 
         self.assertEqual(test_card_suit, "hearts")
@@ -21,7 +20,6 @@ class TestCard(unittest.TestCase):
 
         test_card = Card("hearts", 2)
 
-
         test_card_number = test_card.number
 
         self.assertEqual(test_card_number, 2)
@@ -29,7 +27,6 @@ class TestCard(unittest.TestCase):
     def test_constructor_name(self):
 
         test_card = Card("hearts", 2)
-
 
         test_card_name = str(test_card)
 

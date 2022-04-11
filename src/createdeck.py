@@ -1,5 +1,6 @@
-from card import Card
 import random
+from card import Card
+
 
 class CreateDeck:
 
@@ -10,9 +11,9 @@ class CreateDeck:
         self.create_deck()
 
     def create_deck(self):
-        
+
         suits = ["hearts", "diamonds", "clubs", "spades"]
-        numbers = [2,3,4,5,6,7,8,9,10,11,12,13,14]
+        numbers = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
 
         for suit in suits:
             for number in numbers:
@@ -29,4 +30,3 @@ class CreateDeck:
     def export(self):
 
         return self.deck
-        

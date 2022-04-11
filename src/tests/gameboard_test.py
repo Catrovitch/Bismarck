@@ -2,6 +2,7 @@ import unittest
 from gameboard import GameBoard
 from createdeck import CreateDeck
 
+
 class TestGameBoard(unittest.TestCase):
 
     def setUp(self):
@@ -27,4 +28,4 @@ class TestGameBoard(unittest.TestCase):
         player1_hand = len(gameboard.player1_hand)
         player2_hand = len(gameboard.player2_hand)
 
-        self.assertEqual((player1_hand, player2_hand), (6,6))
+        self.assertEqual((player1_hand, player2_hand), (6, 6))
