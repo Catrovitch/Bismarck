@@ -1,6 +1,6 @@
 import unittest
-from gameboard import GameBoard
-from createdeck import CreateDeck
+from services.gameboard import GameBoard
+from services.createdeck import CreateDeck
 
 
 class TestGameBoard(unittest.TestCase):
@@ -18,14 +18,4 @@ class TestGameBoard(unittest.TestCase):
 
         self.assertEqual(length, 54)
 
-    def test_initial_deal(self):
-        createddeck = CreateDeck()
-        deck = createddeck.export()
-        gameboard = GameBoard(deck)
 
-        gameboard.initial_deal()
-
-        player1_hand = len(gameboard.player1_hand)
-        player2_hand = len(gameboard.player2_hand)
-
-        self.assertEqual((player1_hand, player2_hand), (6, 6))

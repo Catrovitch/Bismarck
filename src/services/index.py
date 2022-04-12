@@ -1,6 +1,6 @@
-from createdeck import CreateDeck
-from gameboard import GameBoard
-from gamelogic import GameLogic
+from services.createdeck import CreateDeck
+from services.gameboard import GameBoard
+from services.gamelogic import GameLogic
 
 
 def main():

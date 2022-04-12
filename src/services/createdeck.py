@@ -1,5 +1,5 @@
 import random
-from card import Card
+from services.card import Card
 
 
 class CreateDeck:

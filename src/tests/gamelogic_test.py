@@ -1,8 +1,8 @@
 import unittest
-from createdeck import CreateDeck
-from gameboard import GameBoard
-from gamelogic import GameLogic
-from card import Card
+from services.createdeck import CreateDeck
+from services.gameboard import GameBoard
+from services.gamelogic import GameLogic
+from services.card import Card
 
 
 class TestGameLogic(unittest.TestCase):
@@ -28,12 +28,12 @@ class TestGameLogic(unittest.TestCase):
 
         gamelogic.initial_deal()
 
-        p1h = len(gamelogic.gameboard.player1_hand)
-        p1f = len(gamelogic.gameboard.player1_final)
-        p2h = len(gamelogic.gameboard.player2_hand)
-        p2f = len(gamelogic.gameboard.player2_final)
+        player1h = len(gamelogic.gameboard.player1_hand)
+        player1f = len(gamelogic.gameboard.player1_final)
+        player2h = len(gamelogic.gameboard.player2_hand)
+        player2f = len(gamelogic.gameboard.player2_final)
 
-        self.assertEqual((p1h, p1f, p2h, p2f), (6, 3, 6, 3))
+        self.assertEqual((player1h, player1f, player2h, player2f), (6, 3, 6, 3))
 
     def test_decide_turn_in_beginning_player1_starts(self):
 
@@ -100,7 +100,7 @@ class TestGameLogic(unittest.TestCase):
         gameboard = GameBoard(deck)
         gamelogic = GameLogic(gameboard)
 
-        gamelogic.gameboard.initial_deal()
+        gamelogic.initial_deal()
 
         player1 = gamelogic.stage_card_from_hand(
             1, gamelogic.gameboard.player1_hand[0])
@@ -116,7 +116,7 @@ class TestGameLogic(unittest.TestCase):
         gameboard = GameBoard(deck)
         gamelogic = GameLogic(gameboard)
 
-        gamelogic.gameboard.initial_deal()
+        gamelogic.initial_deal()
 
         p1first = gamelogic.stage_card_from_hand(
             1, gamelogic.gameboard.player1_hand[0])
@@ -272,7 +272,7 @@ class TestGameLogic(unittest.TestCase):
         gamelogic.gameboard.field_deck.append(card1)
         gamelogic.gameboard.field_deck.append(card2)
 
-        result = gamelogic.check_card_hierarchy(1, 1)
+        result = gamelogic.check_card_hierarchy(1)
 
         self.assertEqual(result, True)
 
@@ -289,7 +289,7 @@ class TestGameLogic(unittest.TestCase):
         gamelogic.gameboard.field_deck.append(card1)
         gamelogic.gameboard.field_deck.append(card2)
 
-        result = gamelogic.check_card_hierarchy(1, 1)
+        result = gamelogic.check_card_hierarchy(1)
 
         self.assertEqual(result, False)
 
@@ -310,7 +310,7 @@ class TestGameLogic(unittest.TestCase):
         gamelogic.gameboard.field_deck.append(card3)
         gamelogic.gameboard.field_deck.append(card4)
 
-        result = gamelogic.check_card_hierarchy(1, 3)
+        result = gamelogic.check_card_hierarchy(3)
 
         self.assertEqual(result, True)
 
@@ -325,7 +325,7 @@ class TestGameLogic(unittest.TestCase):
 
         gamelogic.gameboard.field_deck.append(card1)
 
-        result = gamelogic.check_card_hierarchy(1, 1)
+        result = gamelogic.check_card_hierarchy(1)
 
         self.assertEqual(result, True)
 
@@ -342,7 +342,7 @@ class TestGameLogic(unittest.TestCase):
         gamelogic.gameboard.field_deck.append(card1)
         gamelogic.gameboard.field_deck.append(card2)
 
-        result = gamelogic.check_card_hierarchy(1, 1)
+        result = gamelogic.check_card_hierarchy(1)
 
         self.assertEqual(result, True)
 
@@ -359,7 +359,7 @@ class TestGameLogic(unittest.TestCase):
         gamelogic.gameboard.field_deck.append(card1)
         gamelogic.gameboard.field_deck.append(card2)
 
-        result = gamelogic.check_card_hierarchy(1, 1)
+        result = gamelogic.check_card_hierarchy(1)
 
         self.assertEqual(result, True)
 
@@ -376,7 +376,7 @@ class TestGameLogic(unittest.TestCase):
         gamelogic.gameboard.field_deck.append(card1)
         gamelogic.gameboard.field_deck.append(card2)
 
-        gamelogic.check_card_hierarchy(1, 1)
+        gamelogic.check_card_hierarchy(1)
 
         field_length = len(gamelogic.gameboard.field_deck)
         trash_length = len(gamelogic.gameboard.trash_deck)
@@ -586,3 +586,4 @@ class TestGameLogic(unittest.TestCase):
         player_hand_length = len(gamelogic.gameboard.player2_hand)
 
         self.assertEqual((field_length, player_hand_length), (0, 3))
+
