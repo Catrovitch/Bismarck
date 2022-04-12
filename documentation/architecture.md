@@ -4,7 +4,7 @@
 
 The goal of the set up of Bismarck is to make it as simple as possible with only a few classes each with it's own particular concerns. The same goal applies to the folder stucture where in this case four folders are used. The first folder *ui* contains code which is used to visualize the program for the user. The second folder *services* is saved for the actual program. The folder *entities* will contain classes for various users, be it human or AI. The last folder *repositories* will serve as a folder where the player can store "saved games" in. 
 
-![Stucture](./pictures/packaging diagram.png)
+![Stucture](./pictures/structure_diagram.png)
 
 ##Menus
 
