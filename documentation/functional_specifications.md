@@ -20,6 +20,36 @@ Landscape 3 consists of the "main menu"-page. Here the user can press four diffe
 Button 3 (Saved games) takes the player to landscape 6 which holds a list of "saved games" of the user. This list will to a beginning be empty but will store a list of recorded games that the user has chosen to save. The saving process will take place at the end of a game (landscape 4) if the player would chose to save it by pressing the "save game button". The "save games" page (landscape 6) will also hold a "main menu" button to take the player back to the main menu (landscape 3).
 The 4th and final button (exit) on the main menu (landscape 3) will simply exit the game.    
 
+## List of features in Bismarck program
+
+The list is divided into categories and are noted *(implemented)* if implemented at the current stage.
+
+### Features callable by the player
+- Stage a card from hand (implemented)
+- Stage a card from endgame (implemented)
+- Play staged cards (implemented)
+- Pich up the field_deck (implemented)
+
+### Features used by the game
+
+- class Card (implemented)
+- class CreateDeck (implemented)
+- class Gameboard (implemented)
+- class GameLogic (mostly implemented)
+- class Player
+
+### User
+
+- create an account
+- log in
+- AI
+
+
+### Save game
+
+- save a played game
+
+
 
 ## Rules
 
