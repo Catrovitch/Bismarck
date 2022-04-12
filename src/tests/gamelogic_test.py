@@ -33,7 +33,8 @@ class TestGameLogic(unittest.TestCase):
         player2h = len(gamelogic.gameboard.player2_hand)
         player2f = len(gamelogic.gameboard.player2_final)
 
-        self.assertEqual((player1h, player1f, player2h, player2f), (6, 3, 6, 3))
+        self.assertEqual(
+            (player1h, player1f, player2h, player2f), (6, 3, 6, 3))
 
     def test_decide_turn_in_beginning_player1_starts(self):
 
@@ -586,4 +587,3 @@ class TestGameLogic(unittest.TestCase):
         player_hand_length = len(gamelogic.gameboard.player2_hand)
 
         self.assertEqual((field_length, player_hand_length), (0, 3))
-

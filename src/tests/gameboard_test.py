@@ -17,5 +17,3 @@ class TestGameBoard(unittest.TestCase):
         length = len(gameboard.reserve_deck)
 
         self.assertEqual(length, 54)
-
-
