@@ -28,7 +28,8 @@ The list is divided into categories and are noted *(implemented)* if implemented
 - Stage a card from hand (implemented)
 - Stage a card from endgame (implemented)
 - Play staged cards (implemented)
-- Pich up the field_deck (implemented)
+- Pick up the field_deck (implemented)
+- Chance from reserve_deck (implemented)
 
 ### Features used by the game
 
