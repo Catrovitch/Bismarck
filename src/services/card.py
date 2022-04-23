@@ -4,7 +4,7 @@ class Card:
 
         self.suit = suit
         self.number = number
-        self.name = f"{number} {suit}"
+        self.name = f"{number}_of_{suit}"
 
     def __str__(self):
 

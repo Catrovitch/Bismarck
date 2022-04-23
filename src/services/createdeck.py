@@ -29,4 +29,6 @@ class CreateDeck:
 
     def export(self):
 
+        self.shuffle()
+        
         return self.deck

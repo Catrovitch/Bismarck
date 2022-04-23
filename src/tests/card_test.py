@@ -30,4 +30,4 @@ class TestCard(unittest.TestCase):
 
         test_card_name = str(test_card)
 
-        self.assertEqual(test_card_name, "2 hearts")
+        self.assertEqual(test_card_name, "2_of_hearts")

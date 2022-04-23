@@ -94,6 +94,36 @@ class TestGameLogic(unittest.TestCase):
 
         self.assertEqual(gamelogic.turn, -1)
 
+    def test_choose_endgame_cards_normal(self):
+
+        createddeck = CreateDeck()
+        deck = createddeck.export()
+        gameboard = GameBoard(deck)
+        gamelogic = GameLogic(gameboard)
+
+        gamelogic.initial_deal()
+
+        for i in range(3):
+            card = gameboard.player1_hand[-1]
+            result = gamelogic.choose_endgame_cards(1, card)
+
+        self.assertEqual(result, True)
+
+    def test_choose_endgame_cards_too_many(self):
+
+        createddeck = CreateDeck()
+        deck = createddeck.export()
+        gameboard = GameBoard(deck)
+        gamelogic = GameLogic(gameboard)
+
+        gamelogic.initial_deal()
+
+        for i in range(4):
+            card = gameboard.player1_hand[-1]
+            result = gamelogic.choose_endgame_cards(1, card)
+
+        self.assertEqual(result, False)
+
     def test_stage_card_normal(self):
 
         createddeck = CreateDeck()
@@ -109,6 +139,23 @@ class TestGameLogic(unittest.TestCase):
             -1, gamelogic.gameboard.player2_hand[0])
 
         self.assertEqual((player1, player2), (True, True))
+
+    def test_stage_card_normal_joker_as_first_card(self):
+
+        createddeck = CreateDeck()
+        deck = createddeck.export()
+        gameboard = GameBoard(deck)
+        gamelogic = GameLogic(gameboard)
+        joker = Card("red-joker", 0)
+        other_card = Card("hearts", 2)
+
+        gameboard.player1_hand.append(joker)
+        gameboard.player1_hand.append(other_card)
+
+        gamelogic.stage_card_from_hand(1, joker)
+        player = gamelogic.stage_card_from_hand(1, other_card)
+
+        self.assertEqual(player, True)
 
     def test_stage_card_two_different_false(self):
 

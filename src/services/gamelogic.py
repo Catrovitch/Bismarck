@@ -7,14 +7,37 @@ class GameLogic:
         self.gameboard = gameboard
         self.turn = 1
 
+    def choose_endgame_cards(self, player, card):
+
+        if player == 1 and len(self.gameboard.player1_endgame) < 3:
+
+            self.gameboard.player1_endgame.append(card)
+            self.gameboard.player1_hand.remove(card)
+            return True
+
+        if player == -1 and len(self.gameboard.player2_endgame) < 3:
+
+            self.gameboard.player2_endgame.append(card)
+            self.gameboard.player2_hand.remove(card)
+            return True
+
+        return False
+            
+
     def stage_card_from_hand(self, player, card):
 
         if player == 1:
             # Checks if card can be staged and stages it if possible.
             length = len(self.gameboard.player1_staged)
-            if length > 0:
-                last_staged = self.gameboard.player1_staged[-1]
-            if length == 0 or card.number in (last_staged.number, 0):
+
+            for staged_card in self.gameboard.player1_staged:
+                if staged_card.number > 0:
+                    last_staged = staged_card
+                    break
+
+                last_staged = staged_card
+
+            if length == 0 or card.number in (last_staged.number, 0) or last_staged.number == 0:
                 self.gameboard.player1_staged.append(card)
                 self.gameboard.player1_hand.remove(card)
                 return True
@@ -60,10 +83,12 @@ class GameLogic:
         if player == 1:
             self.gameboard.field_deck += self.gameboard.player1_staged
             self.gameboard.player1_staged.clear()
+            self.turn *= -1
 
         if player == -1:
             self.gameboard.field_deck += self.gameboard.player2_staged
             self.gameboard.player2_staged.clear()
+            self.turn *= -1
 
     def check_card_hierarchy(self, amount_played):
 
