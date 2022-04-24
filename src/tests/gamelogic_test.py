@@ -94,7 +94,7 @@ class TestGameLogic(unittest.TestCase):
 
         self.assertEqual(gamelogic.turn, -1)
 
-    def test_choose_endgame_cards_normal(self):
+    def test_choose_endgame_cards_normal_player1(self):
 
         createddeck = CreateDeck()
         deck = createddeck.export()
@@ -106,6 +106,21 @@ class TestGameLogic(unittest.TestCase):
         for i in range(3):
             card = gameboard.player1_hand[-1]
             result = gamelogic.choose_endgame_cards(1, card)
+
+        self.assertEqual(result, True)
+
+    def test_choose_endgame_cards_normal_player2(self):
+
+        createddeck = CreateDeck()
+        deck = createddeck.export()
+        gameboard = GameBoard(deck)
+        gamelogic = GameLogic(gameboard)
+
+        gamelogic.initial_deal()
+
+        for i in range(3):
+            card = gameboard.player2_hand[-1]
+            result = gamelogic.choose_endgame_cards(-1, card)
 
         self.assertEqual(result, True)
 
@@ -164,7 +179,15 @@ class TestGameLogic(unittest.TestCase):
         gameboard = GameBoard(deck)
         gamelogic = GameLogic(gameboard)
 
-        gamelogic.initial_deal()
+        card1 = Card("hearts", 2)
+        card2 = Card("clubs", 3)
+        card3 = Card("spades", 4)
+        card4 = Card("diamonds", 5)
+
+        gamelogic.gameboard.player1_hand.append(card1)
+        gamelogic.gameboard.player1_hand.append(card2)
+        gamelogic.gameboard.player2_hand.append(card3)
+        gamelogic.gameboard.player2_hand.append(card4)
 
         p1first = gamelogic.stage_card_from_hand(
             1, gamelogic.gameboard.player1_hand[0])
@@ -591,6 +614,17 @@ class TestGameLogic(unittest.TestCase):
 
         self.assertEqual(result, False)
 
+    def test_chance_reserve_deck_empty(self):
+
+        createddeck = CreateDeck()
+        deck = createddeck.export()
+        gameboard = GameBoard(deck)
+        gamelogic = GameLogic(gameboard)
+
+        gameboard.reserve_deck = []
+
+        self.assertEqual(gamelogic.chance(1), False)
+
     def test_pick_up_field_deck_player1(self):
 
         createddeck = CreateDeck()
@@ -634,3 +668,34 @@ class TestGameLogic(unittest.TestCase):
         player_hand_length = len(gamelogic.gameboard.player2_hand)
 
         self.assertEqual((field_length, player_hand_length), (0, 3))
+
+    def test_sort_hand(self):
+
+        createddeck = CreateDeck()
+        deck = createddeck.export()
+        gameboard = GameBoard(deck)
+        gamelogic = GameLogic(gameboard)
+        card1 = Card("hearts", 2)
+        card2 = Card("clubs", 3)
+        card3 = Card("spades", 4)
+        card4 = Card("diamonds", 5)
+
+        gamelogic.gameboard.player1_hand.append(card3)
+        gamelogic.gameboard.player1_hand.append(card4)
+        gamelogic.gameboard.player1_hand.append(card2)
+        gamelogic.gameboard.player1_hand.append(card1)
+
+        gamelogic.gameboard.player2_hand.append(card3)
+        gamelogic.gameboard.player2_hand.append(card4)
+        gamelogic.gameboard.player2_hand.append(card2)
+        gamelogic.gameboard.player2_hand.append(card1)
+
+        gamelogic.sort_hand(1)
+        gamelogic.sort_hand(-1)
+
+        player1_first_card = gamelogic.gameboard.player1_hand[0].number
+        player1_last_card = gamelogic.gameboard.player1_hand[-1].number
+        player2_first_card = gamelogic.gameboard.player2_hand[0].number
+        player2_first_card = gamelogic.gameboard.player2_hand[-1].number
+        self.assertEqual((player1_first_card, player1_last_card,
+                         player1_first_card, player1_last_card), (2, 5, 2, 5))

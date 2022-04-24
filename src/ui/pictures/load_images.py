@@ -1,6 +1,7 @@
 import os
 import pygame
 
+
 def load_image(filename):
 
     dirname = os.path.dirname(__file__)

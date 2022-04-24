@@ -18,7 +18,7 @@ class Player1Final:
             self.second = True
             return
         if self.third == False:
-            self.third = True  
+            self.third = True
             return
 
     def use_card(self, place):

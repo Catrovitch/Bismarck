@@ -21,7 +21,6 @@ class TestPlayer(unittest.TestCase):
 
         self.assertEqual(player.player_id, 1)
 
-
     def test_player_gamelogic_class(self):
 
         deck = CreateDeck().export()
@@ -44,7 +43,7 @@ class TestPlayer(unittest.TestCase):
         player = Player(1, gamelogic)
 
         gameboard.player1_hand.append(card)
-        
+
         player.stage_card_from_hand(card)
 
         staged_card = gameboard.player1_staged[0]
@@ -61,7 +60,7 @@ class TestPlayer(unittest.TestCase):
         player = Player(1, gamelogic)
 
         gameboard.player1_endgame.append(card)
-        
+
         player.stage_card_from_endgame(card)
 
         staged_card = gameboard.player1_staged[0]
@@ -78,13 +77,12 @@ class TestPlayer(unittest.TestCase):
         player = Player(1, gamelogic)
 
         gameboard.player1_endgame.append(card)
-        
+
         player.stage_card_from_endgame(card)
 
         player.play_staged_cards()
 
         self.assertEqual(gameboard.field_deck[-1], card)
-
 
     def test_pick_up_field_deck(self):
 
@@ -100,7 +98,6 @@ class TestPlayer(unittest.TestCase):
         player.pick_up_field_deck()
 
         self.assertEqual(gameboard.player1_hand[0], card)
-
 
     def test_chance(self):
 

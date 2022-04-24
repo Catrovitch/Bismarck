@@ -6,11 +6,11 @@ class Player:
         self.gamelogic = gamelogic
 
     def stage_card_from_hand(self, card):
-        
+
         self.gamelogic.stage_card_from_hand(self.player_id, card)
 
     def stage_card_from_endgame(self, card):
-        
+
         self.gamelogic.stage_card_from_endgame(self.player_id, card)
 
     def play_staged_cards(self):
@@ -24,5 +24,3 @@ class Player:
     def chance(self):
 
         self.gamelogic.chance(self.player_id)
-
-    

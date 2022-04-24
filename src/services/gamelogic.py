@@ -22,7 +22,6 @@ class GameLogic:
             return True
 
         return False
-            
 
     def stage_card_from_hand(self, player, card):
 
@@ -129,6 +128,9 @@ class GameLogic:
 
     def chance(self, player):
 
+        if len(self.gameboard.reserve_deck) == 0:
+            return False
+
         self.gameboard.field_deck.append(self.gameboard.reserve_deck.pop())
 
         if player == 1 and self.turn == 1:
@@ -193,3 +195,13 @@ class GameLogic:
                 self.gameboard.reserve_deck.pop())
             self.gameboard.player2_hand.append(
                 self.gameboard.reserve_deck.pop())
+
+    def sort_hand(self, player):
+
+        if player == 1:
+
+            self.gameboard.player1_hand.sort(key=lambda x: x.number)
+
+        if player == -1:
+
+            self.gameboard.player2_hand.sort(key=lambda x: x.number)

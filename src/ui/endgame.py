@@ -20,7 +20,7 @@ class Player1Endgame:
         else:
             self.third = card
             return
-    
+
     def use_card(self, place):
 
         self.place = False
@@ -38,7 +38,7 @@ class Player2Endgame:
         self.third_cordinates = (400, 380)
 
     def add_card(self, card, place):
-        
+
         if place == "first":
             self.first = card
             return
@@ -48,7 +48,7 @@ class Player2Endgame:
         else:
             self.third = card
             return
-    
+
     def use_card(self, place):
 
         self.place = False
