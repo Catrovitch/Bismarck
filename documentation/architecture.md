@@ -20,6 +20,12 @@ As described earlier the idea is to make the structure as stripped down as possi
 
 ![architecture](./pictures/bismarck_architecture.jpg)
 
+### Graphical User Interface of actual game
+
+The GUI of the actual game follows the same philosophy as explained earlier where the ideal is to create a structure that is really simple and easy to iterate on while still maintaining a level of concreteness that suits human intuition. 
+
+![GUI architecture](./pictures/bismarck_GUI_architecture.png)
+
 ## Saved Games
 
 *To be completed*
