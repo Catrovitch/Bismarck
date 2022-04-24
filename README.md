@@ -21,6 +21,7 @@ poetry install
 ```
 
 2. Start the program with command:
+- Note: If running the program via a virtual machine, make sure it is running in fullscreen mode for Bismarck to run optimally.
 
 ```bash
 poetry run invoke start
