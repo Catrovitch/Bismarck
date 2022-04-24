@@ -30,27 +30,33 @@ The list is divided into categories and are noted *(implemented)* if implemented
 - Play staged cards (implemented)
 - Pick up the field_deck (implemented)
 - Chance from reserve_deck (implemented)
+- Sort your hand of cards (implemented)
 
 ### Features used by the game
 
 - class Card (implemented)
 - class CreateDeck (implemented)
 - class Gameboard (implemented)
-- class GameLogic (mostly implemented)
-- class Player
+- class GameLogic (implemented)
+- class Player (implemented)
+- class BismarckAI (partially implemented)
 
 ### User
 
 - create an account
 - log in
-- AI
-
 
 ### Save game
 
 - save a played game
 
+### GUI
 
+- Login / create account
+- Menues
+- Main game (mostly implemented)
+- Rules
+- Saved Games
 
 ## Rules
 
