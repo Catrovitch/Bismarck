@@ -1,5 +1,4 @@
 import pygame
-
 from services.createdeck import CreateDeck
 from services.gameboard import GameBoard
 from services.gamelogic import GameLogic
@@ -13,6 +12,7 @@ from ui.endgame import Player1Endgame
 from ui.endgame import Player2Endgame
 from ui.gameboard_positions import GameboardPositions
 from ui.pictures.album import Album
+from ui.pictures.display_size import DisplaySize
 
 
 def main_game():
@@ -23,7 +23,8 @@ def main_game():
     player1 = Player(1, gamelogic)
     player2 = Player(-1, gamelogic)
     album = Album()
-    display_size = album.images["background"]
+    display_size = DisplaySize()
+
 
     display = pygame.display.set_mode(
         (display_size.width, display_size.height), pygame.FULLSCREEN)
