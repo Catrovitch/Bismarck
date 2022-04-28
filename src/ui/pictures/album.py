@@ -3,12 +3,23 @@ from ui.pictures.pictures import Picture
 
 class Album:
 
+    """The class Album is a that creates a dictionary of items of the Picture class where the Picture.name being the key and the value being the Picture itself.
+
+    Attributes:
+        images: dictionary
+    """
+
     def __init__(self):
 
+        """The constructor of the class which initiates the attribute images and calls on the method "create_all"
+        """
         self.images = {}
         self.create_all()
 
     def create_all(self):
+
+        """The create_all method creates all the pictures used in the program.
+        """
 
         suits = ['hearts', 'diamonds', 'clubs', 'spades']
         numbers = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]

@@ -3,7 +3,51 @@ import pygame
 
 class Game:
 
+    """The class Game is used to run the various stages of the main Game. 
+
+    Attributes:
+        gamelogic: instance of the class GameLogic
+        gameboard_positions: instance of the class GameboardPositions
+
+        player1: instance of the class Player corresponding to Player 1 in the game.
+        player2: instance of the class Player corresponding to Player 2 in the game.
+
+        renderer: instance of the class Renderer which is used to render everything.
+        album: instance of the class Album which contains all pictures used in the game.
+        eventqueue: instance of the class EventQueue which stores a list of events occuring in the game.
+        clock: instance of the class Clock which keeps track of time.
+
+        player1_endgame: instance of the class EndGame which keeps track of player1 endgame_cards.
+        player1_final: instance of the class FinalCards which keeps track of player1 final_cards.
+        player2_endgame: instance of the class EndGame which keeps track of player2 endgame_cards.
+        player2_final: instance of the class FinalCards which keeps track of player2 final_cards.
+
+        target: keeps track of if a card is targeted by a player.
+
+        game_begun: keeps track on if the game has begun.
+    """
+
     def __init__(self, gamelogic, gameboard_positions, player1, player2, renderer, album, eventqueue, clock, player1_endgame, player1_final, player2_endgame, player2_final):
+
+        """The constructor of the class. After assigning the corresponding arguments with their attributes it initiates the first stage of the game with the method initial_deal(). After this initiates the Gameloop method.
+
+        Args:
+            gamelogic: instance of the class GameLogic
+            gameboard_positions: instance of the class GameboardPositions
+
+            player1: instance of the class Player corresponding to Player 1 in the game.
+            player2: instance of the class Player corresponding to Player 2 in the game.
+
+            renderer: instance of the class Renderer which is used to render everything.
+            album: instance of the class Album which contains all pictures used in the game.
+            eventqueue: instance of the class EventQueue which stores a list of events occuring in the game.
+            clock: instance of the class Clock which keeps track of time.
+
+            player1_endgame: instance of the class EndGame which keeps track of player1 endgame_cards.
+            player1_final: instance of the class FinalCards which keeps track of player1 final_cards.
+            player2_endgame: instance of the class EndGame which keeps track of player2 endgame_cards.
+            player2_final: instance of the class FinalCards which keeps track of player2 final_cards.
+        """
 
         self.gamelogic = gamelogic
         self.gameboard_positions = gameboard_positions
@@ -30,6 +74,9 @@ class Game:
 
     def initial_deal(self):
 
+        """The method initial_deal calls on the gamelogic method inital_deal and sees that the corresponding response is met on the UI side of the program.
+        """
+
         self.gamelogic.initial_deal()
 
         dealt = 0
@@ -40,6 +87,9 @@ class Game:
             self.player2_final.add_card()
 
     def gameloop(self):
+
+        """This is the main loop of the game. It checks for events that has occured each loop and calls on the renderer to render stuff. The clock ticks 60/second.
+        """
 
         while True:
 
@@ -52,12 +102,18 @@ class Game:
 
     def handle_events(self):
 
+        """Handle_events gets a list of events that has occured and desides the corresponding result of these events.
+
+        Returns:
+            False: event = QUIT. I.E. if the user exits the program.
+        """
+
         for event in self.eventqueue.get():
             if event.type == pygame.MOUSEBUTTONDOWN:
 
                 pos = pygame.mouse.get_pos()
 
-                if self.gameboard_positions.exit_button(pos):
+                if self.gameboard_positions.exitbutton.in_position(pos):
                     return False
 
                 for card in self.gamelogic.gameboard.player1_hand:
@@ -76,7 +132,7 @@ class Game:
                     for name, card in self.album.items():
 
                         # Choose first endgame card
-                        if card.target == True and self.player1_endgame.first == False and self.gameboard_positions.player1_endgame_first(pos):
+                        if card.target == True and self.player1_endgame.first == False and self.gameboard_positions.player1_endgame_first.in_position(pos):
 
                             self.player1_endgame.add_card(card, "first")
                             self.player1_endgame.first = card
@@ -92,7 +148,7 @@ class Game:
                                     return
 
                         # Choose second endgame card
-                        if card.target == True and self.player1_endgame.second == False and self.gameboard_positions.player1_endgame_second(pos):
+                        if card.target == True and self.player1_endgame.second == False and self.gameboard_positions.player1_endgame_second.in_position(pos):
 
                             self.player1_endgame.add_card(card, "second")
                             self.player1_endgame.second = card
@@ -107,7 +163,7 @@ class Game:
                                     return
 
                         # Choose third endgame card
-                        if card.target == True and self.player1_endgame.third == False and self.gameboard_positions.player1_endgame_third(pos):
+                        if card.target == True and self.player1_endgame.third == False and self.gameboard_positions.player1_endgame_third.in_position(pos):
 
                             self.player1_endgame.add_card(card, "third")
                             self.player1_endgame.third = card
@@ -122,7 +178,7 @@ class Game:
                                     return
 
                         # Stage a card
-                        if card.target == True and self.gameboard_positions.player1_stage(pos) and self.game_begun == True:
+                        if card.target == True and self.gameboard_positions.player1_staged.in_position(pos) and self.game_begun == True:
 
                             for real_card in self.gamelogic.gameboard.player1_hand:
                                 if real_card.name == card.name:
@@ -132,11 +188,11 @@ class Game:
                         card.target = False
 
                         # Play_staged_cards
-                        if self.gameboard_positions.play_button(pos):
+                        if self.gameboard_positions.playbutton.in_position(pos):
 
                             self.gamelogic.play_staged_cards(1)
-
-                        if self.gameboard_positions.sort_button(pos):
+                        # Sort player hand
+                        if self.gameboard_positions.sortbutton.in_position(pos):
 
                             self.gamelogic.sort_hand(1)
 

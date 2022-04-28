@@ -1,15 +1,26 @@
-class Player1Final:
+class PlayerFinal:
+
+    """The class PlayerFinal is used by the UI to keep track on the final_cards of a player. 
+
+    Attributes:
+        first: Keeps track of the first final_card of the player. This is False when not available I.E. before the initial_deal (GameLogic method) of the game or after a player has used a final_card.
+        second: Keeps track of the second final_card.
+        third: Keeps track of the third final_card.
+    """
 
     def __init__(self):
 
+        """The constructor of the class. 
+        """
+
         self.first = False
-        self.first_cordinates = (750, 650)
         self.second = False
-        self.second_cordinates = (850, 650)
         self.third = False
-        self.third_cordinates = (950, 650)
 
     def add_card(self):
+
+        """Method is used to add a card to a player. This happens at the initial_deal (GameLogic method).
+        """
 
         if self.first == False:
             self.first = True
@@ -21,38 +32,3 @@ class Player1Final:
             self.third = True
             return
 
-    def use_card(self, place):
-
-        self.place = False
-
-        return
-
-
-class Player2Final:
-
-    def __init__(self):
-
-        self.first = False
-        self.first_cordinates = (750, 150)
-        self.second = False
-        self.second_cordinates = (850, 150)
-        self.third = False
-        self.third_cordinates = (950, 150)
-
-    def add_card(self):
-
-        if self.first == False:
-            self.first = True
-            return
-        if self.second == False:
-            self.second = True
-            return
-        if self.third == False:
-            self.third = True
-            return
-
-    def use_card(self, place):
-
-        self.place = False
-
-        return

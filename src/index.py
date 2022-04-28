@@ -6,10 +6,8 @@ from services.player import Player
 from ui.renderer import Renderer
 from ui.game import Game
 from ui.eventqueue import EventQueue
-from ui.finalcards import Player1Final
-from ui.finalcards import Player2Final
-from ui.endgame import Player1Endgame
-from ui.endgame import Player2Endgame
+from ui.finalcards import PlayerFinal
+from ui.endgame import PlayerEndgame
 from ui.gameboard_positions import GameboardPositions
 from ui.pictures.album import Album
 from ui.pictures.display_size import DisplaySize
@@ -31,10 +29,10 @@ def main_game():
     clock = pygame.time.Clock()
     pygame.display.set_caption("Bismarck")
 
-    player1_endgame = Player1Endgame()
-    player1_final = Player1Final()
-    player2_endgame = Player2Endgame()
-    player2_final = Player2Final()
+    player1_endgame = PlayerEndgame()
+    player1_final = PlayerFinal()
+    player2_endgame = PlayerEndgame()
+    player2_final = PlayerFinal()
 
     # Deciding some dimensions
     card_for_size = album.images["cardback"]

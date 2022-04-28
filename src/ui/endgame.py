@@ -1,15 +1,29 @@
-class Player1Endgame:
+class PlayerEndgame:
 
+    """The class PlayerEndgame is used by the UI to keep track on the endgame_cards of a player. 
+
+    Attributes:
+        first: Keeps track on the first endgame_card. This is = False if it's not avaiable I.E it hasn't been chosen or it has been used and is = card if it is available.
+        second: Keeps track on the endgame_card. 
+        third: Keeps track on the third endgame_card.
+    """
     def __init__(self):
 
-        self.first = False
-        self.first_cordinates = (750, 635)
+        """The constructor of the class.
+        """
+
+        self.first = False  
         self.second = False
-        self.second_cordinates = (850, 635)
         self.third = False
-        self.third_cordinates = (950, 635)
 
     def add_card(self, card, place):
+
+        """Adds a card to either the first, second or third endgame_card slot.
+
+        Args:
+            card: The card that will be placed. This is an item of the class Picture.
+            place: will either be "first", "second" or "third". Which in each case will correspond to the relevant attribute.
+        """
 
         if place == "first":
             self.first = card
@@ -21,34 +35,3 @@ class Player1Endgame:
             self.third = card
             return
 
-    def use_card(self, place):
-
-        self.place = False
-
-
-class Player2Endgame:
-
-    def __init__(self):
-
-        self.first = False
-        self.first_cordinates = (200, 380)
-        self.second = False
-        self.second_cordinates = (300, 380)
-        self.third = False
-        self.third_cordinates = (400, 380)
-
-    def add_card(self, card, place):
-
-        if place == "first":
-            self.first = card
-            return
-        if place == "second":
-            self.second = card
-            return
-        else:
-            self.third = card
-            return
-
-    def use_card(self, place):
-
-        self.place = False
