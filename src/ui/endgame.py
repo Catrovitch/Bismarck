@@ -7,17 +7,21 @@ class PlayerEndgame:
         second: Keeps track on the endgame_card. 
         third: Keeps track on the third endgame_card.
     """
-    def __init__(self):
 
+    def __init__(self):
         """The constructor of the class.
         """
 
-        self.first = False  
+        self.first = False
+        self.first_target = False
+
         self.second = False
+        self.second_target = False
+
         self.third = False
+        self.third_target = False
 
     def add_card(self, card, place):
-
         """Adds a card to either the first, second or third endgame_card slot.
 
         Args:
@@ -35,3 +39,17 @@ class PlayerEndgame:
             self.third = card
             return
 
+    def use_card(self, card):
+
+        if self.first == card:
+            self.first = False
+            self.first_target = False
+            return
+        if self.second == card:
+            self.second = False
+            self.second_target = False
+            return
+        if self.third == card:
+            self.third = False
+            self.third_target = False
+            return

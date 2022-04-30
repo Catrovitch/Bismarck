@@ -9,7 +9,6 @@ class Card:
     """
 
     def __init__(self, suit, number):
-
         """Constructor which is used in the creation of a new card.
 
         Args:

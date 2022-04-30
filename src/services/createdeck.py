@@ -11,7 +11,6 @@ class CreateDeck:
     """
 
     def __init__(self):
-
         """Constructor of the class which initiates the class and calls on the method "create_deck" which takes care of the actual creation of the deck.
 
         Args:
@@ -22,7 +21,6 @@ class CreateDeck:
         self.create_deck()
 
     def create_deck(self):
-
         """Creates a deck of cards where each card is an instance of the "Card" class.
 
         Args:
@@ -41,7 +39,6 @@ class CreateDeck:
         self.deck.append(Card("red-joker", 0))
 
     def shuffle(self):
-    
         """Shuffles the items (cards) in the attribute self.deck"
 
         Args:
@@ -51,7 +48,6 @@ class CreateDeck:
         random.shuffle(self.deck)
 
     def export(self):
-
         """This method is used to export a ready to use shuffled deck of cards. To make sure the cards are shuffled it always calls on the shuffle function.
 
         Returns:

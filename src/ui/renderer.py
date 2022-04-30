@@ -1,5 +1,6 @@
 import pygame
 
+
 class Renderer:
 
     """The Renderer class handles all rendering in the program.
@@ -16,8 +17,7 @@ class Renderer:
         gameboard_positions: instance of class GameboardPositions.
     """
 
-    def __init__(self, display, gameboard, gameboard_positions, album, player1_endgame, player1_final, player2_endgame, player2_final):
-
+    def __init__(self, display, gamelogic, gameboard, gameboard_positions, album, player1_endgame, player1_final, player2_endgame, player2_final):
         """The constructor of the class. 
 
         Args:
@@ -41,11 +41,11 @@ class Renderer:
         self.player2_endgame = player2_endgame
         self.player2_final = player2_final
 
+        self.gamelogic = gamelogic
         self.gameboard = gameboard
         self.gameboard_positions = gameboard_positions
 
     def render(self):
-
         """This function calls on all that shall be rendered.
         """
 
@@ -62,7 +62,6 @@ class Renderer:
         return
 
     def render_base(self):
-
         """ This function renders the actual Gameboard (not to be confused with the class Gameboard). 
             This consists of a background colour and some lines that indicate where things should be placed.
         """
@@ -97,14 +96,16 @@ class Renderer:
         pygame.draw.rect(self.display, (button_frame_colour), (self.gameboard_positions.exitbutton.x,
                          self.gameboard_positions.exitbutton.y, self.gameboard_positions.exitbutton.width, self.gameboard_positions.exitbutton.height), 3)
         exit_text = gamefont.render("Exit", True, (font_colour))
-        self.display.blit(exit_text, (self.gameboard_positions.exitbutton_text.coordinates))
+        self.display.blit(
+            exit_text, (self.gameboard_positions.exitbutton_text.coordinates))
         # Draw Play button
         pygame.draw.rect(self.display, (button_colour), (self.gameboard_positions.playbutton.x,
                          self.gameboard_positions.playbutton.y, self.gameboard_positions.playbutton.width, self.gameboard_positions.playbutton.height))
         pygame.draw.rect(self.display, (button_frame_colour), (self.gameboard_positions.playbutton.x,
                          self.gameboard_positions.playbutton.y, self.gameboard_positions.playbutton.width, self.gameboard_positions.playbutton.height), 3)
         play_text = gamefont.render("Play", True, (font_colour))
-        self.display.blit(play_text, (self.gameboard_positions.playbutton_text.coordinates))
+        self.display.blit(
+            play_text, (self.gameboard_positions.playbutton_text.coordinates))
         # Draw Unstage butto
         pygame.draw.rect(self.display, (button_colour), (self.gameboard_positions.unstagebutton.x,
                          self.gameboard_positions.unstagebutton.y, self.gameboard_positions.unstagebutton.width, self.gameboard_positions.unstagebutton.height))
@@ -119,10 +120,44 @@ class Renderer:
         pygame.draw.rect(self.display, (button_frame_colour), (self.gameboard_positions.sortbutton.x,
                          self.gameboard_positions.sortbutton.y, self.gameboard_positions.sortbutton.width, self.gameboard_positions.sortbutton.height), 3)
         sort_text = gamefont.render("Sort", True, (font_colour))
-        self.display.blit(sort_text, (self.gameboard_positions.sortbutton_text.coordinates))
+        self.display.blit(
+            sort_text, (self.gameboard_positions.sortbutton_text.coordinates))
+        # Draw Chance button
+        pygame.draw.rect(self.display, (button_colour), (self.gameboard_positions.chancebutton.x,
+                         self.gameboard_positions.chancebutton.y, self.gameboard_positions.chancebutton.width, self.gameboard_positions.chancebutton.height))
+        pygame.draw.rect(self.display, (button_frame_colour), (self.gameboard_positions.chancebutton.x,
+                         self.gameboard_positions.chancebutton.y, self.gameboard_positions.chancebutton.width, self.gameboard_positions.chancebutton.height), 3)
+        chance_text = gamefont.render("Chance", True, (font_colour))
+        self.display.blit(
+            chance_text, (self.gameboard_positions.chancebutton_text.coordinates))
+        # Draw Turn button
+        pygame.draw.rect(self.display, (button_colour), (self.gameboard_positions.turnbutton.x,
+                         self.gameboard_positions.turnbutton.y, self.gameboard_positions.turnbutton.width, self.gameboard_positions.turnbutton.height))
+        pygame.draw.rect(self.display, (button_frame_colour), (self.gameboard_positions.turnbutton.x,
+                         self.gameboard_positions.turnbutton.y, self.gameboard_positions.turnbutton.width, self.gameboard_positions.turnbutton.height), 3)
+
+        turn_text = gamefont.render("Turn:", True, (font_colour))
+        self.display.blit(
+            turn_text, (self.gameboard_positions.turnbutton_text.coordinates))
+
+        if self.gamelogic.turn == 1:
+            whos_turn = gamefont.render("Player 1", True, (font_colour))
+        else:
+            whos_turn = gamefont.render("Player 2", True, (font_colour))
+
+        self.display.blit(
+            whos_turn, (self.gameboard_positions.whos_turn_text.coordinates))
+
+        # Draw endgamebutton
+        pygame.draw.rect(self.display, (button_colour), (self.gameboard_positions.endgamebutton.x,
+                         self.gameboard_positions.endgamebutton.y, self.gameboard_positions.endgamebutton.width, self.gameboard_positions.endgamebutton.height))
+        pygame.draw.rect(self.display, (button_frame_colour), (self.gameboard_positions.endgamebutton.x,
+                         self.gameboard_positions.endgamebutton.y, self.gameboard_positions.endgamebutton.width, self.gameboard_positions.endgamebutton.height), 3)
+        endgame_text = gamefont.render("Endgame", True, (font_colour))
+        self.display.blit(
+            endgame_text, (self.gameboard_positions.endgamebutton_text.coordinates))
 
     def render_reserve_deck(self):
-
         """Renders the field_deck.
         """
         if len(self.gameboard.reserve_deck) > 0:
@@ -132,7 +167,6 @@ class Renderer:
                 reserve_deck, (self.gameboard_positions.reserve_deck.coordinates))
 
     def render_finalcards(self):
-
         """Renders the finalcards of player1 and player2 if they are in place"""
 
         if self.player1_final.first:
@@ -160,7 +194,6 @@ class Renderer:
                 self.album["cardback"].image, self.gameboard_positions.player2_final_third.coordinates)
 
     def render_player1_hand(self):
-
         """Renders the cards in held in the hand of player1. (attriute "player1_hand" in Gameboard class)
         """
         card_index = 0
@@ -173,7 +206,6 @@ class Renderer:
             card_index += 1
 
     def render_player2_hand(self):
-
         """Renders the cards held in the hand of player2. (attribute "player2_hand" in Gameboard class)"""
         card_index = 0
 
@@ -185,7 +217,6 @@ class Renderer:
             card_index += 1
 
     def render_field_deck(self):
-
         """Renders the field_deck
         """
 
@@ -195,7 +226,6 @@ class Renderer:
                 top_card, (self.gameboard_positions.field_deck.coordinates))
 
     def render_player1_staged(self):
-
         """Renders the cards staged by player1.
         """
 
@@ -208,25 +238,70 @@ class Renderer:
                 x -= 10
                 y += 10
 
-    def render_endgame_cards(self):
+    def render_player2_staged(self):
+        """Renders the cards staged by player1.
+        """
 
+        if len(self.gameboard.player1_staged) > 0:
+            x = self.gameboard_positions.player2_staged.x
+            y = self.gameboard_positions.player2_staged.y
+
+            for card in self.gameboard.player2_staged:
+                self.display.blit(self.album[card.name].image, (x, y))
+                x -= 10
+                y += 10
+
+    def render_endgame_cards(self):
         """Renders the endgamecards of player1.
         """
 
         if self.player1_endgame.first != False:
             card = self.player1_endgame.first.image
 
-            self.display.blit(
-                card, self.gameboard_positions.player1_endgame_first.coordinates)
+            if self.player1_endgame.first_target == False:
+                self.display.blit(
+                    card, self.gameboard_positions.player1_endgame_first.coordinates)
+
+            else:
+                card = self.album[self.player1_endgame.first.name]
+                self.display.blit(card.image, (card.x, card.y))
 
         if self.player1_endgame.second != False:
             card = self.player1_endgame.second.image
 
-            self.display.blit(
-                card, self.gameboard_positions.player1_endgame_second.coordinates)
+            if self.player1_endgame.second_target == False:
+                self.display.blit(
+                    card, self.gameboard_positions.player1_endgame_second.coordinates)
+
+            else:
+                card = self.album[self.player1_endgame.second.name]
+                self.display.blit(card.image, (card.x, card.y))
 
         if self.player1_endgame.third != False:
             card = self.player1_endgame.third.image
 
+            if self.player1_endgame.third_target == False:
+                self.display.blit(
+                    card, self.gameboard_positions.player1_endgame_third.coordinates)
+
+            else:
+                card = self.album[self.player1_endgame.third.name]
+                self.display.blit(card.image, (card.x, card.y))
+
+        if self.player2_endgame.first != False:
+            card = self.player2_endgame.first.image
+
             self.display.blit(
-                card, self.gameboard_positions.player1_endgame_third.coordinates)
+                card, self.gameboard_positions.player2_endgame_first.coordinates)
+
+        if self.player2_endgame.second != False:
+            card = self.player2_endgame.second.image
+
+            self.display.blit(
+                card, self.gameboard_positions.player2_endgame_second.coordinates)
+
+        if self.player2_endgame.third != False:
+            card = self.player2_endgame.third.image
+
+            self.display.blit(
+                card, self.gameboard_positions.player2_endgame_third.coordinates)

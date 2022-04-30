@@ -22,7 +22,6 @@ class GameBoard:
     """
 
     def __init__(self, deck):
-
         """Constructor method of the class which initiates all the attributes.
 
         Args:

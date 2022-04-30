@@ -17,7 +17,6 @@ class Picture:
     """
 
     def __init__(self, name):
-
         """Constructor of the class. 
 
         Args:

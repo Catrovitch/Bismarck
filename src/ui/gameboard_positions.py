@@ -11,7 +11,6 @@ class Position:
     """
 
     def __init__(self, x, y, width, height):
-
         """The constructor of the class.
 
         Args:
@@ -29,7 +28,6 @@ class Position:
         self.height = height
 
     def in_position(self, position):
-
         """Checks if the mouse-cursor is within the object.
 
         Args:
@@ -39,11 +37,12 @@ class Position:
             True: if the position of the mouse-cursor is within the object
             False: if the position of the mouse-cursor is not within the object.
         """
-    
+
         if self.x <= position[0] <= self.x + self.width and self.y <= position[1] <= self.y + self.height:
             return True
-        
+
         return False
+
 
 class GameboardPositions:
 
@@ -70,7 +69,6 @@ class GameboardPositions:
     """
 
     def __init__(self, gameboard, album, display_size, card_width, card_height):
-
         """The constructor of the class. This class also holds all of the attributes. Read the notes about the class to get a good understanding of the arguments as well. The rest is very straight forward.
         """
 
@@ -83,73 +81,111 @@ class GameboardPositions:
         self.card_height = card_height
 
         # Reserve_deck position
-        self.reserve_deck = Position(((self.display_size.width/4)-(self.card_height/2)), ((self.display_size.height/2)-(self.card_width/2)), self.card_width, self.card_height)
+        self.reserve_deck = Position(((self.display_size.width/4)-(self.card_height/2)), ((
+            self.display_size.height/2)-(self.card_width/2)), self.card_width, self.card_height)
 
         # Field_deck position
-        self.field_deck = Position(((self.display_size.width/2)-(self.card_width/2)), ((self.display_size.height/2)-(self.card_height/2)), self.card_width, self.card_height)
-
+        self.field_deck = Position(((self.display_size.width/2)-(self.card_width/2)), ((
+            self.display_size.height/2)-(self.card_height/2)), self.card_width, self.card_height)
 
         # Player1 staged position
-        self.player1_staged = Position((self.field_deck.x - self.card_width*0.7), (self.field_deck.y + self.card_height*0.7), self.card_width, self.card_height)
+        self.player1_staged = Position((self.field_deck.x - self.card_width*0.7),
+                                       (self.field_deck.y + self.card_height*0.7), self.card_width, self.card_height)
 
         # Player2 staged position
-        self.player2_staged = Position((self.field_deck.x + self.card_width*0.7), (self.field_deck.y - self.card_height*0.7), self.card_width, self.card_height)
-
+        self.player2_staged = Position((self.field_deck.x + self.card_width*0.7),
+                                       (self.field_deck.y - self.card_height*0.7), self.card_width, self.card_height)
 
         # Player1 endgame first, second, third
-        self.player1_endgame_second = Position((self.display_size.width/2-self.card_width/2), (self.player1_staged.y + self.card_height*1.5), self.card_width, self.card_height)
-        self.player1_endgame_first = Position((self.player1_endgame_second.x - self.card_width*1.5), (self.player1_endgame_second.y), self.card_width, self.card_height)
-        self.player1_endgame_third = Position((self.player1_endgame_second.x + self.card_width*1.5), (self.player1_endgame_second.y), self.card_width, self.card_height)
-
+        self.player1_endgame_second = Position((self.display_size.width/2-self.card_width/2), (
+            self.player1_staged.y + self.card_height*1.5), self.card_width, self.card_height)
+        self.player1_endgame_first = Position(
+            (self.player1_endgame_second.x - self.card_width*1.5), (self.player1_endgame_second.y), self.card_width, self.card_height)
+        self.player1_endgame_third = Position(
+            (self.player1_endgame_second.x + self.card_width*1.5), (self.player1_endgame_second.y), self.card_width, self.card_height)
 
         # Player2 endgame first, second, third
-        self.player2_endgame_second = Position((self.player1_endgame_second.x), (self.player2_staged.y - self.card_height*2), self.card_width, self.card_height)
-        self.player2_endgame_first = Position((self.player2_endgame_second.x - self.card_width*1.5), (self.player2_endgame_second.y), self.card_width, self.card_height)
-        self.player2_endgame_third = Position((self.player2_endgame_second.x + self.card_width*1.5), (self.player2_endgame_first.y), self.card_width, self.card_height)
-
+        self.player2_endgame_second = Position((self.player1_endgame_second.x), (
+            self.player2_staged.y - self.card_height*2), self.card_width, self.card_height)
+        self.player2_endgame_first = Position(
+            (self.player2_endgame_second.x - self.card_width*1.5), (self.player2_endgame_second.y), self.card_width, self.card_height)
+        self.player2_endgame_third = Position(
+            (self.player2_endgame_second.x + self.card_width*1.5), (self.player2_endgame_first.y), self.card_width, self.card_height)
 
         # Player1 final first, second, third
-        self.player1_final_first = Position((self.player1_endgame_first.x), (self.player1_endgame_first.y + self.card_height*0.2), self.card_width, self.card_height)
-        self.player1_final_second = Position((self.player1_endgame_second.x), (self.player1_final_first.y), self.card_width, self.card_height)
-        self.player1_final_third = Position((self.player1_endgame_third.x), (self.player1_final_first.y), self.card_width, self.card_height)
-
+        self.player1_final_first = Position((self.player1_endgame_first.x), (
+            self.player1_endgame_first.y + self.card_height*0.2), self.card_width, self.card_height)
+        self.player1_final_second = Position((self.player1_endgame_second.x), (
+            self.player1_final_first.y), self.card_width, self.card_height)
+        self.player1_final_third = Position((self.player1_endgame_third.x), (
+            self.player1_final_first.y), self.card_width, self.card_height)
 
         # Player2 final first, second, third
-        self.player2_final_first = Position((self.player2_endgame_first.x), (self.player2_endgame_first.y - self.card_height*0.2), self.card_width, self.card_height)
-        self.player2_final_second = Position((self.player2_endgame_second.x), (self.player2_final_first.y), self.card_width, self.card_height)
-        self.player2_final_third = Position((self.player2_endgame_third.x), (self.player2_final_first.y), self.card_width, self.card_height)
-
+        self.player2_final_first = Position((self.player2_endgame_first.x), (
+            self.player2_endgame_first.y - self.card_height*0.2), self.card_width, self.card_height)
+        self.player2_final_second = Position((self.player2_endgame_second.x), (
+            self.player2_final_first.y), self.card_width, self.card_height)
+        self.player2_final_third = Position((self.player2_endgame_third.x), (
+            self.player2_final_first.y), self.card_width, self.card_height)
 
         # Player hand mid card position
-        self.player1_hand_mid_card = Position((self.display_size.width/2), (self.display_size.height-self.card_height*1.1), self.card_width, self.card_height)
-        self.player2_hand_mid_card = Position((self.display_size.width/2), (self.card_height*0.1), self.card_width, self.card_height)
+        self.player1_hand_mid_card = Position(
+            (self.display_size.width/2), (self.display_size.height-self.card_height*1.1), self.card_width, self.card_height)
+        self.player2_hand_mid_card = Position(
+            (self.display_size.width/2), (self.card_height*0.1), self.card_width, self.card_height)
 
         # Gameboard graphics
-        self.reserve_deck_frame = Position((self.reserve_deck.x - self.card_height*0.05), (self.reserve_deck.y - self.card_width*0.10), 125, 95)
-        self.field_deck_frame = Position((self.field_deck.x - self.card_width*0.10), (self.field_deck.y - self.card_height*0.05), 95, 125)
+        self.reserve_deck_frame = Position(
+            (self.reserve_deck.x - self.card_height*0.05), (self.reserve_deck.y - self.card_width*0.10), 125, 95)
+        self.field_deck_frame = Position(
+            (self.field_deck.x - self.card_width*0.10), (self.field_deck.y - self.card_height*0.05), 95, 125)
 
-        self.player1_stage_frame = Position((self.player1_staged.x - self.card_width*0.10), (self.player1_staged.y - self.card_height*0.05), 95, 125)
-        self.player2_stage_frame = Position((self.player2_staged.x - self.card_width*0.10), (self.player2_staged.y - self.card_height*0.05), 95, 125)
+        self.player1_stage_frame = Position(
+            (self.player1_staged.x - self.card_width*0.10), (self.player1_staged.y - self.card_height*0.05), 95, 125)
+        self.player2_stage_frame = Position(
+            (self.player2_staged.x - self.card_width*0.10), (self.player2_staged.y - self.card_height*0.05), 95, 125)
 
         self.button_width = self.card_width*1.5
         self.button_height = self.card_height/2.8
 
-        self.playbutton = Position((self.player1_staged.x + self.card_width + 10), (self.player1_staged.y + self.card_width - 10), self.button_width, self.button_height)
-        self.playbutton_text = Position((self.playbutton.x + 40), (self.playbutton.y + 10), self.button_width, self.button_height)
+        self.playbutton = Position((self.player1_staged.x + self.card_width + 10),
+                                   (self.player1_staged.y + self.card_width - 10), self.button_width, self.button_height)
+        self.playbutton_text = Position(
+            (self.playbutton.x + 40), (self.playbutton.y + 10), self.button_width, self.button_height)
 
-        self.exitbutton = Position((self.card_width/3), (self.display_size.height - self.card_width/1.5), self.button_width, self.button_height)
-        self.exitbutton_text = Position((self.exitbutton.x + 40), (self.exitbutton.y + 10), self.button_width, self.button_height)
+        self.exitbutton = Position((self.card_width/3), (self.display_size.height -
+                                   self.card_width/1.5), self.button_width, self.button_height)
+        self.exitbutton_text = Position(
+            (self.exitbutton.x + 40), (self.exitbutton.y + 10), self.button_width, self.button_height)
 
-        self.unstagebutton = Position((self.player1_stage_frame.x - self.button_width*1.05), (self.playbutton.y), self.button_width, self.button_height)
-        self.unstagebutton_text = Position((self.unstagebutton.x + 10), (self.unstagebutton.y + 10), self.button_width, self.button_height)
+        self.unstagebutton = Position((self.player1_stage_frame.x - self.button_width*1.05),
+                                      (self.playbutton.y), self.button_width, self.button_height)
+        self.unstagebutton_text = Position(
+            (self.unstagebutton.x + 10), (self.unstagebutton.y + 10), self.button_width, self.button_height)
 
-        self.sortbutton = Position((self.display_size.width - self.exitbutton.x - self.button_width), (self.exitbutton.y), self.button_width, self.button_height)
-        self.sortbutton_text = Position((self.sortbutton.x + 40), (self.sortbutton.y + 10), self.button_width, self.button_height)
+        self.sortbutton = Position((self.display_size.width - self.exitbutton.x -
+                                   self.button_width), (self.exitbutton.y), self.button_width, self.button_height)
+        self.sortbutton_text = Position(
+            (self.sortbutton.x + 40), (self.sortbutton.y + 10), self.button_width, self.button_height)
 
+        self.endgamebutton = Position(
+            (10), (10), self.button_width, self.button_height)
+        self.endgamebutton_text = Position(
+            (self.endgamebutton.x + 10), (self.endgamebutton.y + 10), self.button_width, self.button_height)
 
+        self.chancebutton = Position(
+            (self.reserve_deck.x), (self.reserve_deck.y+100), self.button_width, self.button_height)
+        self.chancebutton_text = Position(
+            (self.chancebutton.x+10), (self.chancebutton.y+10), self.button_width, self.button_height)
+
+        self.turnbutton = Position((self.display_size.width-self.button_width-10), ((
+            self.display_size.height/2)-self.button_height), self.button_width, self.button_height*2)
+        self.turnbutton_text = Position(
+            (self.turnbutton.x+10), (self.turnbutton.y+10), self.button_width, self.button_height*2)
+        self.whos_turn_text = Position(
+            (self.turnbutton.x+10), (self.turnbutton.y+40), self.button_width, self.button_height*2)
 
     def decide_player1_hand_card_position(self, card, card_index):
-
         """Decides the position of a card in player1's hand. The position is decided as a relation between the card_index and the total amount of cards in the player's hand.
 
         Args:
@@ -173,8 +209,6 @@ class GameboardPositions:
         return (ui_card.x, ui_card.y)
 
     def decide_player2_hand_card_position(self, card, card_index):
-
-
         """Decides the position of a card in player2's hand. The position is decided as a relation between the card_index and the total amount of cards in the player's hand.
 
         Args:
@@ -196,4 +230,3 @@ class GameboardPositions:
             return (x, y)
 
         return (ui_card.x, ui_card.y)
-

@@ -42,6 +42,8 @@ class TestPlayer(unittest.TestCase):
 
         player = Player(1, gamelogic)
 
+        gamelogic.player1_locked = False
+
         gameboard.player1_hand.append(card)
 
         player.stage_card_from_hand(card)
@@ -59,6 +61,8 @@ class TestPlayer(unittest.TestCase):
 
         player = Player(1, gamelogic)
 
+        gamelogic.player1_locked = False
+
         gameboard.player1_endgame.append(card)
 
         player.stage_card_from_endgame(card)
@@ -75,6 +79,8 @@ class TestPlayer(unittest.TestCase):
         card = Card("hearts", 2)
 
         player = Player(1, gamelogic)
+
+        gamelogic.player1_locked = False
 
         gameboard.player1_endgame.append(card)
 
@@ -105,6 +111,8 @@ class TestPlayer(unittest.TestCase):
         gameboard = GameBoard(deck)
         gamelogic = GameLogic(gameboard)
         player = Player(1, gamelogic)
+
+        gamelogic.player1_locked = False
 
         card = gameboard.reserve_deck[-1]
 

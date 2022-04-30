@@ -10,14 +10,12 @@ class Album:
     """
 
     def __init__(self):
-
         """The constructor of the class which initiates the attribute images and calls on the method "create_all"
         """
         self.images = {}
         self.create_all()
 
     def create_all(self):
-
         """The create_all method creates all the pictures used in the program.
         """
 

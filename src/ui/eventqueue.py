@@ -1,11 +1,12 @@
 import pygame
 
+
 class EventQueue:
 
     """The EventQueue class is used to get all the events in a pygame instance.
     """
-    def get(self):
 
+    def get(self):
         """Gets the events.
 
         Returns:

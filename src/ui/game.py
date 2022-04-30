@@ -27,8 +27,7 @@ class Game:
         game_begun: keeps track on if the game has begun.
     """
 
-    def __init__(self, gamelogic, gameboard_positions, player1, player2, renderer, album, eventqueue, clock, player1_endgame, player1_final, player2_endgame, player2_final):
-
+    def __init__(self, gamelogic, gameboard_positions, player1, player2, renderer, album, eventqueue, clock, player1_endgame, player1_final, player2_endgame, player2_final, bismarck):
         """The constructor of the class. After assigning the corresponding arguments with their attributes it initiates the first stage of the game with the method initial_deal(). After this initiates the Gameloop method.
 
         Args:
@@ -54,6 +53,7 @@ class Game:
 
         self.player1 = player1
         self.player2 = player2
+        self.bismarck = bismarck
 
         self.renderer = renderer
         self.album = album.images
@@ -70,10 +70,11 @@ class Game:
         self.game_begun = False
 
         self.initial_deal()
+        self.gamelogic.decide_turn_in_beginning()
+        self.bismarck.choose_endgame_cards()
         self.gameloop()
 
     def initial_deal(self):
-
         """The method initial_deal calls on the gamelogic method inital_deal and sees that the corresponding response is met on the UI side of the program.
         """
 
@@ -87,7 +88,6 @@ class Game:
             self.player2_final.add_card()
 
     def gameloop(self):
-
         """This is the main loop of the game. It checks for events that has occured each loop and calls on the renderer to render stuff. The clock ticks 60/second.
         """
 
@@ -96,12 +96,13 @@ class Game:
             if self.handle_events() is False:
                 break
 
+            if self.game_begun == True:
+                self.bismarck.choose_played_cards()
             self.renderer.render()
 
             self.clock.tick(60)
 
     def handle_events(self):
-
         """Handle_events gets a list of events that has occured and desides the corresponding result of these events.
 
         Returns:
@@ -111,10 +112,36 @@ class Game:
         for event in self.eventqueue.get():
             if event.type == pygame.MOUSEBUTTONDOWN:
 
+                self.click = True
                 pos = pygame.mouse.get_pos()
+
+                if self.gameboard_positions.endgamebutton.in_position(pos):
+                    self.game_begun = True
+                    self.gamelogic.player1_locked = False
+                    self.gamelogic.player2_locked = False
+                    self.gamelogic.gameboard.reserve_deck.clear()
+                    self.gamelogic.gameboard.player1_hand.clear()
+                    self.gamelogic.gameboard.player2_hand.clear()
+                    self.gamelogic.gameboard.player1_staged.clear()
+                    self.gamelogic.gameboard.player2_staged.clear()
+                    self.gamelogic.turn = 1
 
                 if self.gameboard_positions.exitbutton.in_position(pos):
                     return False
+
+                if len(self.gamelogic.gameboard.player1_endgame) == 0 and len(self.gamelogic.gameboard.player1_hand) == 0:
+
+                    if self.gameboard_positions.player1_final_first.in_position(pos) and self.player1_final.first == True:
+                        self.player1_final.first = False
+                        self.player1.play_finalcard()
+
+                    if self.gameboard_positions.player1_final_second.in_position(pos) and self.player1_final.second == True:
+                        self.player1_final.second = False
+                        self.player1.play_finalcard()
+
+                    if self.gameboard_positions.player1_final_third.in_position(pos) and self.player1_final.third == True:
+                        self.player1_final.third = False
+                        self.player1.play_finalcard()
 
                 for card in self.gamelogic.gameboard.player1_hand:
                     ui_card = self.album[card.name]
@@ -126,7 +153,43 @@ class Game:
                         self.offset_x = ui_card.x - mouse_x
                         self.offset_y = ui_card.y - mouse_y
 
+                if len(self.gamelogic.gameboard.reserve_deck) == 0 and len(self.gamelogic.gameboard.player1_hand) == 0:
+
+                    for card in self.gamelogic.gameboard.player1_endgame:
+                        ui_card = self.album[card.name]
+
+                        if self.gameboard_positions.player1_endgame_first.in_position(pos) and self.player1_endgame.first != False:
+
+                            self.player1_endgame.first_target = True
+                            ui_card.x = self.gameboard_positions.player1_endgame_first.x
+                            ui_card.y = self.gameboard_positions.player1_endgame_first.y
+                            ui_card.target = True
+                            mouse_x, mouse_y = event.pos
+                            self.offset_x = ui_card.x - mouse_x
+                            self.offset_y = ui_card.y - mouse_y
+
+                        if self.gameboard_positions.player1_endgame_second.in_position(pos) and self.player1_endgame.second != False:
+
+                            self.player1_endgame.second_target = True
+                            ui_card.x = self.gameboard_positions.player1_endgame_second.x
+                            ui_card.y = self.gameboard_positions.player1_endgame_second.y
+                            ui_card.target = True
+                            mouse_x, mouse_y = event.pos
+                            self.offset_x = ui_card.x - mouse_x
+                            self.offset_y = ui_card.y - mouse_y
+
+                        if self.gameboard_positions.player1_endgame_third.in_position(pos) and self.player1_endgame.third != False:
+
+                            self.player1_endgame.third_target = True
+                            ui_card.x = self.gameboard_positions.player1_endgame_third.x
+                            ui_card.y = self.gameboard_positions.player1_endgame_third.y
+                            ui_card.target = True
+                            mouse_x, mouse_y = event.pos
+                            self.offset_x = ui_card.x - mouse_x
+                            self.offset_y = ui_card.y - mouse_y
+
             elif event.type == pygame.MOUSEBUTTONUP:
+
                 if event.button == 1:
                     pos = pygame.mouse.get_pos()
                     for name, card in self.album.items():
@@ -185,16 +248,58 @@ class Game:
                                     self.gamelogic.stage_card_from_hand(
                                         1, real_card)
 
+                            for real_card in self.gamelogic.gameboard.player1_endgame:
+                                if real_card.name == card.name:
+
+                                    if self.player1_endgame.first == card and self.player1_endgame.first_target is True:
+                                        self.gamelogic.stage_card_from_endgame(
+                                            1, real_card)
+                                        self.player1_endgame.use_card(card)
+                                    if self.player1_endgame.second == card and self.player1_endgame.second_target is True:
+                                        self.gamelogic.stage_card_from_endgame(
+                                            1, real_card)
+                                        self.player1_endgame.use_card(card)
+                                    if self.player1_endgame.third == card and self.player1_endgame.third_target is True:
+                                        self.gamelogic.stage_card_from_endgame(
+                                            1, real_card)
+                                        self.player1_endgame.use_card(card)
+
                         card.target = False
 
-                        # Play_staged_cards
-                        if self.gameboard_positions.playbutton.in_position(pos):
+                        if self.player1_endgame.first == card:
+                            card.x = self.gameboard_positions.player1_endgame_first.x
+                            card.y = self.gameboard_positions.player1_endgame_first.y
+                            self.player1_endgame.first_target = False
 
-                            self.gamelogic.play_staged_cards(1)
-                        # Sort player hand
-                        if self.gameboard_positions.sortbutton.in_position(pos):
+                        if self.player1_endgame.second == card:
+                            card.x = self.gameboard_positions.player1_endgame_second.x
+                            card.y = self.gameboard_positions.player1_endgame_second.y
+                            self.player1_endgame.second_target = False
 
-                            self.gamelogic.sort_hand(1)
+                        if self.player1_endgame.third == card:
+                            card.x = self.gameboard_positions.player1_endgame_third.x
+                            card.y = self.gameboard_positions.player1_endgame_third.y
+                            self.player1_endgame.third_target = False
+
+                    # Play_staged_cards
+                    if self.gameboard_positions.playbutton.in_position(pos) and self.click == True:
+
+                        self.click = False
+                        self.gamelogic.play_staged_cards(1)
+                    # Sort player hand
+                    if self.gameboard_positions.sortbutton.in_position(pos):
+
+                        self.gamelogic.sort_hand(1)
+                    # Chance
+                    if self.gameboard_positions.chancebutton.in_position(pos) and self.click == True:
+
+                        self.click = False
+                        self.gamelogic.chance(1)
+
+                    # Unstage
+                    if self.gameboard_positions.unstagebutton.in_position(pos):
+
+                        self.gamelogic.unstage_cards(1)
 
             elif event.type == pygame.MOUSEMOTION:
                 for name, card in self.album.items():
@@ -203,6 +308,12 @@ class Game:
                         card.x = mouse_x + self.offset_x
                         card.y = mouse_y + self.offset_y
                         card.cord = (card.x, card.y)
+
+                if self.player1_final.first_target:
+                    mouse_x, mouse_y = event.pos
+                    self.player1_final.first_x = mouse_x + self.offset_x
+                    self.player1_final.first_y = mouse_y + self.offset_y
+                    card.cord = (card.x, card.y)
 
             if event.type == pygame.QUIT:
                 return False

@@ -12,7 +12,6 @@ class DisplaySize():
     """
 
     def __init__(self):
-
         """The constructor of the class. Calls on the Tk method "withdraw".
         """
 
