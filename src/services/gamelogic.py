@@ -435,7 +435,6 @@ class GameLogic:
             self.gameboard.player2_hand.append(
                 self.gameboard.reserve_deck.pop())
 
-        self.stage_of_game_inc()
 
     def sort_hand(self, player):
         """Used to sort a players hand_cards in order according to the cards' numeric value.
