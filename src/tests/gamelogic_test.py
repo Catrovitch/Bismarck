@@ -1336,7 +1336,7 @@ class TestGameLogic(unittest.TestCase):
 
         gamelogic.player1_locked = False
 
-        gamelogic.unstage_cards(1)
+        gamelogic.unstage_cards()
 
         result = len(gamelogic.gameboard.player1_hand)
 

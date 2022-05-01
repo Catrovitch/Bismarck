@@ -8,7 +8,7 @@ class Player:
     """
 
     def __init__(self, player_id, gamelogic):
-        """Constructor of the class. 
+        """Constructor of the class.
 
         Args:
             player_id: if player1 it will be 1. If player2 it will be -1. (int)

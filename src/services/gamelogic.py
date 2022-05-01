@@ -20,7 +20,9 @@ class GameLogic:
 
         self.stage_of_game = 0
         self.player1_locked = True
+        self.player1_last_staged = None
         self.player2_locked = True
+        self.player2_last_staged = None
 
     def choose_endgame_cards(self, player, card):
         """Used in the beginning of a game by players to choose their endgame cards. Moves one card from the player's hand to the player-specific endgame_card's list. Checks that the rules are followed.
@@ -60,11 +62,11 @@ class GameLogic:
         """
 
         if player == 1:
-            if self.player1_locked == True:
+            if self.player1_locked is True:
                 return False
 
         if player == -1:
-            if self.player2_locked == True:
+            if self.player2_locked is True:
                 return False
 
         if player == 1:
@@ -111,11 +113,11 @@ class GameLogic:
         """
 
         if player == 1:
-            if self.player1_locked == True:
+            if self.player1_locked is True:
                 return False
 
         if player == -1:
-            if self.player2_locked == True:
+            if self.player2_locked is True:
                 return False
 
         if player == 1:
@@ -149,7 +151,7 @@ class GameLogic:
 
         return False
 
-    def unstage_cards(self, player):
+    def unstage_cards(self):
 
         self.gameboard.player1_hand += self.gameboard.player1_staged
         self.gameboard.player1_staged.clear()
@@ -161,11 +163,11 @@ class GameLogic:
             player: If method is called by player1 it will be 1. If called by player2 it will be -1. (int)
         """
         if player == 1:
-            if self.player1_locked == True or len(self.gameboard.player1_staged) == 0:
+            if self.player1_locked is True or len(self.gameboard.player1_staged) == 0:
                 return False
 
         if player == -1:
-            if self.player2_locked == True or len(self.gameboard.player2_staged) == 0:
+            if self.player2_locked is True or len(self.gameboard.player2_staged) == 0:
                 return False
 
         if player == 1:
@@ -306,25 +308,24 @@ class GameLogic:
             self.pick_up_field_deck(-1)
             return False
 
-        else:
-            if player == 1 and self.turn == -1:
+        if player == 1 and self.turn == -1:
 
-                if played_card.number in (self.player1_last_played.number, 0):
-                    self.draw_cards(1)
-                    return True
-
-                self.pick_up_field_deck(1)
-                return False
-
-            if played_card.number in (self.player2_last_played.number, 0):
+            if played_card.number in (self.player1_last_played.number, 0):
                 self.draw_cards(1)
                 return True
 
-            self.pick_up_field_deck(-1)
+            self.pick_up_field_deck(1)
             return False
 
+        if played_card.number in (self.player2_last_played.number, 0):
+            self.draw_cards(1)
+            return True
+
+        self.pick_up_field_deck(-1)
+        return False
+
     def pick_up_field_deck(self, player):
-        """Moves the cards from the field_deck to the hand_cards of a player. Used when a player wants or has to pick up the field_deck. 
+        """Moves the cards from the field_deck to the hand_cards of a player. Used when a player wants or has to pick up the field_deck.
 
         Args:
             player: If method is called by player1 it will be 1. If called by player2 it will be -1. (int)
@@ -354,10 +355,10 @@ class GameLogic:
             True: if the chance is successful.
             False: if the chance is unsuccessful.
         """
-        if player == 1 and self.player1_locked == True or len(self.gameboard.reserve_deck) == 0:
+        if player == 1 and self.player1_locked is True or len(self.gameboard.reserve_deck) == 0:
             return False
 
-        if player == -1 and self.player2_locked == True or len(self.gameboard.reserve_deck) == 0:
+        if player == -1 and self.player2_locked is True or len(self.gameboard.reserve_deck) == 0:
             return False
 
         self.gameboard.field_deck.append(self.gameboard.reserve_deck.pop())
@@ -370,8 +371,8 @@ class GameLogic:
         if self.turn == -1 and player == 1:
             return self.check_card_hierarchy(1, 1)
 
-        if self.turn == -1 and player == -1:
-            return self.check_card_hierarchy(-1, 1)
+        # if self.turn == -1 and player == -1:
+        return self.check_card_hierarchy(-1, 1)
 
     def play_finalcard(self, player_id):
 
@@ -473,24 +474,6 @@ class GameLogic:
         if player_id == -1:
 
             self.turn = 1
-
-    def stage_of_game_inc(self):
-
-        if self.stage_of_game == 0:
-            self.stage_of_game += 1
-
-        if self.stage_of_game == 1:
-            if len(self.gameboard.player1_endgame) == 3:
-                self.stage_of_game += 1
-
-        if self.stage_of_game == 2:
-            if self.first_turn is True:
-                self.first_turn = False
-                self.stage_of_game += 1
-
-        if self.stage_of_game == 3:
-            if len(self.gameboard.reserve_deck) == 0:
-                self.stage_of_game += 1
 
     def draw_cards(self, player):
 

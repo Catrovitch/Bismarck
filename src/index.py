@@ -3,6 +3,7 @@ from services.createdeck import CreateDeck
 from services.gameboard import GameBoard
 from services.gamelogic import GameLogic
 from services.player import Player
+
 from ui.renderer import Renderer
 from ui.game import Game
 from ui.eventqueue import EventQueue
@@ -11,8 +12,9 @@ from ui.endgame import PlayerEndgame
 from ui.gameboard_positions import GameboardPositions
 from ui.pictures.album import Album
 from ui.pictures.display_size import DisplaySize
+
 from services.bismarck_ai import BismarckAI
-    
+
 
 def main_game():
     deck = CreateDeck()

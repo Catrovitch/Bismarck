@@ -3,7 +3,8 @@
 
 class GameBoard:
 
-    """This class is used to store the location of all cards at all times of the game. This is achieved by moving cards between different lists that represent various elements of the game.
+    """ This class is used to store the location of all cards at all times of the game.
+        This is achieved by moving cards between different lists that represent various elements of the game.
 
     Attributes:
         reserve_deck: All cards are here in the beginning of the game. (list)
