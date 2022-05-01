@@ -4,6 +4,7 @@ Bismarck is a classic card game which is played between two players each strivin
 
 ## Documentation
 
+ - [Instructions](./documentation/instructions.md)
  - [Functional specifications](./documentation/functional_specifications.md)
  - [Working hours](./documentation/working_hours.md)
  - [Changelog](./documentation/changelog.md)

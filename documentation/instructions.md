@@ -1,15 +1,14 @@
 # Instructions
 
-Download the latest [release](https://github.com/ohjelmistotekniikkahttps://github.com/Catrovitch/ot-harjoitustyo/releases) by clicking on the flip down menue "Assets", scrolling down and choosing the option "Source code (zip)".
+Download the latest [release](https://github.com/ohjelmistotekniikkahttps://github.com/Catrovitch/ot-harjoitustyo/releases) by clicking on the link and then navigating to the flip down menu "Assets". Scroll down and choose the option "Source code (zip)" which downloads a the project. Extract it to your prefered folder.
 
-## Konfiguration
+## Configuration
 
 to be completed
 
 ## Starting the program
 
-Before starting the program navigate in your terminal to the folder to where you have extracted the downloaded zip file. Then navigate further into the project main folder named "ot-harjoitustyo". Here you should perform the command "poetry install" in your terminal which installs all dependencies needed to run the program. After this you are ready to start the actual program with the command "poetry run invoke start" in your terminal.
-
+Before starting the program you should navigate in your terminal to the project main folder named "ot-harjoitustyo" and perform the command "poetry install" which installs all dependencies needed to run the program. After this you are ready to start the actual program with the command "poetry run invoke start".
 
 1. Run this command inside the project folder.
 
