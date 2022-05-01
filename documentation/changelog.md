@@ -12,3 +12,9 @@
 ## Week 5
 
 - During this week I created the first version of the GUI that will be used. I also started on creating an AI for the game which a player can play against.
+
+## Week 6
+
+- Added Docstring-documentation. Iterating on existing classes. Creating AI. Finishing main game.
+
+

@@ -13,3 +13,8 @@
 | 21.4  | 8    | Planned out the architecture of the GUI for the main game. Searched for creative commons licenced images that I could use for the cards |
 | 22.4  | 10   | Started to implement the planned architecture. |
 | 23.4  | 10   | Because of bad planning (or the lack of experience in coding bigger projects) I had to redo most of the GUI. |
+| 27.4  | 7    | Documenting all of the relevant classes. |
+| 28.4  | 9    | Redoing the class "GameboardPositions". Writing new tests. |
+| 29.4  | 8    | Creating the AI for the game. |
+| 30.4  | 8    | Finishing the main game. |
+| 1.5   | 5    | Documentation furhter testing. |
