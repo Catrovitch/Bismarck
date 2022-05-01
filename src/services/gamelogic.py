@@ -466,6 +466,12 @@ class GameLogic:
 
     def change_turn(self, player_id):
 
+        """This method is used to change the turn of the game. 
+
+        Args:
+            player_id: gives the id of the player which turn it is currently by which the method knows that it should be the opposite.
+        """
+
         if player_id == 1:
 
             self.turn = -1
@@ -475,6 +481,12 @@ class GameLogic:
             self.turn = 1
 
     def draw_cards(self, player):
+
+        """Used by a player to draw cards from the reserve deck.
+
+        Args:
+            player: gives the id of the player so the method knows who calls on it.
+        """
 
         if player == 1:
 
