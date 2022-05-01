@@ -299,7 +299,7 @@ class Game:
                     # Unstage
                     if self.gameboard_positions.unstagebutton.in_position(pos):
 
-                        self.gamelogic.unstage_cards(1)
+                        self.gamelogic.unstage_cards()
 
             elif event.type == pygame.MOUSEMOTION:
                 for name, card in self.album.items():
