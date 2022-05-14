@@ -1,6 +1,5 @@
 import pygame
 
-
 class Renderer:
 
     """The Renderer class handles all rendering in the program.
@@ -17,7 +16,7 @@ class Renderer:
         gameboard_positions: instance of class GameboardPositions.
     """
 
-    def __init__(self, display, gamelogic, gameboard, gameboard_positions, album, player1_endgame, player1_final, player2_endgame, player2_final):
+    def __init__(self, display, gameboard_positions, album, user_control, gamelogic=None, gameboard=None,  player1_endgame=None, player1_final=None, player2_endgame=None, player2_final=None):
         """The constructor of the class. 
 
         Args:
@@ -33,6 +32,7 @@ class Renderer:
         """
         pygame.init()
         self.display = display
+        self.user_control = user_control
         self.background = album.images["background"]
         self.album = album.images
 
@@ -44,8 +44,52 @@ class Renderer:
         self.gamelogic = gamelogic
         self.gameboard = gameboard
         self.gameboard_positions = gameboard_positions
+                
+        self.gamefont = pygame.font.SysFont("Arial", 25)
+        self.font_colour = (255, 243, 158)
+        self.button_colour = (98, 155, 115)
+        self.button_frame_colour = (80, 30, 0)
+        self.background_colour = (68, 134, 90)
 
-    def render(self):
+    def render_login(self):
+
+        self.render_login_screen()
+
+        pygame.display.flip()
+        return
+
+    def render_create_account(self):
+
+        self.render_create_account_screen()
+
+        pygame.display.flip()
+        return
+
+    def render_main_menu(self):
+
+        self.render_main_menu_screen()
+        self.render_name_box()
+
+        pygame.display.flip()
+        return
+
+    def render_rules(self):
+
+        self.render_rules_screen()
+        self.render_rules_pages()
+
+        pygame.display.flip()
+        return  
+
+    def render_ratingboard(self):
+
+        self.render_ratingboard_background()
+        self.render_ratingboard_statistics()
+
+        pygame.display.flip()
+        return
+
+    def render_game(self):
         """This function calls on all that shall be rendered.
         """
 
@@ -57,8 +101,78 @@ class Renderer:
         self.render_endgame_cards()
         self.render_player1_hand()
         self.render_player2_hand()
+        self.render_name_box()
+
+        if self.gamelogic.winner != None:
+            self.render_gameover_screen()
 
         pygame.display.flip()
+        return
+
+    def render_login_screen(self):
+
+        self.display.fill(self.background_colour)
+
+        login_box_colour = (80, 90, 80)
+        login_box_frame_colour = (192, 192, 192)
+        entry_box_colour = (192, 210, 192)
+        entry_box_frame_colour = (50, 70, 50)
+
+        # Draw login box
+        self.gameboard_positions.login_box.draw_box(self.display, login_box_colour, login_box_frame_colour, 3)
+        self.gameboard_positions.account_box.render(self.display)
+        self.gameboard_positions.password_box.render(self.display)
+
+        # Draw login button
+        self.gameboard_positions.login_button.draw_button(self.display, 3, 25)
+
+        # Draw create_new_account button
+        self.gameboard_positions.create_new_account_button.draw_button(self.display, 3, 25)
+
+        # Draw exitbutton
+        self.gameboard_positions.exitbutton.draw_button(self.display, 3, 25)
+  
+    def render_create_account_screen(self):
+        
+        self.render_login_screen()
+        
+        self.gameboard_positions.create_account_box.draw_box(self.display, self.button_colour, self.button_frame_colour, 3)
+
+        self.gameboard_positions.accountname_box.render(self.display)
+        self.gameboard_positions.password_enter_box.render(self.display)
+        self.gameboard_positions.password_confirmation_box.render(self.display)
+
+        self.gameboard_positions.create_account_button.draw_button(self.display, 3, 25)
+        self.gameboard_positions.cancel_button.draw_button(self.display, 3, 25)
+
+    def render_main_menu_screen(self):
+
+        self.display.fill(self.background_colour)
+
+        self.gameboard_positions.play_game_button.draw_button(self.display, 3, 40)
+        self.gameboard_positions.rules_button.draw_button(self.display, 3, 40)
+        self.gameboard_positions.ratingboard_button.draw_button(self.display, 3, 40)
+
+        self.gameboard_positions.exitbutton.draw_button(self.display, 3, 25)
+
+    def render_rules_screen(self):
+
+        self.display.fill(self.background_colour)
+
+        self.gameboard_positions.rules_header.draw_button(self.display, 4, 40)
+        self.gameboard_positions.next_button.draw_button(self.display, 3, 25)
+        self.gameboard_positions.exitbutton.draw_button(self.display, 3, 25)
+
+    def render_rules_pages(self):
+        
+        image1 = self.album["rule1"].image
+        image2 = self.album["rule2"].image
+        image3 = self.album["rule3"].image
+
+        self.display.blit(image1, (self.gameboard_positions.rules_text1))
+        self.display.blit(image2, (self.gameboard_positions.rules_text2))
+        self.display.blit(image3, (self.gameboard_positions.rules_text3))
+
         return
 
     def render_base(self):
@@ -66,14 +180,8 @@ class Renderer:
             This consists of a background colour and some lines that indicate where things should be placed.
         """
 
-        gamefont = pygame.font.SysFont("Arial", 25)
-        font_colour = (255, 243, 158)
-        button_colour = (98, 155, 115)
-        button_frame_colour = (80, 30, 0)
-        background_colour = (68, 134, 90)
-
-        self.display.fill(background_colour)
-
+        self.display.fill(self.background_colour)
+    
         # Draw reserve_deck_frame
         pygame.draw.rect(self.display, (255, 255, 255), (self.gameboard_positions.reserve_deck_frame.x,
                          self.gameboard_positions.reserve_deck_frame.y, self.gameboard_positions.reserve_deck_frame.width, self.gameboard_positions.reserve_deck_frame.height), 2)
@@ -91,71 +199,35 @@ class Renderer:
                          self.gameboard_positions.field_deck_frame.y, self.gameboard_positions.field_deck_frame.width, self.gameboard_positions.field_deck_frame.height), 2)
 
         # Draw Exit button
-        pygame.draw.rect(self.display, (button_colour), (self.gameboard_positions.exitbutton.x,
-                         self.gameboard_positions.exitbutton.y, self.gameboard_positions.exitbutton.width, self.gameboard_positions.exitbutton.height))
-        pygame.draw.rect(self.display, (button_frame_colour), (self.gameboard_positions.exitbutton.x,
-                         self.gameboard_positions.exitbutton.y, self.gameboard_positions.exitbutton.width, self.gameboard_positions.exitbutton.height), 3)
-        exit_text = gamefont.render("Exit", True, (font_colour))
-        self.display.blit(
-            exit_text, (self.gameboard_positions.exitbutton_text.coordinates))
+        self.gameboard_positions.exitbutton.draw_button(self.display, 3, 25)
         # Draw Play button
-        pygame.draw.rect(self.display, (button_colour), (self.gameboard_positions.playbutton.x,
-                         self.gameboard_positions.playbutton.y, self.gameboard_positions.playbutton.width, self.gameboard_positions.playbutton.height))
-        pygame.draw.rect(self.display, (button_frame_colour), (self.gameboard_positions.playbutton.x,
-                         self.gameboard_positions.playbutton.y, self.gameboard_positions.playbutton.width, self.gameboard_positions.playbutton.height), 3)
-        play_text = gamefont.render("Play", True, (font_colour))
-        self.display.blit(
-            play_text, (self.gameboard_positions.playbutton_text.coordinates))
+        self.gameboard_positions.playbutton.draw_button(self.display, 3, 25)
         # Draw Unstage butto
-        pygame.draw.rect(self.display, (button_colour), (self.gameboard_positions.unstagebutton.x,
-                         self.gameboard_positions.unstagebutton.y, self.gameboard_positions.unstagebutton.width, self.gameboard_positions.unstagebutton.height))
-        pygame.draw.rect(self.display, (button_frame_colour), (self.gameboard_positions.unstagebutton.x,
-                         self.gameboard_positions.unstagebutton.y, self.gameboard_positions.unstagebutton.width, self.gameboard_positions.unstagebutton.height), 3)
-        unstage_text = gamefont.render("Unstage", True, (font_colour))
-        self.display.blit(
-            unstage_text, (self.gameboard_positions.unstagebutton_text.coordinates))
+        self.gameboard_positions.unstagebutton.draw_button(self.display, 3, 25)
         # Draw Sort button
-        pygame.draw.rect(self.display, (button_colour), (self.gameboard_positions.sortbutton.x,
-                         self.gameboard_positions.sortbutton.y, self.gameboard_positions.sortbutton.width, self.gameboard_positions.sortbutton.height))
-        pygame.draw.rect(self.display, (button_frame_colour), (self.gameboard_positions.sortbutton.x,
-                         self.gameboard_positions.sortbutton.y, self.gameboard_positions.sortbutton.width, self.gameboard_positions.sortbutton.height), 3)
-        sort_text = gamefont.render("Sort", True, (font_colour))
-        self.display.blit(
-            sort_text, (self.gameboard_positions.sortbutton_text.coordinates))
+        self.gameboard_positions.sortbutton.draw_button(self.display, 3, 25)
         # Draw Chance button
-        pygame.draw.rect(self.display, (button_colour), (self.gameboard_positions.chancebutton.x,
-                         self.gameboard_positions.chancebutton.y, self.gameboard_positions.chancebutton.width, self.gameboard_positions.chancebutton.height))
-        pygame.draw.rect(self.display, (button_frame_colour), (self.gameboard_positions.chancebutton.x,
-                         self.gameboard_positions.chancebutton.y, self.gameboard_positions.chancebutton.width, self.gameboard_positions.chancebutton.height), 3)
-        chance_text = gamefont.render("Chance", True, (font_colour))
-        self.display.blit(
-            chance_text, (self.gameboard_positions.chancebutton_text.coordinates))
+        self.gameboard_positions.chancebutton.draw_button(self.display, 3, 25)
         # Draw Turn button
-        pygame.draw.rect(self.display, (button_colour), (self.gameboard_positions.turnbutton.x,
+        pygame.draw.rect(self.display, (self.button_colour), (self.gameboard_positions.turnbutton.x,
                          self.gameboard_positions.turnbutton.y, self.gameboard_positions.turnbutton.width, self.gameboard_positions.turnbutton.height))
-        pygame.draw.rect(self.display, (button_frame_colour), (self.gameboard_positions.turnbutton.x,
+        pygame.draw.rect(self.display, (self.button_frame_colour), (self.gameboard_positions.turnbutton.x,
                          self.gameboard_positions.turnbutton.y, self.gameboard_positions.turnbutton.width, self.gameboard_positions.turnbutton.height), 3)
 
-        turn_text = gamefont.render("Turn:", True, (font_colour))
+        turn_text = self.gamefont.render("Turn:", True, (self.font_colour))
         self.display.blit(
             turn_text, (self.gameboard_positions.turnbutton_text.coordinates))
 
         if self.gamelogic.turn == 1:
-            whos_turn = gamefont.render("Player 1", True, (font_colour))
+            whos_turn = self.gamefont.render("Player 1", True, (self.font_colour))
         else:
-            whos_turn = gamefont.render("Player 2", True, (font_colour))
+            whos_turn = self.gamefont.render("Player 2", True, (self.font_colour))
 
         self.display.blit(
             whos_turn, (self.gameboard_positions.whos_turn_text.coordinates))
 
         # Draw endgamebutton
-        pygame.draw.rect(self.display, (button_colour), (self.gameboard_positions.endgamebutton.x,
-                         self.gameboard_positions.endgamebutton.y, self.gameboard_positions.endgamebutton.width, self.gameboard_positions.endgamebutton.height))
-        pygame.draw.rect(self.display, (button_frame_colour), (self.gameboard_positions.endgamebutton.x,
-                         self.gameboard_positions.endgamebutton.y, self.gameboard_positions.endgamebutton.width, self.gameboard_positions.endgamebutton.height), 3)
-        endgame_text = gamefont.render("Endgame", True, (font_colour))
-        self.display.blit(
-            endgame_text, (self.gameboard_positions.endgamebutton_text.coordinates))
+        self.gameboard_positions.endgamebutton.draw_button(self.display, 3, 25)
 
     def render_reserve_deck(self):
         """Renders the field_deck.
@@ -305,3 +377,67 @@ class Renderer:
 
             self.display.blit(
                 card, self.gameboard_positions.player2_endgame_third.coordinates)
+
+    def render_name_box(self):
+
+        self.gameboard_positions.name_box.draw_button(self.display, 3, 30)
+
+    def render_gameover_screen(self):
+
+        login_box_colour = (80, 90, 80)
+        login_box_frame_colour = (192, 192, 192)
+        
+        self.gameboard_positions.gameover_box.draw_box(self.display, login_box_colour, login_box_frame_colour, 4)
+        self.gameboard_positions.exitbutton2.draw_button(self.display, 3, 25)
+        self.gameboard_positions.play_again_button.draw_button(self.display, 3, 25)
+
+        self.gameboard_positions.winner_button.text = f"Winner: Player{self.gamelogic.winner}"
+        self.gameboard_positions.winner_button.draw_button(self.display, 3, 35)
+
+    def render_ratingboard_background(self):
+
+        login_box_colour = (80, 90, 80)
+        login_box_frame_colour = (192, 192, 192)
+
+        self.display.fill(self.background_colour)
+        
+        self.gameboard_positions.login_box.draw_box(self.display, login_box_colour, login_box_frame_colour, 3)
+        self.gameboard_positions.exitbutton.draw_button(self.display, 3, 25)
+        self.gameboard_positions.ratingboard_header.draw_button(self.display, 4, 35)
+
+    def render_ratingboard_statistics(self):
+
+        top_ten = self.user_control.get_top_ten()
+
+        number_coord = self.gameboard_positions.top_ten_number
+        username_coord = self.gameboard_positions.top_ten_name
+        rating_coord = self.gameboard_positions.top_ten_rating
+
+        font = pygame.font.SysFont("Arial", 25)
+        font_colour = (255, 243, 158)
+        
+        number = 1
+
+        for item in top_ten:
+
+            username = str(item.username)
+            user_rating = str(item.rating)
+            number_text = str(number)+"."
+
+            number_text2 = font.render(number_text, True, font_colour)
+            self.display.blit(number_text2, (number_coord))
+
+            name = font.render(username, True, font_colour)
+            self.display.blit(name, (username_coord))
+
+            rating = font.render(user_rating, True, font_colour)
+            self.display.blit(rating, (rating_coord))
+
+            number_coord = (number_coord[0], number_coord[1]+30)
+            username_coord = (username_coord[0], username_coord[1]+30)
+            rating_coord = (rating_coord[0], rating_coord[1]+30)
+
+            number += 1
+
+
+        return

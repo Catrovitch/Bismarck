@@ -27,7 +27,7 @@ class Game:
         game_begun: keeps track on if the game has begun.
     """
 
-    def __init__(self, gamelogic, gameboard_positions, player1, player2, renderer, album, eventqueue, clock, player1_endgame, player1_final, player2_endgame, player2_final, bismarck):
+    def __init__(self, gamelogic, gameboard_positions, player1, player2, renderer, album, eventqueue, clock, player1_endgame, player1_final, player2_endgame, player2_final, bismarck, user_control):
         """The constructor of the class. After assigning the corresponding arguments with their attributes it initiates the first stage of the game with the method initial_deal(). After this initiates the Gameloop method.
 
         Args:
@@ -48,6 +48,11 @@ class Game:
             player2_final: instance of the class FinalCards which keeps track of player2 final_cards.
         """
 
+        self.user_control = user_control
+
+        self.main_menu = False
+        self.game = False
+    
         self.gamelogic = gamelogic
         self.gameboard_positions = gameboard_positions
 
@@ -68,6 +73,7 @@ class Game:
         self.target = None
 
         self.game_begun = False
+        self.rating_change = True
 
         self.initial_deal()
         self.gamelogic.decide_turn_in_beginning()
@@ -93,13 +99,31 @@ class Game:
 
         while True:
 
-            if self.handle_events() is False:
-                break
+            self.handle_events()
+
+            if self.main_menu:
+                return 3
+
+            if self.game:
+                return 4
+
+            self.gamelogic.winner = self.gamelogic.game_over()
+            
+            if self.gamelogic.winner == 1 and self.rating_change:
+                self.user_control.update_rating(15)
+                self.rating_change = False
+
+            if self.gamelogic.winner == 2 and self.rating_change:
+                self.user_control.update_rating(-15)
+                self.rating_change = False
 
             if self.game_begun == True:
                 self.bismarck.choose_played_cards()
-            self.renderer.render()
 
+
+
+            self.renderer.render_game()
+        
             self.clock.tick(60)
 
     def handle_events(self):
@@ -115,6 +139,15 @@ class Game:
                 self.click = True
                 pos = pygame.mouse.get_pos()
 
+                if self.gameboard_positions.exitbutton.in_position(pos):
+                    self.main_menu = True
+
+                if self.gamelogic.winner != None:
+                    if self.gameboard_positions.exitbutton2.in_position(pos):
+                        self.main_menu = True
+                    if self.gameboard_positions.play_again_button.in_position(pos):
+                        self.game = True
+
                 if self.gameboard_positions.endgamebutton.in_position(pos):
                     self.game_begun = True
                     self.gamelogic.player1_locked = False
@@ -125,9 +158,6 @@ class Game:
                     self.gamelogic.gameboard.player1_staged.clear()
                     self.gamelogic.gameboard.player2_staged.clear()
                     self.gamelogic.turn = 1
-
-                if self.gameboard_positions.exitbutton.in_position(pos):
-                    return False
 
                 if len(self.gamelogic.gameboard.player1_endgame) == 0 and len(self.gamelogic.gameboard.player1_hand) == 0:
 
@@ -315,5 +345,3 @@ class Game:
                     self.player1_final.first_y = mouse_y + self.offset_y
                     card.cord = (card.x, card.y)
 
-            if event.type == pygame.QUIT:
-                return False

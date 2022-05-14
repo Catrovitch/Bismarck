@@ -24,6 +24,8 @@ class GameLogic:
         self.player2_locked = True
         self.player2_last_staged = None
 
+        self.winner = None
+
     def choose_endgame_cards(self, player, card):
         """Used in the beginning of a game by players to choose their endgame cards. Moves one card from the player's hand to the player-specific endgame_card's list. Checks that the rules are followed.
 
@@ -501,3 +503,11 @@ class GameLogic:
             while len(self.gameboard.player2_hand) < 3 and len(self.gameboard.reserve_deck) > 0:
                 self.gameboard.player2_hand.append(
                     self.gameboard.reserve_deck.pop())
+
+    def game_over(self):
+
+        if len(self.gameboard.player1_hand) == 0 and len(self.gameboard.player1_final) == 0 and len(self.gameboard.player1_endgame) == 0:
+            return 1
+        if len(self.gameboard.player2_hand) == 0 and len(self.gameboard.player2_final) == 0 and len(self.gameboard.player2_endgame) == 0:
+            return 2
+        return None

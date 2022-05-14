@@ -32,3 +32,6 @@ class Album:
         self.images["0_of_black-joker"] = Picture("0_of_black-joker.png")
         self.images["cardback"] = Picture("cardback.png")
         self.images["background"] = Picture("background.png")
+        self.images["rule1"] = Picture("rule1.png")
+        self.images["rule2"] = Picture("rule2.png")
+        self.images["rule3"] = Picture("rule3.png")

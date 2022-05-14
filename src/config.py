@@ -1,13 +1,16 @@
 import os
 from dotenv import load_dotenv
 
+
 dirname = os.path.dirname(__file__)
 
 try:
     load_dotenv(dotenv_path=os.path.join(dirname, "..", ".env"))
+
 except FileNotFoundError:
     pass
 
-# if os.getenv("FOO") returns None, FOO gets value "default bar"
-FOO = os.getenv("FOO") or "default bar"
-LOREM = os.getenv("LOREM") or "default ipsum"
+
+
+DATABASE_FILENAME = os.getenv("DATABASE_FILENAME") or "user_repository.db"
+DATABASE_FILE_PATH = os.path.join(dirname, "..", "data", DATABASE_FILENAME)
