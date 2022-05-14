@@ -10,7 +10,7 @@ class TestUser(unittest.TestCase):
 
     def test_username(self):
 
-        user = User("Gandalf", "oneringtorulethemall123")
+        user = User("Gandalf", "oneringtorulethemall123", 0)
 
-        self.assertEqual((user.username, user.password),
-                         ("Gandalf", "oneringtorulethemall123"))
+        self.assertEqual((user.username, user.password, user.rating),
+                         ("Gandalf", "oneringtorulethemall123", 0))

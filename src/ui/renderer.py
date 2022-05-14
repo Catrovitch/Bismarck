@@ -160,7 +160,6 @@ class Renderer:
         self.display.fill(self.background_colour)
 
         self.gameboard_positions.rules_header.draw_button(self.display, 4, 40)
-        self.gameboard_positions.next_button.draw_button(self.display, 3, 25)
         self.gameboard_positions.exitbutton.draw_button(self.display, 3, 25)
 
     def render_rules_pages(self):
