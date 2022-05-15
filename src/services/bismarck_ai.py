@@ -22,26 +22,28 @@ class BismarckAI:
     def choose_endgame_cards(self):
 
         for card in self.hand:
+            print(card.number)
             if card.number in (2, 10, 14) and len(self.endgame) < 3:
                 self.player.choose_endgame_cards(card)
                 if self.endgame_ui.first is False:
                     self.endgame_ui.add_card(self.album[card.name], "first")
                     self.endgame_ui.first = self.album[card.name]
+                    self.choose_endgame_cards()
                     continue
                 if self.endgame_ui.second is False:
                     self.endgame_ui.add_card(self.album[card.name], "second")
                     self.endgame_ui.second = self.album[card.name]
+                    self.choose_endgame_cards()
                     continue
-                if self.endgame_ui.third is False:
-                    self.endgame_ui.add_card(self.album[card.name], "third")
-                    self.endgame_ui.third = self.album[card.name]
-                    continue
-
-        self.player.sort_hand()
+                #if self.endgame_ui.third is False:
+                self.endgame_ui.add_card(self.album[card.name], "third")
+                self.endgame_ui.third = self.album[card.name]
+                self.choose_endgame_cards()
+                continue
 
         index = 0
         while len(self.endgame) < 3:
-            card = self.gameboard.player2_hand[-index]
+            card = max(self.gameboard.player2_hand, key=lambda card: card.number)
             self.player.choose_endgame_cards(card)
 
             if self.endgame_ui.first is False:
@@ -54,11 +56,11 @@ class BismarckAI:
                 self.endgame_ui.second = self.album[card.name]
                 index += 1
                 continue
-            if self.endgame_ui.third is False:
-                self.endgame_ui.add_card(self.album[card.name], "third")
-                self.endgame_ui.third = self.album[card.name]
-                index += 1
-                continue
+            #if self.endgame_ui.third is False:
+            self.endgame_ui.add_card(self.album[card.name], "third")
+            self.endgame_ui.third = self.album[card.name]
+            index += 1
+            continue
 
     def choose_least_valuable_card(self, deck, top_card):
 
@@ -134,11 +136,14 @@ class BismarckAI:
             if self.play_from_endgame(top_card):
                 return
 
-        if len(self.endgame) == 0 and len(self.hand) == 0:
+        if len(self.endgame) == 0 and len(self.hand) == 0 and len(self.final) > 0:
             self.player.play_finalcard()
             choice = random.choice(self.final_list)
             self.final_list.remove(choice)
             self.final_ui.use_card(choice)
+            return
+
+        if len(self.endgame) == 0 and len(self.hand) == 0 and len(self.final) == 0:
             return
 
         self.player.pick_up_field_deck()

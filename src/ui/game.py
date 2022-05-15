@@ -71,6 +71,7 @@ class Game:
         self.player2_final = player2_final
 
         self.target = None
+        self.click = False
 
         self.game_begun = False
         self.rating_change = True
@@ -225,7 +226,7 @@ class Game:
                     for name, card in self.album.items():
 
                         # Choose first endgame card
-                        if card.target == True and self.player1_endgame.first == False and self.gameboard_positions.player1_endgame_first.in_position(pos):
+                        if card.target == True and self.player1_endgame.first == False and self.gameboard_positions.player1_endgame_first.in_position(pos) and len(self.gamelogic.gameboard.reserve_deck) > 0:
 
                             self.player1_endgame.add_card(card, "first")
                             self.player1_endgame.first = card
@@ -241,7 +242,7 @@ class Game:
                                     return
 
                         # Choose second endgame card
-                        if card.target == True and self.player1_endgame.second == False and self.gameboard_positions.player1_endgame_second.in_position(pos):
+                        if card.target == True and self.player1_endgame.second == False and self.gameboard_positions.player1_endgame_second.in_position(pos) and len(self.gamelogic.gameboard.reserve_deck) > 0:
 
                             self.player1_endgame.add_card(card, "second")
                             self.player1_endgame.second = card
@@ -256,7 +257,7 @@ class Game:
                                     return
 
                         # Choose third endgame card
-                        if card.target == True and self.player1_endgame.third == False and self.gameboard_positions.player1_endgame_third.in_position(pos):
+                        if card.target == True and self.player1_endgame.third == False and self.gameboard_positions.player1_endgame_third.in_position(pos) and len(self.gamelogic.gameboard.reserve_deck) > 0:
 
                             self.player1_endgame.add_card(card, "third")
                             self.player1_endgame.third = card
@@ -282,17 +283,14 @@ class Game:
                                 if real_card.name == card.name:
 
                                     if self.player1_endgame.first == card and self.player1_endgame.first_target is True:
-                                        self.gamelogic.stage_card_from_endgame(
-                                            1, real_card)
-                                        self.player1_endgame.use_card(card)
+                                        if self.gamelogic.stage_card_from_endgame(1, real_card):
+                                            self.player1_endgame.use_card(card)
                                     if self.player1_endgame.second == card and self.player1_endgame.second_target is True:
-                                        self.gamelogic.stage_card_from_endgame(
-                                            1, real_card)
-                                        self.player1_endgame.use_card(card)
+                                        if self.gamelogic.stage_card_from_endgame(1, real_card):
+                                            self.player1_endgame.use_card(card)
                                     if self.player1_endgame.third == card and self.player1_endgame.third_target is True:
-                                        self.gamelogic.stage_card_from_endgame(
-                                            1, real_card)
-                                        self.player1_endgame.use_card(card)
+                                        if self.gamelogic.stage_card_from_endgame(1, real_card):
+                                            self.player1_endgame.use_card(card)
 
                         card.target = False
 

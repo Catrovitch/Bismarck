@@ -3,6 +3,7 @@ from services.createdeck import CreateDeck
 from services.gameboard import GameBoard
 from services.gamelogic import GameLogic
 from services.card import Card
+from services.player import Player
 
 
 class TestGameLogic(unittest.TestCase):
@@ -299,7 +300,7 @@ class TestGameLogic(unittest.TestCase):
 
         self.assertEqual(player2, False)
 
-    def test_stage_card_normal_joker_as_first_card(self):
+    def test_stage_card_normal_joker_as_first_card_player1(self):
 
         createddeck = CreateDeck()
         deck = createddeck.export()
@@ -316,6 +317,98 @@ class TestGameLogic(unittest.TestCase):
 
         gamelogic.stage_card_from_hand(1, joker)
         player = gamelogic.stage_card_from_hand(1, other_card)
+
+        self.assertEqual(player, True)
+
+    def test_stage_card_normal_joker_as_first_card_player2(self):
+
+        createddeck = CreateDeck()
+        deck = createddeck.export()
+        gameboard = GameBoard(deck)
+        gamelogic = GameLogic(gameboard)
+        joker = Card("red-joker", 0)
+        other_card = Card("hearts", 2)
+
+        gamelogic.turn = 1
+        gamelogic.player2_locked = False
+
+        gameboard.player2_hand.append(joker)
+        gameboard.player2_hand.append(other_card)
+
+        gamelogic.stage_card_from_hand(-1, joker)
+        player = gamelogic.stage_card_from_hand(-1, other_card)
+
+        self.assertEqual(player, True)
+
+    def test_play_card_joker_as_only_card_player2(self):
+
+        createddeck = CreateDeck()
+        deck = createddeck.export()
+        gameboard = GameBoard(deck)
+        gamelogic = GameLogic(gameboard)
+        joker = Card("red-joker", 0)
+        
+        gamelogic.turn = -1
+        gamelogic.player2_locked = False
+
+        gameboard.player2_hand.append(joker)
+
+        gamelogic.stage_card_from_hand(-1, joker)
+
+        player = gamelogic.play_staged_cards(-1)
+
+
+        self.assertEqual(player, True)
+
+    def test_check_card_hierarchy_joker_as_only_card_on_turn_player1(self):
+
+        createddeck = CreateDeck()
+        deck = createddeck.export()
+        gameboard = GameBoard(deck)
+        gamelogic = GameLogic(gameboard)
+        joker = Card("red-joker", 0)
+        card2 = Card("heart", 5)
+        card3 = Card("spades", 13)
+
+        gameboard.field_deck.append(card2)
+        gameboard.field_deck.append(card3)
+        
+        gamelogic.turn = 1
+        gamelogic.player1_locked = False
+
+        gameboard.player1_hand.append(joker)
+
+        gamelogic.stage_card_from_hand(1, joker)
+
+        gamelogic.play_staged_cards(1)
+
+        player = gamelogic.check_player_played_on_turn(1, joker, card3)
+
+        self.assertEqual(player, True)
+
+    def test_check_card_hierarchy_joker_as_only_card_on_turn_player2(self):
+
+        createddeck = CreateDeck()
+        deck = createddeck.export()
+        gameboard = GameBoard(deck)
+        gamelogic = GameLogic(gameboard)
+        joker = Card("red-joker", 0)
+        card2 = Card("heart", 5)
+        card3 = Card("spades", 13)
+
+        gameboard.field_deck.append(card2)
+        gameboard.field_deck.append(card3)
+        
+        gamelogic.turn = -1
+        gamelogic.player2_locked = False
+
+        gameboard.player2_hand.append(joker)
+
+        gamelogic.stage_card_from_hand(-1, joker)
+
+        gamelogic.play_staged_cards(-1)
+
+        player = gamelogic.check_player_played_on_turn(-1, joker, card3)
 
         self.assertEqual(player, True)
 
@@ -1372,3 +1465,80 @@ class TestGameLogic(unittest.TestCase):
         player2_last_card = gamelogic.gameboard.player2_staged[-1].number
         self.assertEqual((player1_first_card, player1_last_card,
                          player2_first_card, player2_last_card), (3, 0, 3, 0))
+
+
+    def test_stage_card_from_endgame_when_player_is_locked(self):
+
+        createddeck = CreateDeck()
+        deck = createddeck.export()
+        gameboard = GameBoard(deck)
+        gamelogic = GameLogic(gameboard)
+        card1 = Card("hearts", 2)
+        card2 = Card("spades", 2)
+
+        gameboard.player1_endgame.append(card1)
+        gameboard.player2_endgame.append(card2)
+
+        player1 = gamelogic.stage_card_from_endgame(1, card1)
+        player2 = gamelogic.stage_card_from_endgame(-1, card2)
+
+        self.assertEqual((player1, player2), (False, False))
+
+    def test_game_over_player1_wins(self):
+
+        createddeck = CreateDeck()
+        deck = createddeck.export()
+        gameboard = GameBoard(deck)
+        gamelogic = GameLogic(gameboard)
+        player2 = Player(-1, gamelogic)
+
+        player2.gamelogic.draw_cards(-1)
+        gameboard.reserve_deck = []
+
+        winner = gamelogic.game_over()
+
+        self.assertEqual(winner, 1)
+
+    def test_game_over_player2_wins(self):
+
+        createddeck = CreateDeck()
+        deck = createddeck.export()
+        gameboard = GameBoard(deck)
+        gamelogic = GameLogic(gameboard)
+        player1 = Player(1, gamelogic)
+
+        player1.gamelogic.draw_cards(1)
+        gameboard.reserve_deck = []
+
+        winner = gamelogic.game_over()
+
+        self.assertEqual(winner, 2)
+
+    def test_game_not_over(self):
+
+        createddeck = CreateDeck()
+        deck = createddeck.export()
+        gameboard = GameBoard(deck)
+        gamelogic = GameLogic(gameboard)
+        
+        gamelogic.initial_deal()
+
+        winner = gamelogic.game_over()
+
+        self.assertEqual(winner, None)
+
+
+    def test_play_final_card_player2(self):
+
+        createddeck = CreateDeck()
+        deck = createddeck.export()
+        gameboard = GameBoard(deck)
+        gamelogic = GameLogic(gameboard)
+
+        card1 = Card("hearts", 2)
+
+        gameboard.player2_final.append(card1)
+
+        player2 = gamelogic.play_finalcard(-1)
+
+        self.assertEqual(player2, True)

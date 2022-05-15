@@ -44,8 +44,6 @@ class UserControl:
             return False
         
         user.rating += change
-
-        print(user.username, user.rating)
         
         self.repository.update_rating(user)
 

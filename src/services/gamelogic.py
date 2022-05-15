@@ -72,7 +72,7 @@ class GameLogic:
                 return False
 
         if player == 1:
-            # Checks if card can be staged and stages it if possible.
+            
             length = len(self.gameboard.player1_staged)
 
             if length > 0:
@@ -123,7 +123,7 @@ class GameLogic:
                 return False
 
         if player == 1:
-            # Checks if card can be staged and stages it if possible.
+            
             length = len(self.gameboard.player1_staged)
 
             if length > 0:
@@ -164,6 +164,7 @@ class GameLogic:
         Args:
             player: If method is called by player1 it will be 1. If called by player2 it will be -1. (int)
         """
+        
         if player == 1:
             if self.player1_locked is True or len(self.gameboard.player1_staged) == 0:
                 return False
@@ -208,6 +209,24 @@ class GameLogic:
             True: if the card hierarchy is correct.
             False: if the card hierarchy is incorrect.
         """
+        if self.check_four_of_same():
+            return True
+
+        if self.check_deck_was_empty(player, amount_played):
+            return True
+
+        played_card = self.gameboard.field_deck[-1]
+
+        opposed_card = self.gameboard.field_deck[-(amount_played+1)]
+
+        if self.turn == player:
+            return self.check_player_played_on_turn(player, played_card, opposed_card)
+
+        # if self.turn != player:
+        return self.check_player_played_on_off_turn(player, played_card)
+
+    def check_four_of_same(self):
+    
         if len(self.gameboard.field_deck) >= 4:
             count = 1
             for i in range(2, 5):
@@ -219,6 +238,8 @@ class GameLogic:
                 self.gameboard.trash_deck += self.gameboard.field_deck
                 self.gameboard.field_deck.clear()
                 return True
+
+    def check_deck_was_empty(self, player, amount_played):
 
         if len(self.gameboard.field_deck) == amount_played and player == 1:
             if self.gameboard.field_deck[-1].number == 10:
@@ -242,12 +263,9 @@ class GameLogic:
             self.player2_last_played = self.gameboard.field_deck[-1]
             return True
 
-        played_card = self.gameboard.field_deck[-1]
+    def check_player_played_on_turn(self, player, played_card, opposed_card):
 
-        opposed_card = self.gameboard.field_deck[-(amount_played+1)]
-
-        if self.turn == 1 and player == 1:
-
+        if player == 1:
             if played_card.number == 0:
                 self.gameboard.field_deck.insert(-2, played_card)
                 self.gameboard.field_deck.pop()
@@ -278,39 +296,40 @@ class GameLogic:
             self.pick_up_field_deck(1)
             return False
 
-        if player == -1 and self.turn == -1:
-
-            if played_card.number == 0:
-                self.gameboard.field_deck.insert(-2, played_card)
-                self.gameboard.field_deck.pop()
-                self.draw_cards(-1)
-                self.change_turn(-1)
-                self.player2_last_played = self.gameboard.field_deck[-1]
-                return True
-
-            if played_card.number == 2:
-                self.draw_cards(-1)
-                self.change_turn(-1)
-                self.player2_last_played = self.gameboard.field_deck[-1]
-                return True
-
-            if played_card.number == 10:
-
-                self.gameboard.trash_deck += self.gameboard.field_deck
-                self.gameboard.field_deck.clear()
-                return True
-
-            if played_card.number >= opposed_card.number:
-                self.draw_cards(-1)
-                self.change_turn(-1)
-                self.player2_last_played = self.gameboard.field_deck[-1]
-                return True
-
+        # if player == -1:
+        if played_card.number == 0:
+            self.gameboard.field_deck.insert(-2, played_card)
+            self.gameboard.field_deck.pop()
+            self.draw_cards(-1)
             self.change_turn(-1)
-            self.pick_up_field_deck(-1)
-            return False
+            self.player2_last_played = self.gameboard.field_deck[-1]
+            return True
 
-        if player == 1 and self.turn == -1:
+        if played_card.number == 2:
+            self.draw_cards(-1)
+            self.change_turn(-1)
+            self.player2_last_played = self.gameboard.field_deck[-1]
+            return True
+
+        if played_card.number == 10:
+
+            self.gameboard.trash_deck += self.gameboard.field_deck
+            self.gameboard.field_deck.clear()
+            return True
+
+        if played_card.number >= opposed_card.number:
+            self.draw_cards(-1)
+            self.change_turn(-1)
+            self.player2_last_played = self.gameboard.field_deck[-1]
+            return True
+
+        self.change_turn(-1)
+        self.pick_up_field_deck(-1)
+        return False
+
+    def check_player_played_on_off_turn(self, player, played_card):
+        
+        if player == 1:
 
             if played_card.number in (self.player1_last_played.number, 0):
                 self.draw_cards(1)
@@ -319,13 +338,14 @@ class GameLogic:
             self.pick_up_field_deck(1)
             return False
 
+        # if player == -1
         if played_card.number in (self.player2_last_played.number, 0):
             self.draw_cards(1)
             return True
 
         self.pick_up_field_deck(-1)
         return False
-
+        
     def pick_up_field_deck(self, player):
         """Moves the cards from the field_deck to the hand_cards of a player. Used when a player wants or has to pick up the field_deck.
 
@@ -367,7 +387,7 @@ class GameLogic:
 
         if self.turn == 1 and player == 1:
             result = self.check_card_hierarchy(1, 1)
-            self.change_turn(player)
+            # self.change_turn(player)
             return result
 
         if self.turn == -1 and player == 1:
@@ -437,7 +457,6 @@ class GameLogic:
             self.gameboard.player2_hand.append(
                 self.gameboard.reserve_deck.pop())
 
-
     def sort_hand(self, player):
         """Used to sort a players hand_cards in order according to the cards' numeric value.
 
@@ -477,10 +496,12 @@ class GameLogic:
         if player_id == 1:
 
             self.turn = -1
+            self.player2_locked = False
 
         if player_id == -1:
 
             self.turn = 1
+            self.player1_locked = False
 
     def draw_cards(self, player):
 
@@ -498,11 +519,10 @@ class GameLogic:
 
             return
 
-        if player == -1:
-
-            while len(self.gameboard.player2_hand) < 3 and len(self.gameboard.reserve_deck) > 0:
-                self.gameboard.player2_hand.append(
-                    self.gameboard.reserve_deck.pop())
+        # if player == -1
+        while len(self.gameboard.player2_hand) < 3 and len(self.gameboard.reserve_deck) > 0:
+            self.gameboard.player2_hand.append(
+                self.gameboard.reserve_deck.pop())
 
     def game_over(self):
 
@@ -511,3 +531,5 @@ class GameLogic:
         if len(self.gameboard.player2_hand) == 0 and len(self.gameboard.player2_final) == 0 and len(self.gameboard.player2_endgame) == 0:
             return 2
         return None
+
+        
