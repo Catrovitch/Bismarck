@@ -1,6 +1,6 @@
 # Instructions
 
-Download the latest [release](https://github.com/ohjelmistotekniikkahttps://github.com/Catrovitch/ot-harjoitustyo/releases) by clicking on the link and then navigating to the flip down menu "Assets". Scroll down and choose the option "Source code (zip)" which downloads a the project. Extract it to your prefered folder.
+Download the latest [release](https://github.com/Catrovitch/ot-harjoitustyo/releases/tag/loppupalautus) by clicking on the link and then navigating to the flip down menu "Assets". Scroll down and choose the option "Source code (zip)" which downloads a the project. Extract it to your prefered folder.
 
 ## Configuration
 
