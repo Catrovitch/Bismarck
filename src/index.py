@@ -1,4 +1,4 @@
-from control import Control
+from services.control import Control
 
 
 def main():

@@ -45,7 +45,7 @@ class BismarckAI:
         """
 
         for card in self.hand:
-            print(card.number)
+
             if card.number in (2, 10, 14) and len(self.endgame) < 3:
                 self.player.choose_endgame_cards(card)
                 if self.endgame_ui.first is False:
@@ -88,11 +88,11 @@ class BismarckAI:
 
     def choose_least_valuable_card(self, deck, top_card):
         """Used to choose the least valuable card that still defeats the top_card in a given deck.
-        
+
         Args:
             deck (list): the deck from which to search the least valueable card. Ex. self.hand or self.endgame
             top_card (list): the current top_card of the field_deck.
-        
+
         Returns:
             True: if card is found
             False: if no card is found"""
@@ -122,10 +122,10 @@ class BismarckAI:
 
     def play_from_hand(self, top_card):
         """Used to play a card from the hand
-        
+
         Args:
             top_card: the current top card of the field_deck
-            
+
         Returns:
             True: if card is found in the hand.
             False: if no card is found in the hand."""
@@ -146,7 +146,7 @@ class BismarckAI:
 
         Args:
             top_card: The current top card of the field_deck
- 
+
         Returns:
             True: if a card is found in the endgame cards
             False: if no card is found in the endgame cards

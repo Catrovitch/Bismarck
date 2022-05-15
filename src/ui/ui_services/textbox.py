@@ -35,10 +35,8 @@ class TextBox:
 
     def in_position(self, position):
         """Checks if the mouse-cursor is within the object.
-
         Args:
             position: gives the position of the mouse-cursor as coordinates. (tuple)
-
         Returns:
             True: if the position of the mouse-cursor is within the object
             False: if the position of the mouse-cursor is not within the object.
@@ -65,7 +63,7 @@ class TextBox:
         text_coordinates = (text_x, text_y)
 
         frame_size = 2
-        
+
         if self.selected:
             frame_size = 3
             frame_colour = (211, 154, 0)

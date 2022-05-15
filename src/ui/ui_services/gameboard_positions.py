@@ -1,7 +1,7 @@
 import pygame
 
-from ui.textbox import TextBox
-from ui.passwordbox import PasswordBox
+from ui.ui_services.textbox import TextBox
+from ui.ui_services.passwordbox import PasswordBox
 
 
 class Button:

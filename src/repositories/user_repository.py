@@ -107,7 +107,7 @@ class UserRepository:
 
     def get_top_ten(self):
         """Get the top ten highest rated players found in the local database.
-        
+
         Returns:
             list of user-objects.
         """

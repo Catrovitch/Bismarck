@@ -62,7 +62,7 @@ class UserControl:
 
     def update_rating(self, change):
         """Used to update the rating after a played game. If it's a win for the player increase by 15. If it's a loss decrease by 15.
-        
+
         Args:
             Change: +/-15
         Returns:
@@ -70,8 +70,6 @@ class UserControl:
             None: in other cases"""
 
         user = self.repository.get_by_username(self.user.username)
-
-        print(user.username, user.rating)
 
         if user == None:
             return False
@@ -82,7 +80,7 @@ class UserControl:
 
     def get_top_ten(self):
         """Used to get the currently top ten rated players in the local database.
-        
+
         Returns:
             list: list of user-objects with top ten user.rating
         """

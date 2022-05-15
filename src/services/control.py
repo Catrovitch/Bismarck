@@ -3,26 +3,27 @@ from services.createdeck import CreateDeck
 from services.gameboard import GameBoard
 from services.gamelogic import GameLogic
 from services.player import Player
-from ui.create_account import CreateAccount
-from ui.main_menu import MainMenu
+from ui.landscapes.create_account import CreateAccount
+from ui.landscapes.main_menu import MainMenu
 
-from ui.renderer import Renderer
-from ui.game import Game
-from ui.eventqueue import EventQueue
-from ui.finalcards import PlayerFinal
-from ui.endgame import PlayerEndgame
-from ui.gameboard_positions import GameboardPositions
+from ui.ui_services.renderer import Renderer
+from ui.landscapes.game import Game
+from ui.ui_services.eventqueue import EventQueue
+from ui.ui_services.finalcards import PlayerFinal
+from ui.ui_services.endgame import PlayerEndgame
+from ui.ui_services.gameboard_positions import GameboardPositions
 from ui.pictures.album import Album
 from ui.pictures.display_size import DisplaySize
-from ui.login import Login
-from ui.rules import Rules
-from ui.ratingboard import RatingBoard
+from ui.landscapes.login import Login
+from ui.landscapes.rules import Rules
+from ui.landscapes.ratingboard import RatingBoard
 from services.user_control import UserControl
 
 from services.bismarck_ai import BismarckAI
 
 
 class Control:
+    """Class which controls the whole program."""
 
     def __init__(self):
 

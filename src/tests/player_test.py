@@ -114,11 +114,15 @@ class TestPlayer(unittest.TestCase):
 
         gamelogic.player1_locked = False
 
-        card = gameboard.reserve_deck[-1]
+        card = Card("hearts", 2)
+
+        gameboard.reserve_deck.append(card)
+
+        chance_card = gameboard.reserve_deck[-1]
 
         player.chance()
 
-        self.assertEqual(gameboard.field_deck[0], card)
+        self.assertEqual(gameboard.field_deck[0], chance_card)
 
     def test_play_final_card(self):
 

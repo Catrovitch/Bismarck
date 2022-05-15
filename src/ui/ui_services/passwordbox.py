@@ -66,7 +66,7 @@ class PasswordBox:
         text_coordinates = (text_x, text_y)
 
         frame_size = 2
-        
+
         if self.selected:
             frame_size = 3
             frame_colour = (211, 154, 0)

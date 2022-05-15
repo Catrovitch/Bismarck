@@ -5,8 +5,8 @@ from services.bismarck_ai import BismarckAI
 from services.gameboard import GameBoard
 from services.gamelogic import GameLogic
 from services.player import Player
-from ui.endgame import PlayerEndgame
-from ui.finalcards import PlayerFinal
+from ui.ui_services.endgame import PlayerEndgame
+from ui.ui_services.finalcards import PlayerFinal
 
 
 class TestBismarckAI(unittest.TestCase):

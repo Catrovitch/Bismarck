@@ -117,19 +117,21 @@ class Renderer:
         login_box_colour = (80, 90, 80)
         login_box_frame_colour = (192, 192, 192)
 
-
         # Draw login box
-        username_text = self.gamefont.render("Username", True, self.font_colour)
-        password_text = self.gamefont.render("Password", True, self.font_colour)
-        
-        
+        username_text = self.gamefont.render(
+            "Username", True, self.font_colour)
+        password_text = self.gamefont.render(
+            "Password", True, self.font_colour)
+
         self.gameboard_positions.login_box.draw_box(
             self.display, login_box_colour, login_box_frame_colour, 3)
         self.gameboard_positions.account_box.render(self.display)
         self.gameboard_positions.password_box.render(self.display)
 
-        self.display.blit(username_text, (self.gameboard_positions.account_box.x+3, self.gameboard_positions.account_box.y-23))
-        self.display.blit(password_text, (self.gameboard_positions.password_box.x+3, self.gameboard_positions.password_box.y-23))
+        self.display.blit(username_text, (self.gameboard_positions.account_box.x +
+                          3, self.gameboard_positions.account_box.y-23))
+        self.display.blit(password_text, (self.gameboard_positions.password_box.x +
+                          3, self.gameboard_positions.password_box.y-23))
         # Draw login button
         self.gameboard_positions.login_button.draw_button(self.display, 3, 25)
 
@@ -144,9 +146,12 @@ class Renderer:
 
         self.render_login_screen()
 
-        username_text = self.gamefont.render("Username", True, self.font_colour)
-        password_text = self.gamefont.render("Password", True, self.font_colour)
-        password_text2 = self.gamefont.render("Reenter Password", True, self.font_colour)
+        username_text = self.gamefont.render(
+            "Username", True, self.font_colour)
+        password_text = self.gamefont.render(
+            "Password", True, self.font_colour)
+        password_text2 = self.gamefont.render(
+            "Reenter Password", True, self.font_colour)
 
         self.gameboard_positions.create_account_box.draw_box(
             self.display, self.button_colour, self.button_frame_colour, 3)
@@ -155,9 +160,12 @@ class Renderer:
         self.gameboard_positions.password_enter_box.render(self.display)
         self.gameboard_positions.password_confirmation_box.render(self.display)
 
-        self.display.blit(username_text, (self.gameboard_positions.account_box.x+3, self.gameboard_positions.account_box.y-23))
-        self.display.blit(password_text, (self.gameboard_positions.password_box.x+3, self.gameboard_positions.password_box.y-23))
-        self.display.blit(password_text2, (self.gameboard_positions.password_confirmation_box.x+3, self.gameboard_positions.password_confirmation_box.y-23))
+        self.display.blit(username_text, (self.gameboard_positions.account_box.x +
+                          3, self.gameboard_positions.account_box.y-23))
+        self.display.blit(password_text, (self.gameboard_positions.password_box.x +
+                          3, self.gameboard_positions.password_box.y-23))
+        self.display.blit(password_text2, (self.gameboard_positions.password_confirmation_box.x +
+                          3, self.gameboard_positions.password_confirmation_box.y-23))
 
         self.gameboard_positions.create_account_button.draw_button(
             self.display, 3, 25)
@@ -400,10 +408,12 @@ class Renderer:
                 card, self.gameboard_positions.player2_endgame_third.coordinates)
 
     def render_name_box(self):
+        """Renders the box where user writes his/her username"""
 
         self.gameboard_positions.name_box.draw_button(self.display, 3, 30)
 
     def render_gameover_screen(self):
+        """Renders the pop-window which happens when game is over"""
 
         login_box_colour = (80, 90, 80)
         login_box_frame_colour = (192, 192, 192)

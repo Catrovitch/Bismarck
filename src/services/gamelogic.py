@@ -560,7 +560,7 @@ class GameLogic:
 
     def game_over(self):
         """Used to check if a game has ended.
-        
+
         Returns:
             None: if game hasn't ended
             1: if player1 has won the game
