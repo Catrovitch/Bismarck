@@ -32,6 +32,8 @@ poetry run invoke build
 poetry run invoke start
 ```
 
+Note: If you run into error code: "Database is locked" it may help to run the program in /tmp folder. Navigate into this folder and clode the project here. Try running steps 1, 2, 3 again from here.
+
 ## Log in
 
 When you start the program for the first time you need to create an account. The program asks for a username and a password. Both the username and password can use any combination of upper/lowercase letters, numbers and characters in "!"¤%&/()=?". Max length for both username and password is 16 characters. The username needs to be unique which the program checks automatically. The password needs to be entered two times and they need to match. After this you click the "create account button" which creates an account according to the information you have just entered and logs you in automatically.
