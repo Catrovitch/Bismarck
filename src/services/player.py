@@ -55,13 +55,16 @@ class Player:
         self.gamelogic.chance(self.player_id)
 
     def play_finalcard(self):
+        """Used by the player to play a final card"""
 
         self.gamelogic.play_finalcard(self.player_id)
 
     def choose_endgame_cards(self, card):
+        """Used by the player to choose an endgame_card"""
 
         self.gamelogic.choose_endgame_cards(self.player_id, card)
 
     def sort_hand(self):
+        """Used by the player to sort his/her hand acccording to the numeric value of the cards in his/her hand."""
 
         self.gamelogic.sort_hand(self.player_id)

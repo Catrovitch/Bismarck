@@ -74,7 +74,7 @@ class PasswordBox:
         pygame.draw.rect(display, (box_colour),
                          (self.x, self.y, self.width, self.height))
         pygame.draw.rect(display, (frame_colour),
-                         (self.x, self.y, self.width, self.height), 2)
+                         (self.x, self.y, self.width, self.height), frame_size)
 
         display.blit(
             text, (text_coordinates))

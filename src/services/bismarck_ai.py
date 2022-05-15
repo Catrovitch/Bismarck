@@ -3,10 +3,31 @@ from ui.pictures.album import Album
 
 
 class BismarckAI:
+    """Class which functions as the AI which is used in the main game.
+
+    Attributes:
+        gamelogic: instance of GameLogic class
+        gameboard: instance of Gameboard class
+        hand: the hand of the bismarck AI (also player2 hand
+        staged: the staged of the bismarck AI (also player2_staged)
+        endgame: the endgame cards of the bismarck AI (also player2_endgame)
+        final: the final cards of the bismarck AI (also player2_final
+        endgame_ui: instance of EndgameUI class
+        final_ui: instance of FinalUI class
+        album: instance of Album class
+        player: instance of Player class))
+    """
 
     def __init__(self, gamelogic, endgame, final, player):
+        """Constructor of the class.
 
-        self.name = "BismarckAI"
+        Args:
+            gamelogic (class): instance of GameLogic class
+            endgame (class): instance of EndgameUI class
+            final (class): instance of FinalUI class
+            player (class): instance of Player class
+        """
+
         self.gamelogic = gamelogic
         self.gameboard = self.gamelogic.gameboard
         self.hand = self.gamelogic.gameboard.player2_hand
@@ -20,6 +41,8 @@ class BismarckAI:
         self.player = player
 
     def choose_endgame_cards(self):
+        """Used in the beginning of the game to choose the endgame cards.
+        """
 
         for card in self.hand:
             print(card.number)
@@ -64,6 +87,15 @@ class BismarckAI:
             continue
 
     def choose_least_valuable_card(self, deck, top_card):
+        """Used to choose the least valuable card that still defeats the top_card in a given deck.
+        
+        Args:
+            deck (list): the deck from which to search the least valueable card. Ex. self.hand or self.endgame
+            top_card (list): the current top_card of the field_deck.
+        
+        Returns:
+            True: if card is found
+            False: if no card is found"""
 
         minimi = 14
         chosen = True
@@ -84,10 +116,19 @@ class BismarckAI:
         return chosen
 
     def chance(self):
+        """Used by BismarckAI to chance"""
 
         self.player.chance()
 
     def play_from_hand(self, top_card):
+        """Used to play a card from the hand
+        
+        Args:
+            top_card: the current top card of the field_deck
+            
+        Returns:
+            True: if card is found in the hand.
+            False: if no card is found in the hand."""
 
         self.player.sort_hand()
 
@@ -101,6 +142,15 @@ class BismarckAI:
         return True
 
     def play_from_endgame(self, top_card):
+        """Used to play a card from the endgame cards
+
+        Args:
+            top_card: The current top card of the field_deck
+ 
+        Returns:
+            True: if a card is found in the endgame cards
+            False: if no card is found in the endgame cards
+        """
 
         chosen_card = self.choose_least_valuable_card(self.endgame, top_card)
 
@@ -113,6 +163,8 @@ class BismarckAI:
         return True
 
     def choose_played_cards(self):
+        """Used to see from which card-set BismarckAI should play a card from.
+        """
 
         if self.gamelogic.turn == 1:
             return

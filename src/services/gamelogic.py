@@ -154,6 +154,7 @@ class GameLogic:
         return False
 
     def unstage_cards(self):
+        """Used to unstage cards currently staged by a player"""
 
         self.gameboard.player1_hand += self.gameboard.player1_staged
         self.gameboard.player1_staged.clear()
@@ -226,6 +227,7 @@ class GameLogic:
         return self.check_player_played_on_off_turn(player, played_card)
 
     def check_four_of_same(self):
+        """Checks if the top four cards in the field_deck are of same numeric value or is a joker. If so it trashes the pack."""
 
         if len(self.gameboard.field_deck) >= 4:
             count = 1
@@ -240,6 +242,15 @@ class GameLogic:
                 return True
 
     def check_deck_was_empty(self, player, amount_played):
+        """Decides the outcome if the field_deck was empty when a player played a card/cards
+
+        Args:
+            player (int): player_id. 1 = player1, -1 = player2 
+            amount_played (int): number of cards played by the player.
+
+        Returns:
+            True: in all cases.
+        """
 
         if len(self.gameboard.field_deck) == amount_played and player == 1:
             if self.gameboard.field_deck[-1].number == 10:
@@ -264,6 +275,14 @@ class GameLogic:
             return True
 
     def check_player_played_on_turn(self, player, played_card, opposed_card):
+        """Decides the outcome when a player played a card on his/her turn.
+
+        Args:
+            player (int): player_id, 1 if player1, -1 if player2
+            played_card (card-object): the card or representing card of the cards the played played
+            opposed_card (card-object): the card which was played by the opponent before the player played his/her card.
+        Returns:
+            True: in all cases."""
 
         if player == 1:
             if played_card.number == 0:
@@ -296,7 +315,6 @@ class GameLogic:
             self.pick_up_field_deck(1)
             return False
 
-        # if player == -1:
         if played_card.number == 0:
             self.gameboard.field_deck.insert(-2, played_card)
             self.gameboard.field_deck.pop()
@@ -328,6 +346,16 @@ class GameLogic:
         return False
 
     def check_player_played_on_off_turn(self, player, played_card):
+        """Decides the outcome if a player played a card on his/her off-turn.
+
+        Args:
+            player (int): player_id. 1 if player1, -1 if player2.
+            played_card (card-object): The card played by the player
+
+        Returns:
+            True: if played_card is the same as the card that player last played.
+            False: if played_card doesn't match the last played card of that player. 
+        """
 
         if player == 1:
 
@@ -397,6 +425,14 @@ class GameLogic:
         return self.check_card_hierarchy(-1, 1)
 
     def play_finalcard(self, player_id):
+        """Plays a final card of a player
+
+        Args:
+            player_id (int): player_id, 1 if player1, -1 if player2
+
+        Returns:
+            The return value of check_card_hierarchy(player_id, 1)
+        """
 
         if player_id == 1:
 
@@ -523,6 +559,13 @@ class GameLogic:
                 self.gameboard.reserve_deck.pop())
 
     def game_over(self):
+        """Used to check if a game has ended.
+        
+        Returns:
+            None: if game hasn't ended
+            1: if player1 has won the game
+            2: if player2 has won the game
+        """
 
         if len(self.gameboard.player1_hand) == 0 and len(self.gameboard.player1_final) == 0 and len(self.gameboard.player1_endgame) == 0:
             return 1

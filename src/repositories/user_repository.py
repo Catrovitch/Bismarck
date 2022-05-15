@@ -7,21 +7,24 @@ def get_user_by_row(row):
 
 
 class UserRepository:
-    """Käyttäjiin liittyvistä tietokantaoperaatioista vastaava luokka.
+    """A class which controls the information that is stored about users in local sqlite database.
+
+    Attributes:
+        connection: connection to a sql database on the local computer.
     """
 
     def __init__(self, connection):
-        """Luokan konstruktori.
+        """The constructor of the class.
         Args:
-            connection: Tietokantayhteyden Connection-olio
+            connection: connection to the database-object.
         """
 
         self._connection = connection
 
-    def find_all(self):
-        """Palauttaa kaikki käyttäjät.
+    def get_all_users(self):
+        """Returns a list of the user-objects found in the local database.
         Returns:
-            Palauttaa listan User-olioita.
+            List of user-objects.
         """
 
         cursor = self._connection.cursor()
@@ -32,13 +35,13 @@ class UserRepository:
 
         return list(map(get_user_by_row, rows))
 
-    def find_by_username(self, username):
-        """Palauttaa käyttäjän käyttäjätunnuksen perusteella.
+    def get_by_username(self, username):
+        """Find a user according to username.
         Args:
-            username: Käyttäjätunnus, jonka käyttäjä palautetaan.
+            username: username attribute of a User-object.
         Returns:
-            Palauttaa User-olion, jos käyttäjätunnuksen omaava käyttäjä on tietokannassa.
-            Muussa tapauksessa None.
+            User-object corresponding to the searched for username.
+            If no User with said username exist in the local database it returns None.
         """
 
         cursor = self._connection.cursor()
@@ -53,11 +56,11 @@ class UserRepository:
         return get_user_by_row(row)
 
     def create(self, user):
-        """Tallentaa käyttäjän tietokantaan.
+        """Saves information about a new user in the local database.
         Args:
-            todo: Tallennettava käyttäjä User-oliona.
+            user: User-object.
         Returns:
-            Tallennettu käyttjä User-oliona.
+            True.
         """
 
         cursor = self._connection.cursor()
@@ -72,7 +75,7 @@ class UserRepository:
         return True
 
     def delete_all(self):
-        """Poistaa kaikki käyttäjät.
+        """Deletes all users from the database. I.E. resetting it.
         """
 
         cursor = self._connection.cursor()
@@ -82,6 +85,14 @@ class UserRepository:
         self._connection.commit()
 
     def update_rating(self, user):
+        """Updates the rating for a user to the current rating of that user.
+
+        Args:
+            user (class): User-object with already updated current rating.
+
+        Returns:
+            True
+        """
 
         cursor = self._connection.cursor()
 
@@ -95,6 +106,11 @@ class UserRepository:
         return True
 
     def get_top_ten(self):
+        """Get the top ten highest rated players found in the local database.
+        
+        Returns:
+            list of user-objects.
+        """
 
         cursor = self._connection.cursor()
 
