@@ -18,3 +18,6 @@
 | 29.4  | 8    | Creating the AI for the game. |
 | 30.4  | 8    | Finishing the main game. |
 | 1.5   | 5    | Documentation furhter testing. |
+| 12.5  | 1    | Researching on how to implement account and database into my program. |
+| 13.5  | 10   | Implementing the rest of the user interface for the program. |
+| 14.5  | 11   | Implementing account and database functions. Fixing some issues |
