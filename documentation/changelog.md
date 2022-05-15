@@ -17,4 +17,11 @@
 
 - Added Docstring-documentation. Iterating on existing classes. Creating AI. Finishing main game.
 
+## Week 6
+
+- Added account functionality
+- Added database functionality
+- Added GUI for login, create_new_account, main_menu, game(improved), rules, rating
+- Final Release
+
 
