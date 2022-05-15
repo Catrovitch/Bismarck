@@ -5,8 +5,8 @@ Here documentation about testing will be kept and updated during the development
 
 ## Coverage Rapport
 
-### Updated 1.5.2022
-As of this moment proper tests have been developed for classes: Card, CreateDeck, GameBoard, GameLogic, Player and User. When testing the method shuffle from the class CreateDeck the test fails at rare cases. This is due to it testing what the top card is after the shuffle. Against all odds this should not be the same as before the shuffle, however at rare cases this happens which makes the test fail. The current iteration of index.py is only a filler function to be used when testing the game as implemented to this point and will be iterated on when the game expands.
+### Updated 15.5.2022
+As of this moment most of the classes have been covered. However some are still lacking in tests and will be fixed in the future. Due to this project growing much larger than I had intizipated my architecture came to be suboptimal. In most cases it worked fine, but in certain cases it messed with my testing. I am going to remake the whole project in the comming months and fix these issues. 
 
 ![](./pictures/coverage_report.png)
 
