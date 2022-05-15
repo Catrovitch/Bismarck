@@ -16,7 +16,13 @@ Before starting the program you should navigate in your terminal to the project 
 poetry install
 ```
 
-2. Run this command after the dependencies have been installed.
+2. Run this command to initialize or reset the database used in the program.
+
+```bash
+poetry run invoke build
+```
+
+3. Run this command to start the program.
 
 ```bash
 poetry run invoke start
@@ -24,7 +30,12 @@ poetry run invoke start
 
 ## Log in
 
-to be completed
+When you start the program for the first time you need to create an account. The program asks for a username and a password. Both the username and password can use any combination of upper/lowercase letters, numbers and characters in "!"¤%&/()=?". Max length for both username and password is 16 characters. The username needs to be unique which the program checks automatically. The password needs to be entered two times and they need to match. After this you click the "create account button" which creates an account according to the information you have just entered and logs you in automatically.
 
+If you already have an account you can log in straight away by entering your username and password and then clicking the "login button".
 
- 
+### Picture of login screen
+![](./pictures/login_screen.png)
+
+### Picture of account creation screen
+![](./pictures/create_an_account.png)
