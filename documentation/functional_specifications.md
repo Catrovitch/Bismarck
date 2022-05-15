@@ -18,7 +18,7 @@ Landscape 3 consists of the "main menu"-page. Here the user can press four diffe
 
 Button 3 (Ratingboard) gives the information on the top ten highest rated players that can be found from the local database. A player gets +15 rating for a win and -15 for a loss. 
 
-The 4th and final button (exit) on the main menu (landscape 3) will simply exit the program.    
+The 4th and final button (exit) on the main menu (landscape 3) will take the user back to the login screen (landscape 1).    
 
 ## List of features in Bismarck program
 
@@ -33,27 +33,34 @@ The list is divided into categories and are noted *(implemented)* if implemented
 - Sort your hand of cards
 - Play a Final_card
 
-### Features used by the game
+### Features used by the main Game
 
 - class Card
+	- a class modelling all cards in the game.
 - class CreateDeck
+	- a class that creates the deck that is used in the game.
 - class Gameboard
+	- a class that oversees the location of all cards during a game.
 - class GameLogic
+	- a class which restrics the players from doing illegal moves. It also oversees the phases of the game. I.E a "rulebook".
 - class Player
+	- a class which is used by a player to do any action.
 - class BismarckAI
-
+	- a class which functions as an AI which to play against.
 ### User
-
-- create an account
-- log in
+- class User
+	- a class that keeps information about a user's username, password and current rating
+- class UserControl
+	- a class that oversees users on the local database. Through this class a player can log in, create an account. It also updates the rating of a 	user after a game. It also fetches the top ten highest rated players in the local database.
 
 ### GUI
 
-- Login
-- Create account
-- Main game
-- Rules
-- Ratingboard
+- Login ui
+- Create account ui
+- Main menu ui
+- Game ui
+- Rules ui
+- Ratingboard ui
 
 ## Rules
 
