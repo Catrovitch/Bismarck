@@ -4,7 +4,11 @@ Download the latest [release](https://github.com/ohjelmistotekniikkahttps://gith
 
 ## Configuration
 
-to be completed
+If the user wants to change name of the database which is used it can be configured in the .env file. If this is not configured the default name will be used. 
+
+```
+DATABASE_FILENAME = user_repository.db
+```
 
 ## Starting the program
 
