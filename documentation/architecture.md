@@ -8,7 +8,7 @@ The goal of the set up of Bismarck is to make it as simple as possible with only
 
 The second folder *services* is saved for the actual program. It contains everything the core mechanics of the game, a rulebook (GameLogic) and a simple AI (BismarckAI) to play against. The folder *entities* contians the class user which is used to store account information in. The last folder *repositories* contains a class which connects to a database where the users user-objects are stored.
 
-![Stucture](./pictures/folders_with_files.jpg)
+![Stucture](./pictures/folder_with_files.jpg)
 
 ## Menus
 
