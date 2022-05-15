@@ -23,7 +23,13 @@ As the program is at a very early stage a proper main function is not currently 
 poetry install
 ```
 
-2. Start the program with command:
+1. To initialize or reset the database:
+
+```bash
+poetry run invoke build
+```
+
+3. Start the program with command:
 - Note: If running the program via a virtual machine, make sure it is running in fullscreen mode for Bismarck to run optimally.
 
 ```bash
@@ -40,4 +46,12 @@ poetry run invoke coverage-report
 ```
 
 You can find the generated test in _htmlcov_ folder.
+
+## Clean Code
+
+A clean code rating can be generated with command:
+
+```bash
+pylint src
+```
 
