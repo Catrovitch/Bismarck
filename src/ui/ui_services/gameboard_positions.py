@@ -289,7 +289,7 @@ class GameboardPositions:
 
         # statistics button
         self.ratingboard_button = Button((self.play_game_button.x), (
-            self.rules_button.y+self.button_height*3), self.button_width*2, self.button_height*2, "Rating")
+            self.rules_button.y+self.button_height*3), self.button_width*2, self.button_height*2, "Ratingboard")
 
         # Account: Logged in as:
         self.name_box = Button((self.display_size.width-self.button_width*2.5),
