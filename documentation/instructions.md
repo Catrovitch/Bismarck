@@ -38,4 +38,4 @@ If you already have an account you can log in straight away by entering your use
 ![](./pictures/login_screen.png)
 
 ### Picture of account creation screen
-![](./pictures/create_an_acccount.png)
+![](./pictures/create_an_account.png)
