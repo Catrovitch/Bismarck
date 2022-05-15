@@ -147,17 +147,6 @@ class Game:
                     if self.gameboard_positions.play_again_button.in_position(pos):
                         self.game = True
 
-                if self.gameboard_positions.endgamebutton.in_position(pos):
-                    self.game_begun = True
-                    self.gamelogic.player1_locked = False
-                    self.gamelogic.player2_locked = False
-                    self.gamelogic.gameboard.reserve_deck.clear()
-                    self.gamelogic.gameboard.player1_hand.clear()
-                    self.gamelogic.gameboard.player2_hand.clear()
-                    self.gamelogic.gameboard.player1_staged.clear()
-                    self.gamelogic.gameboard.player2_staged.clear()
-                    self.gamelogic.turn = 1
-
                 if len(self.gamelogic.gameboard.player1_endgame) == 0 and len(self.gamelogic.gameboard.player1_hand) == 0:
 
                     if self.gameboard_positions.player1_final_first.in_position(pos) and self.player1_final.first == True:

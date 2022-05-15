@@ -255,9 +255,6 @@ class Renderer:
         self.display.blit(
             whos_turn, (self.gameboard_positions.whos_turn_text.coordinates))
 
-        # Draw endgamebutton
-        self.gameboard_positions.endgamebutton.draw_button(self.display, 3, 25)
-
     def render_reserve_deck(self):
         """Renders the field_deck.
         """

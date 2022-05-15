@@ -236,9 +236,6 @@ class GameboardPositions:
         self.sortbutton = Button((self.display_size.width - self.exitbutton.x -
                                   self.button_width), (self.exitbutton.y), self.button_width, self.button_height, "Sort")
 
-        self.endgamebutton = Button(
-            (10), (10), self.button_width, self.button_height, "Endgame")
-
         self.chancebutton = Button(
             (self.reserve_deck.x), (self.reserve_deck.y+100), self.button_width, self.button_height, "Chance")
 
