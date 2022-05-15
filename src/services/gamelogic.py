@@ -72,7 +72,7 @@ class GameLogic:
                 return False
 
         if player == 1:
-            
+
             length = len(self.gameboard.player1_staged)
 
             if length > 0:
@@ -123,7 +123,7 @@ class GameLogic:
                 return False
 
         if player == 1:
-            
+
             length = len(self.gameboard.player1_staged)
 
             if length > 0:
@@ -164,7 +164,7 @@ class GameLogic:
         Args:
             player: If method is called by player1 it will be 1. If called by player2 it will be -1. (int)
         """
-        
+
         if player == 1:
             if self.player1_locked is True or len(self.gameboard.player1_staged) == 0:
                 return False
@@ -226,7 +226,7 @@ class GameLogic:
         return self.check_player_played_on_off_turn(player, played_card)
 
     def check_four_of_same(self):
-    
+
         if len(self.gameboard.field_deck) >= 4:
             count = 1
             for i in range(2, 5):
@@ -328,7 +328,7 @@ class GameLogic:
         return False
 
     def check_player_played_on_off_turn(self, player, played_card):
-        
+
         if player == 1:
 
             if played_card.number in (self.player1_last_played.number, 0):
@@ -345,7 +345,7 @@ class GameLogic:
 
         self.pick_up_field_deck(-1)
         return False
-        
+
     def pick_up_field_deck(self, player):
         """Moves the cards from the field_deck to the hand_cards of a player. Used when a player wants or has to pick up the field_deck.
 
@@ -486,7 +486,6 @@ class GameLogic:
             self.gameboard.player2_staged.sort(key=lambda x: x.number)
 
     def change_turn(self, player_id):
-
         """This method is used to change the turn of the game. 
 
         Args:
@@ -504,7 +503,6 @@ class GameLogic:
             self.player1_locked = False
 
     def draw_cards(self, player):
-
         """Used by a player to draw cards from the reserve deck.
 
         Args:
@@ -531,5 +529,3 @@ class GameLogic:
         if len(self.gameboard.player2_hand) == 0 and len(self.gameboard.player2_final) == 0 and len(self.gameboard.player2_endgame) == 0:
             return 2
         return None
-
-        

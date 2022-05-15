@@ -21,10 +21,10 @@ from services.user_control import UserControl
 
 from services.bismarck_ai import BismarckAI
 
+
 class Control:
 
     def __init__(self):
-        
 
         self.album = Album()
         self.display_size = DisplaySize()
@@ -37,32 +37,36 @@ class Control:
         self.card_for_size = self.album.images["cardback"]
         self.card_width = self.card_for_size.width
         self.card_height = self.card_for_size.height
-        
+
         self.user_control = UserControl()
-        self.gameboard_positions = GameboardPositions(self.album, self.display_size, self.card_width, self.card_height)
-        self.renderer = Renderer(self.display, self.gameboard_positions, self.album, self.user_control)
+        self.gameboard_positions = GameboardPositions(
+            self.album, self.display_size, self.card_width, self.card_height)
+        self.renderer = Renderer(
+            self.display, self.gameboard_positions, self.album, self.user_control)
         self.eventqueue = EventQueue()
-        
 
     def login(self):
-        
-        login = Login(self.renderer, self.eventqueue, self.clock, self.gameboard_positions, self.user_control)
+
+        login = Login(self.renderer, self.eventqueue, self.clock,
+                      self.gameboard_positions, self.user_control)
 
         next = login.login_loop()
 
         self.next_window(next)
 
     def create_account(self):
-        
-        create_account = CreateAccount(self.renderer, self.eventqueue, self.clock, self.gameboard_positions, self.user_control)
+
+        create_account = CreateAccount(
+            self.renderer, self.eventqueue, self.clock, self.gameboard_positions, self.user_control)
 
         next = create_account.create_account_loop()
 
         self.next_window(next)
 
     def main_menu(self):
-        
-        main_menu = MainMenu(self.renderer, self.eventqueue, self.clock, self.gameboard_positions)
+
+        main_menu = MainMenu(self.renderer, self.eventqueue,
+                             self.clock, self.gameboard_positions)
 
         next = main_menu.main_menu_loop()
 
@@ -82,11 +86,13 @@ class Control:
         self.player2_endgame = PlayerEndgame()
         self.player2_final = PlayerFinal()
 
-        self.bismarck = BismarckAI(self.gamelogic, self.player2_endgame, self.player2_final, self.player2)
+        self.bismarck = BismarckAI(
+            self.gamelogic, self.player2_endgame, self.player2_final, self.player2)
 
         self.gameboard_positions.gameboard = self.gameboard
 
-        self.renderer = Renderer(self.display, self.gameboard_positions, self.album, self.user_control, self.gamelogic, self.gameboard, self.player1_endgame, self.player1_final, self.player2_endgame, self.player2_final)
+        self.renderer = Renderer(self.display, self.gameboard_positions, self.album, self.user_control, self.gamelogic,
+                                 self.gameboard, self.player1_endgame, self.player1_final, self.player2_endgame, self.player2_final)
 
         game = Game(self.gamelogic, self.gameboard_positions, self.player1, self.player2, self.renderer, self.album,
                     self.eventqueue, self.clock, self.player1_endgame, self.player1_final, self.player2_endgame, self.player2_final, self.bismarck, self.user_control)
@@ -99,7 +105,8 @@ class Control:
 
     def rules(self):
 
-        rules = Rules(self.renderer, self.eventqueue, self.clock, self.gameboard_positions)
+        rules = Rules(self.renderer, self.eventqueue,
+                      self.clock, self.gameboard_positions)
 
         next = rules.rule_loop()
 
@@ -107,7 +114,8 @@ class Control:
 
     def ratingboard(self):
 
-        ratingboard = RatingBoard(self.renderer, self.eventqueue, self.clock, self.gameboard_positions)
+        ratingboard = RatingBoard(
+            self.renderer, self.eventqueue, self.clock, self.gameboard_positions)
 
         next = ratingboard.ratingboard_loop()
 
@@ -117,7 +125,7 @@ class Control:
 
         if number == 1:
             self.login()
-        
+
         if number == 2:
             self.create_account()
 

@@ -4,7 +4,7 @@ from config import DATABASE_FILE_PATH
 
 connection = None
 
-try: 
+try:
     connection = sqlite3.connect(DATABASE_FILE_PATH)
     connection.row_factory = sqlite3.Row
 except Error as e:

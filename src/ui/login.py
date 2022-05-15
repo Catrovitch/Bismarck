@@ -1,5 +1,6 @@
 import pygame
 
+
 class Login:
 
     def __init__(self, renderer, eventqueue, clock, gameboard_positions, user_control):
@@ -15,14 +16,13 @@ class Login:
 
         self.login_loop()
 
-
     def login_loop(self):
 
         while True:
 
             if self.handle_events() is False:
                 break
-            
+
             if self.create_account:
                 return 2
             if self.main_menu:
@@ -31,7 +31,6 @@ class Login:
             self.renderer.render_login()
 
             self.clock.tick(60)
-
 
     def handle_events(self):
 
@@ -47,7 +46,8 @@ class Login:
                     self.create_account = True
 
                 if self.gameboard_positions.login_button.in_position(pos):
-                    self.login(self.gameboard_positions.account_box.text, self.gameboard_positions.password_box.text)
+                    self.login(self.gameboard_positions.account_box.text,
+                               self.gameboard_positions.password_box.text)
 
                 if self.gameboard_positions.exitbutton.in_position(pos):
                     return False
@@ -79,7 +79,7 @@ class Login:
                 return False
 
     def login(self, username=None, password=None):
-        
+
         if self.user_control.login(username, password):
             self.gameboard_positions.name_box.text = username
             self.main_menu = True

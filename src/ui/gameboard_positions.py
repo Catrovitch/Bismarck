@@ -3,6 +3,7 @@ import pygame
 from ui.textbox import TextBox
 from ui.passwordbox import PasswordBox
 
+
 class Button:
 
     """The class Position is used to store coordinates of an object. It also contains a method "in_position(self, position)" to check if the given position of the mouse-cursor is within the object.
@@ -57,11 +58,13 @@ class Button:
         font = pygame.font.SysFont("Arial", fontsize)
         font_colour = (255, 243, 158)
         text = font.render(self.text, True, font_colour)
-        text_x = self.x +10
-        text_y = self.y +10
+        text_x = self.x + 10
+        text_y = self.y + 10
         text_coordinates = (text_x, text_y)
-        pygame.draw.rect(display, (button_colour), (self.x, self.y, self.width, self.height))
-        pygame.draw.rect(display, (frame_colour), (self.x, self.y, self.width, self.height), frame_size)
+        pygame.draw.rect(display, (button_colour),
+                         (self.x, self.y, self.width, self.height))
+        pygame.draw.rect(display, (frame_colour),
+                         (self.x, self.y, self.width, self.height), frame_size)
 
         display.blit(
             text, (text_coordinates))
@@ -114,8 +117,11 @@ class Position:
 
     def draw_box(self, display, box_colour, frame_colour, frame_size):
 
-        pygame.draw.rect(display, (box_colour), (self.x, self.y, self.width, self.height))
-        pygame.draw.rect(display, (frame_colour), (self.x, self.y, self.width, self.height), frame_size)
+        pygame.draw.rect(display, (box_colour),
+                         (self.x, self.y, self.width, self.height))
+        pygame.draw.rect(display, (frame_colour),
+                         (self.x, self.y, self.width, self.height), frame_size)
+
 
 class GameboardPositions:
 
@@ -222,13 +228,13 @@ class GameboardPositions:
         self.button_height = self.card_height/2.8
 
         self.playbutton = Button((self.player1_staged.x + self.card_width + 10),
-                                   (self.player1_staged.y + self.card_width - 10), self.button_width, self.button_height, "Play")
+                                 (self.player1_staged.y + self.card_width - 10), self.button_width, self.button_height, "Play")
         self.exitbutton = Button((self.card_width/3), (self.display_size.height -
-                                   self.card_width/1.5), self.button_width, self.button_height, "Exit")
+                                                       self.card_width/1.5), self.button_width, self.button_height, "Exit")
         self.unstagebutton = Button((self.player1_stage_frame.x - self.button_width*1.05),
-                                      (self.playbutton.y), self.button_width, self.button_height, "Unstage")
+                                    (self.playbutton.y), self.button_width, self.button_height, "Unstage")
         self.sortbutton = Button((self.display_size.width - self.exitbutton.x -
-                                   self.button_width), (self.exitbutton.y), self.button_width, self.button_height, "Sort")
+                                  self.button_width), (self.exitbutton.y), self.button_width, self.button_height, "Sort")
 
         self.endgamebutton = Button(
             (10), (10), self.button_width, self.button_height, "Endgame")
@@ -244,52 +250,74 @@ class GameboardPositions:
             (self.turnbutton.x+10), (self.turnbutton.y+40), self.button_width, self.button_height*2)
 
         # Login_screen_login_button and Login text box_fields and login text box
-        
-        self.login_button = Button((self.display_size.width/2-self.button_width/2), (self.display_size.height-(self.display_size.height/4)), self.button_width, self.button_height, "Login")
-        self.login_box = Position((self.display_size.width/2-((self.display_size.width/4)/2)), (self.display_size.height/2-self.display_size.height/4), self.display_size.width/4, self.display_size.height/2.1)
-        self.account_box = TextBox((self.login_box.x+120), (self.login_box.y+150), self.button_width*2, self.button_height)
-        self.password_box = PasswordBox((self.login_box.x+120), (self.login_box.y+250), self.button_width*2, self.button_height)
+
+        self.login_button = Button((self.display_size.width/2-self.button_width/2), (self.display_size.height-(
+            self.display_size.height/4)), self.button_width, self.button_height, "Login")
+        self.login_box = Position((self.display_size.width/2-((self.display_size.width/4)/2)), (self.display_size.height /
+                                  2-self.display_size.height/4), self.display_size.width/4, self.display_size.height/2.1)
+        self.account_box = TextBox(
+            (self.login_box.x+120), (self.login_box.y+150), self.button_width*2, self.button_height)
+        self.password_box = PasswordBox(
+            (self.login_box.x+120), (self.login_box.y+250), self.button_width*2, self.button_height)
 
         # Create_account_box
-        self.create_account_box = Position((self.display_size.width/2-self.display_size.width/4), (self.display_size.height/2-self.display_size.height/4), self.display_size.width/2, self.display_size.height/1.9)
-        self.create_new_account_button = Button((self.login_button.x-self.button_width/2), (self.login_button.y+self.button_height+10), self.button_width*2, self.button_height, "Create New Account")
-        
-        self.accountname_box = TextBox((self.login_box.x+120), (self.login_box.y+150), self.button_width*2, self.button_height)
-        self.password_enter_box = PasswordBox((self.login_box.x+120), (self.login_box.y+250), self.button_width*2, self.button_height)
-        self.password_confirmation_box = PasswordBox((self.login_box.x+120), (self.login_box.y+350), self.button_width*2, self.button_height)
-        
-        
-        self.create_account_button = Button((self.create_new_account_button.x+10), (self.login_button.y-50), self.button_width*1.8, self.button_height, "Create Account")
-        self.cancel_button = Button((self.create_account_box.x +7), (self.create_account_box.y+self.create_account_box.height-self.button_height-5), self.button_width, self.button_height, "Cancel")
+        self.create_account_box = Position((self.display_size.width/2-self.display_size.width/4), (self.display_size.height /
+                                           2-self.display_size.height/4), self.display_size.width/2, self.display_size.height/1.9)
+        self.create_new_account_button = Button((self.login_button.x-self.button_width/2), (
+            self.login_button.y+self.button_height+10), self.button_width*2, self.button_height, "Create New Account")
+
+        self.accountname_box = TextBox(
+            (self.login_box.x+120), (self.login_box.y+150), self.button_width*2, self.button_height)
+        self.password_enter_box = PasswordBox(
+            (self.login_box.x+120), (self.login_box.y+250), self.button_width*2, self.button_height)
+        self.password_confirmation_box = PasswordBox(
+            (self.login_box.x+120), (self.login_box.y+350), self.button_width*2, self.button_height)
+
+        self.create_account_button = Button((self.create_new_account_button.x+10), (
+            self.login_button.y-50), self.button_width*1.8, self.button_height, "Create Account")
+        self.cancel_button = Button((self.create_account_box.x + 7), (self.create_account_box.y +
+                                    self.create_account_box.height-self.button_height-5), self.button_width, self.button_height, "Cancel")
         # Main Menu buttons
-            
-            # play game button
-        self.play_game_button = Button((self.display_size.width/2-self.button_width), (self.display_size.height/3), self.button_width*2, self.button_height*2, "Play Game")
 
-            # rules button
-        self.rules_button = Button((self.play_game_button.x), (self.play_game_button.y+self.button_height*3), self.button_width*2, self.button_height*2, "Rules")
+        # play game button
+        self.play_game_button = Button((self.display_size.width/2-self.button_width),
+                                       (self.display_size.height/3), self.button_width*2, self.button_height*2, "Play Game")
 
-            # statistics button
-        self.ratingboard_button = Button((self.play_game_button.x), (self.rules_button.y+self.button_height*3), self.button_width*2, self.button_height*2, "Rating")
+        # rules button
+        self.rules_button = Button((self.play_game_button.x), (self.play_game_button.y +
+                                   self.button_height*3), self.button_width*2, self.button_height*2, "Rules")
+
+        # statistics button
+        self.ratingboard_button = Button((self.play_game_button.x), (
+            self.rules_button.y+self.button_height*3), self.button_width*2, self.button_height*2, "Rating")
 
         # Account: Logged in as:
-        self.name_box = Button((self.display_size.width-self.button_width*2.5), (10), self.button_width*2.4, self.button_height*1.2, "")
+        self.name_box = Button((self.display_size.width-self.button_width*2.5),
+                               (10), self.button_width*2.4, self.button_height*1.2, "")
 
         # Game over Screen
-        self.gameover_box = Position((self.display_size.width/2-self.button_width*3), (self.button_width*2.5), self.button_width*6, self.button_width*4)
-        self.exitbutton2 = Button((self.display_size.width/2-self.button_width-5), (self.gameover_box.y+(self.button_width*3)), self.button_width, self.button_height, "Exit")
-        self.play_again_button = Button((self.display_size.width/2+5), (self.exitbutton2.y), self.button_width*1.2, self.button_height, "Play Again")
-        self.winner_button = Button((self.display_size.width/2-(self.button_width)), (self.gameover_box.y+200), self.button_width*2.2, self.button_height*1.3, "")
+        self.gameover_box = Position((self.display_size.width/2-self.button_width*3),
+                                     (self.button_width*2.5), self.button_width*6, self.button_width*4)
+        self.exitbutton2 = Button((self.display_size.width/2-self.button_width-5), (self.gameover_box.y+(
+            self.button_width*3)), self.button_width, self.button_height, "Exit")
+        self.play_again_button = Button(
+            (self.display_size.width/2+5), (self.exitbutton2.y), self.button_width*1.2, self.button_height, "Play Again")
+        self.winner_button = Button((self.display_size.width/2-(self.button_width)),
+                                    (self.gameover_box.y+200), self.button_width*2.2, self.button_height*1.3, "")
 
-        #Rules Screen
-        self.rules_header = Button((self.winner_button.x), (self.winner_button.y-480), self.winner_button.width-80, self.winner_button.height, "Rules")
-        self.next_button = Button((self.sortbutton.x), (self.sortbutton.y), self.button_width, self.button_height, "Next")
+        # Rules Screen
+        self.rules_header = Button((self.winner_button.x), (self.winner_button.y-480),
+                                   self.winner_button.width-80, self.winner_button.height, "Rules")
+        self.next_button = Button(
+            (self.sortbutton.x), (self.sortbutton.y), self.button_width, self.button_height, "Next")
         self.rules_text1 = (50, self.rules_header.y+70)
         self.rules_text2 = (50, self.rules_header.y+170)
         self.rules_text3 = (self.display_size.width/2+10, self.rules_text1[1])
-        #Ratingboard Screen
-        self.ratingboard_header = Button((self.winner_button.x), (self.winner_button.y-300), self.winner_button.width-50, self.winner_button.height, "Ratingboard")
-        self.top_ten_number = (self.ratingboard_header.x-100, self.ratingboard_header.y+100)
+        # Ratingboard Screen
+        self.ratingboard_header = Button((self.winner_button.x), (self.winner_button.y-300),
+                                         self.winner_button.width-50, self.winner_button.height, "Ratingboard")
+        self.top_ten_number = (self.ratingboard_header.x -
+                               100, self.ratingboard_header.y+100)
         self.top_ten_name = (self.top_ten_number[0]+50, self.top_ten_number[1])
         self.top_ten_rating = (self.top_ten_name[0]+320, self.top_ten_name[1])
 

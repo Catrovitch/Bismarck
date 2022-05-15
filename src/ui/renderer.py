@@ -1,5 +1,6 @@
 import pygame
 
+
 class Renderer:
 
     """The Renderer class handles all rendering in the program.
@@ -44,7 +45,7 @@ class Renderer:
         self.gamelogic = gamelogic
         self.gameboard = gameboard
         self.gameboard_positions = gameboard_positions
-                
+
         self.gamefont = pygame.font.SysFont("Arial", 25)
         self.font_colour = (255, 243, 158)
         self.button_colour = (98, 155, 115)
@@ -79,7 +80,7 @@ class Renderer:
         self.render_rules_pages()
 
         pygame.display.flip()
-        return  
+        return
 
     def render_ratingboard(self):
 
@@ -115,43 +116,62 @@ class Renderer:
 
         login_box_colour = (80, 90, 80)
         login_box_frame_colour = (192, 192, 192)
-        entry_box_colour = (192, 210, 192)
-        entry_box_frame_colour = (50, 70, 50)
+
 
         # Draw login box
-        self.gameboard_positions.login_box.draw_box(self.display, login_box_colour, login_box_frame_colour, 3)
+        username_text = self.gamefont.render("Username", True, self.font_colour)
+        password_text = self.gamefont.render("Password", True, self.font_colour)
+        
+        
+        self.gameboard_positions.login_box.draw_box(
+            self.display, login_box_colour, login_box_frame_colour, 3)
         self.gameboard_positions.account_box.render(self.display)
         self.gameboard_positions.password_box.render(self.display)
 
+        self.display.blit(username_text, (self.gameboard_positions.account_box.x+3, self.gameboard_positions.account_box.y-23))
+        self.display.blit(password_text, (self.gameboard_positions.password_box.x+3, self.gameboard_positions.password_box.y-23))
         # Draw login button
         self.gameboard_positions.login_button.draw_button(self.display, 3, 25)
 
         # Draw create_new_account button
-        self.gameboard_positions.create_new_account_button.draw_button(self.display, 3, 25)
+        self.gameboard_positions.create_new_account_button.draw_button(
+            self.display, 3, 25)
 
         # Draw exitbutton
         self.gameboard_positions.exitbutton.draw_button(self.display, 3, 25)
-  
+
     def render_create_account_screen(self):
-        
+
         self.render_login_screen()
-        
-        self.gameboard_positions.create_account_box.draw_box(self.display, self.button_colour, self.button_frame_colour, 3)
+
+        username_text = self.gamefont.render("Username", True, self.font_colour)
+        password_text = self.gamefont.render("Password", True, self.font_colour)
+        password_text2 = self.gamefont.render("Reenter Password", True, self.font_colour)
+
+        self.gameboard_positions.create_account_box.draw_box(
+            self.display, self.button_colour, self.button_frame_colour, 3)
 
         self.gameboard_positions.accountname_box.render(self.display)
         self.gameboard_positions.password_enter_box.render(self.display)
         self.gameboard_positions.password_confirmation_box.render(self.display)
 
-        self.gameboard_positions.create_account_button.draw_button(self.display, 3, 25)
+        self.display.blit(username_text, (self.gameboard_positions.account_box.x+3, self.gameboard_positions.account_box.y-23))
+        self.display.blit(password_text, (self.gameboard_positions.password_box.x+3, self.gameboard_positions.password_box.y-23))
+        self.display.blit(password_text2, (self.gameboard_positions.password_confirmation_box.x+3, self.gameboard_positions.password_confirmation_box.y-23))
+
+        self.gameboard_positions.create_account_button.draw_button(
+            self.display, 3, 25)
         self.gameboard_positions.cancel_button.draw_button(self.display, 3, 25)
 
     def render_main_menu_screen(self):
 
         self.display.fill(self.background_colour)
 
-        self.gameboard_positions.play_game_button.draw_button(self.display, 3, 40)
+        self.gameboard_positions.play_game_button.draw_button(
+            self.display, 3, 40)
         self.gameboard_positions.rules_button.draw_button(self.display, 3, 40)
-        self.gameboard_positions.ratingboard_button.draw_button(self.display, 3, 40)
+        self.gameboard_positions.ratingboard_button.draw_button(
+            self.display, 3, 40)
 
         self.gameboard_positions.exitbutton.draw_button(self.display, 3, 25)
 
@@ -163,7 +183,7 @@ class Renderer:
         self.gameboard_positions.exitbutton.draw_button(self.display, 3, 25)
 
     def render_rules_pages(self):
-        
+
         image1 = self.album["rule1"].image
         image2 = self.album["rule2"].image
         image3 = self.album["rule3"].image
@@ -180,7 +200,7 @@ class Renderer:
         """
 
         self.display.fill(self.background_colour)
-    
+
         # Draw reserve_deck_frame
         pygame.draw.rect(self.display, (255, 255, 255), (self.gameboard_positions.reserve_deck_frame.x,
                          self.gameboard_positions.reserve_deck_frame.y, self.gameboard_positions.reserve_deck_frame.width, self.gameboard_positions.reserve_deck_frame.height), 2)
@@ -218,9 +238,11 @@ class Renderer:
             turn_text, (self.gameboard_positions.turnbutton_text.coordinates))
 
         if self.gamelogic.turn == 1:
-            whos_turn = self.gamefont.render("Player 1", True, (self.font_colour))
+            whos_turn = self.gamefont.render(
+                "Player 1", True, (self.font_colour))
         else:
-            whos_turn = self.gamefont.render("Player 2", True, (self.font_colour))
+            whos_turn = self.gamefont.render(
+                "Player 2", True, (self.font_colour))
 
         self.display.blit(
             whos_turn, (self.gameboard_positions.whos_turn_text.coordinates))
@@ -385,10 +407,12 @@ class Renderer:
 
         login_box_colour = (80, 90, 80)
         login_box_frame_colour = (192, 192, 192)
-        
-        self.gameboard_positions.gameover_box.draw_box(self.display, login_box_colour, login_box_frame_colour, 4)
+
+        self.gameboard_positions.gameover_box.draw_box(
+            self.display, login_box_colour, login_box_frame_colour, 4)
         self.gameboard_positions.exitbutton2.draw_button(self.display, 3, 25)
-        self.gameboard_positions.play_again_button.draw_button(self.display, 3, 25)
+        self.gameboard_positions.play_again_button.draw_button(
+            self.display, 3, 25)
 
         self.gameboard_positions.winner_button.text = f"Winner: Player{self.gamelogic.winner}"
         self.gameboard_positions.winner_button.draw_button(self.display, 3, 35)
@@ -399,10 +423,12 @@ class Renderer:
         login_box_frame_colour = (192, 192, 192)
 
         self.display.fill(self.background_colour)
-        
-        self.gameboard_positions.login_box.draw_box(self.display, login_box_colour, login_box_frame_colour, 3)
+
+        self.gameboard_positions.login_box.draw_box(
+            self.display, login_box_colour, login_box_frame_colour, 3)
         self.gameboard_positions.exitbutton.draw_button(self.display, 3, 25)
-        self.gameboard_positions.ratingboard_header.draw_button(self.display, 4, 35)
+        self.gameboard_positions.ratingboard_header.draw_button(
+            self.display, 4, 35)
 
     def render_ratingboard_statistics(self):
 
@@ -414,7 +440,7 @@ class Renderer:
 
         font = pygame.font.SysFont("Arial", 25)
         font_colour = (255, 243, 158)
-        
+
         number = 1
 
         for item in top_ten:
@@ -437,6 +463,5 @@ class Renderer:
             rating_coord = (rating_coord[0], rating_coord[1]+30)
 
             number += 1
-
 
         return

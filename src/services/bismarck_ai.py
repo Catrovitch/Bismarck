@@ -35,7 +35,7 @@ class BismarckAI:
                     self.endgame_ui.second = self.album[card.name]
                     self.choose_endgame_cards()
                     continue
-                #if self.endgame_ui.third is False:
+                # if self.endgame_ui.third is False:
                 self.endgame_ui.add_card(self.album[card.name], "third")
                 self.endgame_ui.third = self.album[card.name]
                 self.choose_endgame_cards()
@@ -43,7 +43,8 @@ class BismarckAI:
 
         index = 0
         while len(self.endgame) < 3:
-            card = max(self.gameboard.player2_hand, key=lambda card: card.number)
+            card = max(self.gameboard.player2_hand,
+                       key=lambda card: card.number)
             self.player.choose_endgame_cards(card)
 
             if self.endgame_ui.first is False:
@@ -56,7 +57,7 @@ class BismarckAI:
                 self.endgame_ui.second = self.album[card.name]
                 index += 1
                 continue
-            #if self.endgame_ui.third is False:
+            # if self.endgame_ui.third is False:
             self.endgame_ui.add_card(self.album[card.name], "third")
             self.endgame_ui.third = self.album[card.name]
             index += 1

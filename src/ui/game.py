@@ -52,7 +52,7 @@ class Game:
 
         self.main_menu = False
         self.game = False
-    
+
         self.gamelogic = gamelogic
         self.gameboard_positions = gameboard_positions
 
@@ -109,7 +109,7 @@ class Game:
                 return 4
 
             self.gamelogic.winner = self.gamelogic.game_over()
-            
+
             if self.gamelogic.winner == 1 and self.rating_change:
                 self.user_control.update_rating(15)
                 self.rating_change = False
@@ -121,10 +121,8 @@ class Game:
             if self.game_begun == True:
                 self.bismarck.choose_played_cards()
 
-
-
             self.renderer.render_game()
-        
+
             self.clock.tick(60)
 
     def handle_events(self):
@@ -342,4 +340,3 @@ class Game:
                     self.player1_final.first_x = mouse_x + self.offset_x
                     self.player1_final.first_y = mouse_y + self.offset_y
                     card.cord = (card.x, card.y)
-

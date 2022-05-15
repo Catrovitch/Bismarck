@@ -1,5 +1,6 @@
 import pygame
 
+
 class RatingBoard:
 
     def __init__(self, renderer, eventqueue, clock, gameboard_positions):
@@ -15,21 +16,19 @@ class RatingBoard:
 
         self.ratingboard_loop()
 
-
     def ratingboard_loop(self):
 
         while True:
 
             if self.handle_events() is False:
                 break
-            
+
             if self.main_menu:
                 return 3
-    
+
             self.renderer.render_ratingboard()
 
             self.clock.tick(60)
-
 
     def handle_events(self):
 
@@ -40,6 +39,6 @@ class RatingBoard:
 
                 if self.gameboard_positions.exitbutton.in_position(pos):
                     self.main_menu = True
-                
+
             if event.type == pygame.QUIT:
                 return False

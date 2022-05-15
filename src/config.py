@@ -11,6 +11,5 @@ except FileNotFoundError:
     pass
 
 
-
 DATABASE_FILENAME = os.getenv("DATABASE_FILENAME") or "user_repository.db"
 DATABASE_FILE_PATH = os.path.join(dirname, "..", "data", DATABASE_FILENAME)

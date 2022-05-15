@@ -5,6 +5,7 @@ from database_connection import get_database_connection
 def get_user_by_row(row):
     return User(row["username"], row["password"], row["rating"]) if row else None
 
+
 class UserRepository:
     """Käyttäjiin liittyvistä tietokantaoperaatioista vastaava luokka.
     """

@@ -1,5 +1,6 @@
 import pygame
 
+
 class MainMenu:
 
     def __init__(self, renderer, eventqueue, clock, gameboard_positions):
@@ -18,14 +19,13 @@ class MainMenu:
 
         self.main_menu_loop()
 
-
     def main_menu_loop(self):
 
         while True:
 
             if self.handle_events() is False:
                 break
-            
+
             if self.login:
                 return 1
 
@@ -37,11 +37,10 @@ class MainMenu:
 
             if self.ratingboard:
                 return 6
-    
+
             self.renderer.render_main_menu()
 
             self.clock.tick(60)
-
 
     def handle_events(self):
 
@@ -52,7 +51,7 @@ class MainMenu:
 
                 if self.gameboard_positions.exitbutton.in_position(pos):
                     self.login = True
-                
+
                 if self.gameboard_positions.play_game_button.in_position(pos):
                     self.game = True
 
@@ -61,7 +60,6 @@ class MainMenu:
 
                 if self.gameboard_positions.ratingboard_button.in_position(pos):
                     self.ratingboard = True
-
 
             if event.type == pygame.QUIT:
                 return False

@@ -2,6 +2,7 @@ from entities.user import User
 from repositories.user_repository import UserRepository
 from repositories.user_repository import get_database_connection
 
+
 class UserControl:
 
     def __init__(self):
@@ -13,7 +14,7 @@ class UserControl:
 
         if self.repository.find_by_username(username) != None:
             return False
-        
+
         if password1 != password2 or None in (password1, password2):
             return False
 
@@ -22,14 +23,13 @@ class UserControl:
             self.repository.create(self.user)
         return True
 
-
     def login(self, username, password):
 
         user = self.repository.find_by_username(username)
 
         if user == None:
             return False
-        
+
         if user.password == password:
             self.user = user
             return True
@@ -42,9 +42,9 @@ class UserControl:
 
         if user == None:
             return False
-        
+
         user.rating += change
-        
+
         self.repository.update_rating(user)
 
     def get_top_ten(self):

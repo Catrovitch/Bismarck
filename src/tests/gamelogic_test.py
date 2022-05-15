@@ -347,7 +347,7 @@ class TestGameLogic(unittest.TestCase):
         gameboard = GameBoard(deck)
         gamelogic = GameLogic(gameboard)
         joker = Card("red-joker", 0)
-        
+
         gamelogic.turn = -1
         gamelogic.player2_locked = False
 
@@ -356,7 +356,6 @@ class TestGameLogic(unittest.TestCase):
         gamelogic.stage_card_from_hand(-1, joker)
 
         player = gamelogic.play_staged_cards(-1)
-
 
         self.assertEqual(player, True)
 
@@ -372,7 +371,7 @@ class TestGameLogic(unittest.TestCase):
 
         gameboard.field_deck.append(card2)
         gameboard.field_deck.append(card3)
-        
+
         gamelogic.turn = 1
         gamelogic.player1_locked = False
 
@@ -398,7 +397,7 @@ class TestGameLogic(unittest.TestCase):
 
         gameboard.field_deck.append(card2)
         gameboard.field_deck.append(card3)
-        
+
         gamelogic.turn = -1
         gamelogic.player2_locked = False
 
@@ -1466,7 +1465,6 @@ class TestGameLogic(unittest.TestCase):
         self.assertEqual((player1_first_card, player1_last_card,
                          player2_first_card, player2_last_card), (3, 0, 3, 0))
 
-
     def test_stage_card_from_endgame_when_player_is_locked(self):
 
         createddeck = CreateDeck()
@@ -1520,13 +1518,12 @@ class TestGameLogic(unittest.TestCase):
         deck = createddeck.export()
         gameboard = GameBoard(deck)
         gamelogic = GameLogic(gameboard)
-        
+
         gamelogic.initial_deal()
 
         winner = gamelogic.game_over()
 
         self.assertEqual(winner, None)
-
 
     def test_play_final_card_player2(self):
 

@@ -175,4 +175,5 @@ class TestPlayer(unittest.TestCase):
 
         player.sort_hand()
 
-        self.assertEqual((gameboard.player1_hand[0].number, gameboard.player1_hand[-1].number), (2, 13))
+        self.assertEqual(
+            (gameboard.player1_hand[0].number, gameboard.player1_hand[-1].number), (2, 13))

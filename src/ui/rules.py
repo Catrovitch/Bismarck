@@ -1,5 +1,6 @@
 import pygame
 
+
 class Rules:
 
     def __init__(self, renderer, eventqueue, clock, gameboard_positions):
@@ -13,21 +14,19 @@ class Rules:
 
         self.rule_loop()
 
-
     def rule_loop(self):
 
         while True:
 
             if self.handle_events() is False:
                 break
-        
+
             if self.main_menu:
                 return 3
 
             self.renderer.render_rules()
 
             self.clock.tick(60)
-
 
     def handle_events(self):
 
