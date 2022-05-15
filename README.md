@@ -14,9 +14,6 @@ Bismarck is a classic card game which is played between two players each strivin
 
 ## Installing
 
-#### Note
-As the program is at a very early stage a proper main function is not currently available. Currently it creates all the currently finnished parts of the game.
-
 1. Install the dependencies with command:
 
 ```bash
